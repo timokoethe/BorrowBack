@@ -37,21 +37,21 @@ struct HomeView: View {
                 .buttonBorderShape(.circle)
                 .controlSize(.regular)
                 .tint(Color("BBTeal"))
-                .accessibilityLabel("Neue Ausleihe")
+                .accessibilityLabel("New Loan")
             }
             .listRowInsets(.init(top: 20, leading: 20, bottom: 18, trailing: 20))
             .listRowSeparator(.hidden)
             .listRowBackground(Color.clear)
 
             HStack {
-                Text("Übersicht")
+                Text("Overview")
                     .font(.title3.weight(.bold))
                     .foregroundStyle(Color("DeepInk"))
 
                 Spacer()
 
                 Menu {
-                    Picker("Sortierung", selection: $sort) {
+                    Picker("Sort order", selection: $sort) {
                         ForEach(HomeSort.allCases) { option in
                             Text(option.title)
                                 .tag(option)
@@ -72,9 +72,9 @@ struct HomeView: View {
 
             if loans.isEmpty {
                 ContentUnavailableView(
-                    "Keine Ausleihen",
+                    "No loans",
                     systemImage: "shippingbox",
-                    description: Text("Aktive Ausleihen erscheinen hier.")
+                    description: Text("Active loans appear here.")
                 )
                 .listRowInsets(.init(top: 48, leading: 20, bottom: 24, trailing: 20))
                 .listRowSeparator(.hidden)
@@ -89,7 +89,7 @@ struct HomeView: View {
                             Button {
                                 markAsReturned(loan)
                             } label: {
-                                Label("Zurückgegeben", systemImage: "checkmark")
+                                Label("Returned", systemImage: "checkmark")
                             }
                             .tint(Color("BBTeal"))
                         }
@@ -97,7 +97,7 @@ struct HomeView: View {
                             Button(role: .destructive) {
                                 delete(loan)
                             } label: {
-                                Label("Löschen", systemImage: "trash")
+                                Label("Delete", systemImage: "trash")
                             }
                         }
                 }
@@ -113,10 +113,10 @@ struct HomeView: View {
                 AddLoanView()
             }
         }
-        .alert("Speichern fehlgeschlagen", isPresented: $isShowingPersistenceError) {
+        .alert("Save failed", isPresented: $isShowingPersistenceError) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text("Die Änderung konnte nicht gespeichert werden.")
+            Text("The change could not be saved.")
         }
     }
 

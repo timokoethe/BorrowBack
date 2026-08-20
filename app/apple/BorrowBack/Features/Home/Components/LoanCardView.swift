@@ -39,26 +39,35 @@ struct LoanCardView: View {
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
 
                 if let returnedAt = loan.returnedAt {
-                    Label(
-                        "Ausgeliehen: \(loan.loanedAt.formatted(date: .long, time: .omitted))",
-                        systemImage: "calendar"
-                    )
+                    Label {
+                        HStack(spacing: 4) {
+                            Text("Loaned:")
+                            Text(loan.loanedAt, format: .dateTime.day().month(.wide).year())
+                        }
+                    } icon: {
+                        Image(systemName: "calendar")
+                    }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
                     .lineLimit(2)
 
-                    Label(
-                        "Rückgabe: \(returnedAt.formatted(date: .long, time: .omitted))",
-                        systemImage: "calendar.badge.checkmark"
-                    )
+                    Label {
+                        HStack(spacing: 4) {
+                            Text("Returned:")
+                            Text(returnedAt, format: .dateTime.day().month(.wide).year())
+                        }
+                    } icon: {
+                        Image(systemName: "calendar.badge.checkmark")
+                    }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
                     .lineLimit(2)
                 } else {
-                    Label(
-                        loan.dueDate.formatted(date: .long, time: .omitted),
-                        systemImage: "calendar"
-                    )
+                    Label {
+                        Text(loan.dueDate, format: .dateTime.day().month(.wide).year())
+                    } icon: {
+                        Image(systemName: "calendar")
+                    }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
                 }
@@ -80,29 +89,30 @@ struct LoanCardView: View {
         .accessibilityElement(children: .combine)
     }
 
-    private var statusTitle: String {
+    private var statusTitle: LocalizedStringKey {
         if loan.returnedAt != nil {
-            return "Zurückgegeben"
+            return "Returned"
         }
 
         if loan.dueDate < .now {
-            return "Überfällig"
+            return "Overdue"
         }
 
         if loan.dueDate < Date.now.addingTimeInterval(7 * 24 * 60 * 60) {
-            return "Bald fällig"
+            return "Due soon"
         }
 
         return "OK"
     }
 
     private var statusColor: Color {
-        switch statusTitle {
-        case "Überfällig":
+        if loan.returnedAt != nil {
+            Color("BBTeal")
+        } else if loan.dueDate < .now {
             Color("Coral")
-        case "Bald fällig":
+        } else if loan.dueDate < Date.now.addingTimeInterval(7 * 24 * 60 * 60) {
             Color("Amber")
-        default:
+        } else {
             Color("BBTeal")
         }
     }

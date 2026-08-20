@@ -10,10 +10,10 @@ import SwiftUI
 struct PersistenceUnavailableView: View {
     var body: some View {
         ContentUnavailableView(
-            "Daten nicht verfügbar",
+            "Data unavailable",
             systemImage: "externaldrive.badge.exclamationmark",
             description: Text(
-                "BorrowBack kann den lokalen Speicher nicht öffnen. Bitte starte die App neu."
+                "BorrowBack can’t open local storage. Please restart the app."
             )
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
