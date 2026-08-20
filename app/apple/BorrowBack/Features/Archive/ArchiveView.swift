@@ -17,9 +17,9 @@ struct ArchiveView: View {
         Group {
             if loans.isEmpty {
                 ContentUnavailableView(
-                    "Noch kein Archiv",
+                    "No archived loans",
                     systemImage: "archivebox",
-                    description: Text("Zurückgegebene Gegenstände erscheinen hier.")
+                    description: Text("Returned items appear here.")
                 )
             } else {
                 ScrollView {
@@ -33,7 +33,7 @@ struct ArchiveView: View {
             }
         }
         .background(Color("WarmIvory"))
-        .navigationTitle("Archiv")
+        .navigationTitle("Archive")
     }
 
     private var sortedLoans: [Loan] {

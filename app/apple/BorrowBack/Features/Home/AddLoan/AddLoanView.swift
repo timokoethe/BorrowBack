@@ -21,8 +21,8 @@ struct AddLoanView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Ausleihe") {
-                    TextField("Was wurde verliehen?", text: $title)
+                Section("Loan") {
+                    TextField("What did you lend?", text: $title)
                         .focused($focusedField, equals: .title)
                 }
 
@@ -32,9 +32,9 @@ struct AddLoanView: View {
                         .focused($focusedField, equals: .borrowerName)
                 }
 
-                Section("Rückgabe") {
+                Section("Return") {
                     DatePicker(
-                        "Fällig am",
+                        "Due on",
                         selection: $dueDate,
                         in: Date.now...,
                         displayedComponents: .date
@@ -44,7 +44,7 @@ struct AddLoanView: View {
             .formStyle(.grouped)
             .scrollContentBackground(.hidden)
             .background(Color("WarmIvory"))
-            .navigationTitle("Neue Ausleihe")
+            .navigationTitle("New Loan")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -53,7 +53,7 @@ struct AddLoanView: View {
                     } label: {
                         Image(systemName: "xmark")
                     }
-                    .accessibilityLabel("Abbrechen")
+                    .accessibilityLabel("Cancel")
                 }
 
                 ToolbarItem(placement: .confirmationAction) {
@@ -64,13 +64,13 @@ struct AddLoanView: View {
                             .fontWeight(.semibold)
                     }
                     .disabled(!canSave)
-                    .accessibilityLabel("Speichern")
+                    .accessibilityLabel("Save")
                 }
             }
-            .alert("Speichern fehlgeschlagen", isPresented: $isShowingSaveError) {
+            .alert("Save failed", isPresented: $isShowingSaveError) {
                 Button("OK", role: .cancel) {}
             } message: {
-                Text("Die Ausleihe konnte nicht gespeichert werden.")
+                Text("The loan could not be saved.")
             }
             .onAppear {
                 focusedField = .title
