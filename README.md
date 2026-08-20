@@ -1,14 +1,26 @@
 # BorrowBack
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-orange)](https://opensource.org/license/mit)
-[![Release](https://img.shields.io/github/v/release/timokoethe/Plotty?color=orange)](https://github.com/timokoethe/Plotty/releases/latest)
+[![Release](https://img.shields.io/github/v/release/timokoethe/BorrowBack?color=orange)](https://github.com/timokoethe/BorrowBack/releases/latest)
 ![Framework](https://img.shields.io/badge/SwiftUI-orange)
 ![Platform](https://img.shields.io/badge/Platform-iOS-orange)
 ![Xcode](https://img.shields.io/badge/Xcode-26-orange)
 ![iOS](https://img.shields.io/badge/iOS-26-orange)
-![Apple](https://img.shields.io/badge/Apple-000000?style=flat&logo=apple)
+
+BorrowBack is a native iOS app for tracking lent items, their borrowers, due dates, and returns.
 
 ## Features
+
+- [App Navigation](docs/features/app-navigation.md)
+- [Active Loan Overview](docs/features/active-loan-overview.md)
+- [Create a Loan](docs/features/create-loan.md)
+- [Loan Status](docs/features/loan-status.md)
+- [Sort Active Loans](docs/features/sort-active-loans.md)
+- [Return a Loan](docs/features/return-loan.md)
+- [Delete a Loan](docs/features/delete-loan.md)
+- [Loan Archive](docs/features/loan-archive.md)
+- [Local Persistence](docs/features/local-persistence.md)
+- [English and German Localization](docs/features/localization.md)
 
 ## Project Structure
 
