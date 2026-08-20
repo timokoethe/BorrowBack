@@ -9,22 +9,32 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
-            VStack {
-                HomeView()
+        TabView {
+            Tab("Übersicht", systemImage: "house.fill") {
+                NavigationStack {
+                    HomeView()
+                        .toolbar(.hidden, for: .navigationBar)
+                }
             }
-            .navigationTitle("BorrowBack")
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    NavigationLink {
-                        SettingsView()
-                    } label: {
-                        Image(systemName: "gear")
-                    }
 
+            Tab("Archiv", systemImage: "archivebox") {
+                NavigationStack {
+                    ContentUnavailableView(
+                        "Noch kein Archiv",
+                        systemImage: "archivebox",
+                        description: Text("Zurückgegebene Gegenstände erscheinen hier.")
+                    )
+                    .navigationTitle("Archiv")
+                }
+            }
+
+            Tab("Mehr", systemImage: "ellipsis") {
+                NavigationStack {
+                    SettingsView()
                 }
             }
         }
+        .tint(Color("BBTeal"))
     }
 }
 
