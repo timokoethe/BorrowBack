@@ -8,16 +8,23 @@
 import SwiftData
 
 enum BBModelContainer {
-    static func make() -> ModelContainer {
+    enum Setup {
+        case ready(ModelContainer)
+        case unavailable
+    }
+
+    static func make() -> Setup {
         let configuration = ModelConfiguration(cloudKitDatabase: .none)
 
         do {
-            return try ModelContainer(
-                for: Loan.self,
-                configurations: configuration
+            return .ready(
+                try ModelContainer(
+                    for: Loan.self,
+                    configurations: configuration
+                )
             )
         } catch {
-            return fallbackContainer(after: error)
+            return .unavailable
         }
     }
 
@@ -39,22 +46,4 @@ enum BBModelContainer {
         }
     }
 
-    private static func fallbackContainer(after persistentStoreError: Error) -> ModelContainer {
-        let configuration = ModelConfiguration(
-            isStoredInMemoryOnly: true,
-            cloudKitDatabase: .none
-        )
-
-        do {
-            return try ModelContainer(
-                for: Loan.self,
-                configurations: configuration
-            )
-        } catch {
-            fatalError(
-                "Could not create persistent or temporary BorrowBack model container. "
-                    + "Persistent error: \(persistentStoreError). Temporary error: \(error)"
-            )
-        }
-    }
 }
