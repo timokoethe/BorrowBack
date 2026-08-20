@@ -38,12 +38,30 @@ struct LoanCardView: View {
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
 
-                Label(
-                    loan.dueDate.formatted(date: .long, time: .omitted),
-                    systemImage: "calendar"
-                )
+                if let returnedAt = loan.returnedAt {
+                    Label(
+                        "Ausgeliehen: \(loan.loanedAt.formatted(date: .long, time: .omitted))",
+                        systemImage: "calendar"
+                    )
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
+                    .lineLimit(2)
+
+                    Label(
+                        "Rückgabe: \(returnedAt.formatted(date: .long, time: .omitted))",
+                        systemImage: "calendar.badge.checkmark"
+                    )
+                    .font(.subheadline)
+                    .foregroundStyle(Color("DeepInk").opacity(0.65))
+                    .lineLimit(2)
+                } else {
+                    Label(
+                        loan.dueDate.formatted(date: .long, time: .omitted),
+                        systemImage: "calendar"
+                    )
+                    .font(.subheadline)
+                    .foregroundStyle(Color("DeepInk").opacity(0.65))
+                }
 
                 Text(statusTitle)
                     .font(.subheadline.weight(.medium))

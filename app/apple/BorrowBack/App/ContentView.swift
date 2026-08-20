@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     var body: some View {
@@ -19,12 +20,7 @@ struct ContentView: View {
 
             Tab("Archiv", systemImage: "archivebox") {
                 NavigationStack {
-                    ContentUnavailableView(
-                        "Noch kein Archiv",
-                        systemImage: "archivebox",
-                        description: Text("Zurückgegebene Gegenstände erscheinen hier.")
-                    )
-                    .navigationTitle("Archiv")
+                    ArchiveView()
                 }
             }
 
@@ -40,4 +36,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .modelContainer(BBModelContainer.preview())
 }
