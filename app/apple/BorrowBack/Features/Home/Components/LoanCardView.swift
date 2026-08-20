@@ -94,11 +94,11 @@ struct LoanCardView: View {
             return "Returned"
         }
 
-        if loan.dueDate < .now {
+        if dueDay < today {
             return "Overdue"
         }
 
-        if loan.dueDate < Date.now.addingTimeInterval(7 * 24 * 60 * 60) {
+        if dueDay < dueSoonThreshold {
             return "Due soon"
         }
 
@@ -108,13 +108,25 @@ struct LoanCardView: View {
     private var statusColor: Color {
         if loan.returnedAt != nil {
             Color("BBTeal")
-        } else if loan.dueDate < .now {
+        } else if dueDay < today {
             Color("Coral")
-        } else if loan.dueDate < Date.now.addingTimeInterval(7 * 24 * 60 * 60) {
+        } else if dueDay < dueSoonThreshold {
             Color("Amber")
         } else {
             Color("BBTeal")
         }
+    }
+
+    private var today: Date {
+        Calendar.current.startOfDay(for: .now)
+    }
+
+    private var dueDay: Date {
+        Calendar.current.startOfDay(for: loan.dueDate)
+    }
+
+    private var dueSoonThreshold: Date {
+        Calendar.current.date(byAdding: .day, value: 7, to: today) ?? today
     }
 }
 
