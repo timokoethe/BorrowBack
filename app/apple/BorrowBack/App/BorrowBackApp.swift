@@ -10,12 +10,17 @@ import SwiftData
 
 @main
 struct BorrowBackApp: App {
-    private let modelContainer = BBModelContainer.make()
+    private let modelSetup = BBModelContainer.make()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            switch modelSetup {
+            case .ready(let modelContainer):
+                ContentView()
+                    .modelContainer(modelContainer)
+            case .unavailable:
+                PersistenceUnavailableView()
+            }
         }
-        .modelContainer(modelContainer)
     }
 }
