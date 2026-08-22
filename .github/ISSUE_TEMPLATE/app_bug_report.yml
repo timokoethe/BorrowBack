@@ -1,0 +1,46 @@
+name: App bug report
+description: Report something that is not working in the iOS app.
+title: "[App Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve BorrowBack.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened, and what did you expect instead?
+      placeholder: BorrowBack should mark the loan as returned, but...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Open BorrowBack
+        2. Tap ...
+        3. See ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: BorrowBack Version
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: input
+    id: ios
+    attributes:
+      label: iOS Version
+      placeholder: iOS 26.x
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add screenshots, recordings, device details, or anything else that helps.

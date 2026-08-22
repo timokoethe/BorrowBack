@@ -1,0 +1,30 @@
+name: App feature request
+description: Suggest a small improvement for the iOS app.
+title: "[App Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for sharing an idea for BorrowBack.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What would this improve?
+      placeholder: When tracking a lent item, I often need to...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should BorrowBack do?
+      placeholder: It would be helpful if...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add examples, screenshots, or related details.
