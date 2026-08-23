@@ -24,11 +24,48 @@ BorrowBack is a native iOS app for tracking lent items, their borrowers, due dat
 
 ## Project Structure
 
+- [`app/apple/`](app/apple/) contains the native iOS app and Xcode project.
+- [`docs/features/`](docs/features/) contains the native iOS feature
+  documentation.
+- [`website/`](website/) contains the separate Next.js-based landing page.
+
 ## Development
 
 ### iOS app
 
+Requirements: Xcode 26 or later and an iPhone or simulator running iOS 26 or later.
+
+Open the project in Xcode and run the `BorrowBack` scheme:
+
+```sh
+open app/apple/BorrowBack.xcodeproj
+```
+
+To verify a command-line build:
+
+```sh
+xcodebuild -project app/apple/BorrowBack.xcodeproj -scheme Plotty \
+  -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+```
+
 ### Website
+
+The BorrowBack website is developed separately in [`website/`](website/). Its
+Next.js application code is located in [`website/app/`](website/app/), with the
+landing page in [`website/app/page.tsx`](website/app/page.tsx).
+
+To run the website locally:
+
+```sh
+cd website
+npm install
+npm run dev
+```
+
+The development server is available at
+[http://localhost:3000](http://localhost:3000). See the
+[website README](website/README.md) for the available scripts and deployment
+details.
 
 ## Releases
 
