@@ -15,14 +15,14 @@ struct LoanCardView: View {
         HStack(spacing: 0) {
             ZStack {
                 LinearGradient(
-                    colors: [Color("BBTeal").opacity(0.78), Color("DeepInk")],
+                    colors: [Color("BBTeal").opacity(0.78), Color("ThumbnailInk")],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
 
                 Image(systemName: "shippingbox.fill")
                     .font(.system(size: 48, weight: .semibold))
-                    .foregroundStyle(Color("WarmIvory"))
+                    .foregroundStyle(Color("ThumbnailIcon"))
                     .accessibilityHidden(true)
             }
             .frame(width: 140)
@@ -83,9 +83,9 @@ struct LoanCardView: View {
             .padding(16)
         }
         .frame(minHeight: 192)
-        .background(.white)
+        .background(Color("CardSurface"))
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .shadow(color: Color("DeepInk").opacity(0.09), radius: 10, y: 5)
+        .shadow(color: .black.opacity(0.12), radius: 10, y: 5)
         .accessibilityElement(children: .combine)
     }
 
