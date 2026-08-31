@@ -22,3 +22,4 @@ As a user, I want to see whether a loan is on time, due soon, overdue, or return
 - An active loan past its due date displays an Overdue status.
 - An archived loan displays a Returned status.
 - Overdue loans use coral, loans due soon use amber, and OK or returned loans use teal.
+- Loan status reflects the current calendar day without requiring a restart or a data change.
