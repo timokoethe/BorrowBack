@@ -1,162 +1,310 @@
 import Image from "next/image";
 import {
-  Archive,
   ArrowRight,
   BellRing,
-  CalendarDays,
-  CalendarClock,
   Check,
-  CheckCircle2,
-  ChevronDown,
-  Clock3,
-  Gift,
-  House,
   Infinity as InfinityIcon,
-  LockKeyhole,
-  MoreHorizontal,
-  PackageCheck,
   Plus,
-  Search,
   ShieldCheck,
   Sparkles,
-  UserRound,
   WifiOff,
 } from "lucide-react";
 import appIcon from "./icon.png";
+import { DeviceFrame } from "./components/DeviceFrame";
+import { AddLoanScreen, ArchiveScreen, OverviewScreen } from "./components/AppScreens";
 
-const features = [
-  { icon: Clock3, title: "Added in seconds", text: "Item, person, and due date — done." },
-  { icon: CalendarClock, title: "Due dates at a glance", text: "See right away what should come back soon." },
-  { icon: PackageCheck, title: "Returned with a swipe", text: "Move returned items neatly into your archive." },
-  { icon: LockKeyhole, title: "Private by design", text: "Your loans stay locally on your device." },
+const steps = [
+  {
+    title: "Add it in seconds",
+    text: "Item, person, due date. Three fields and the sheet closes again.",
+  },
+  {
+    title: "See what is out",
+    text: "One list, sorted by return date, with a quiet badge for anything due soon.",
+  },
+  {
+    title: "Swipe when it is back",
+    text: "A returned item moves straight into the archive, out of your way.",
+  },
 ];
 
-const details = [
-  { icon: WifiOff, title: "100% local", text: "Works offline. Your data stays with you." },
-  { icon: ShieldCheck, title: "No account", text: "No sign-up, no tracking, no profile." },
-  { icon: InfinityIcon, title: "Completely free", text: "No paywalls, subscriptions, or hidden costs." },
+const promises = [
+  {
+    icon: WifiOff,
+    title: "Stays on your iPhone",
+    text: "Everything is stored locally. No server holds your loans, so there is nothing to sync or leak.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "No account, no tracking",
+    text: "No sign-up, no email, no analytics, no profile. Open the app and start.",
+  },
+  {
+    icon: InfinityIcon,
+    title: "Free, without the catch",
+    text: "No subscription, no paywalled features, no ads. The whole app is the free version.",
+  },
 ];
 
-const loans = [
-  { icon: "⌨", title: "Magic Keyboard", person: "Lena Hoffmann", date: "Aug 24", status: "Due soon", tone: "amber" },
-  { icon: "◉", title: "Camera", person: "Jonas Richter", date: "Sep 2", status: "On track", tone: "teal" },
-  { icon: "⌁", title: "Travel guide", person: "Mara Klein", date: "Aug 18", status: "Overdue", tone: "coral" },
+const faq = [
+  {
+    q: "Where is my data stored?",
+    a: "Locally on your iPhone, in the app's own database. BorrowBack has no backend and no account system, so your loans never leave the device.",
+  },
+  {
+    q: "What does BorrowBack cost?",
+    a: "Nothing. There is no subscription, no in-app purchase and no advertising. Every feature is available from the moment you install it.",
+  },
+  {
+    q: "Does it work offline?",
+    a: "Always. Because there is no server involved, the app behaves exactly the same in airplane mode as it does at home.",
+  },
+  {
+    q: "What happens to returned items?",
+    a: "A swipe marks a loan as returned and moves it to the archive, where it stays with its loan and return date in case you need to look it up later.",
+  },
 ];
 
-function AppStoreButton({ compact = false }: { compact?: boolean }) {
+function StoreButton({ variant = "primary" }: { variant?: "primary" | "onDark" | "sm" }) {
+  const className =
+    variant === "sm"
+      ? "btn btn--ghost btn--sm"
+      : variant === "onDark"
+        ? "btn btn--onDark"
+        : "btn btn--primary";
+
   return (
-    <a className={`store-button${compact ? " store-button--compact" : ""}`} href="#download" aria-label="Download BorrowBack on the App Store">
-      <span className="apple-mark" aria-hidden="true"></span>
-      <span><small>Download on the</small><strong>App Store</strong></span>
+    <a className={className} href="#download">
+      <span className="glyph" aria-hidden="true">
+        
+      </span>
+      Download on the App Store
     </a>
-  );
-}
-
-function PhonePreview() {
-  return (
-    <div className="phone-wrap" aria-label="Preview of the BorrowBack app">
-      <div className="phone">
-        <div className="phone-screen">
-          <div className="dynamic-island" />
-          <div className="phone-status"><span>9:41</span><span>● ● ●</span></div>
-          <div className="app-heading">
-            <div><span className="eyebrow">Good morning</span><h3>BorrowBack</h3></div>
-            <button aria-label="Add a new loan"><Plus size={19} strokeWidth={2.5} /></button>
-          </div>
-          <div className="overview-row"><strong>Your loans</strong><span>Due date <ChevronDown size={12} /></span></div>
-          <div className="loan-list">
-            {loans.map((loan) => (
-              <article className="loan-card" key={loan.title}>
-                <div className="loan-art" aria-hidden="true">{loan.icon}</div>
-                <div className="loan-copy">
-                  <h4>{loan.title}</h4>
-                  <p><UserRound size={11} />{loan.person}</p>
-                  <p><CalendarDays size={11} />{loan.date}</p>
-                  <span className={`status status--${loan.tone}`}>{loan.status}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-          <nav className="tabbar" aria-label="App-Navigation">
-            <span className="is-active"><House size={15} fill="currentColor" />Overview</span>
-            <span><Archive size={15} />Archive</span>
-            <span><MoreHorizontal size={15} />More</span>
-          </nav>
-        </div>
-      </div>
-    </div>
   );
 }
 
 export default function Home() {
   return (
-    <main>
-      <header className="site-header shell">
-        <a className="brand" href="#top" aria-label="BorrowBack home page">
-          <Image src={appIcon} alt="" width={38} height={38} priority />
-          <span>BorrowBack</span>
-        </a>
-        <nav className="site-nav" aria-label="Main navigation">
-          <a href="#features">Features</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a>
-        </nav>
-        <AppStoreButton compact />
+    <>
+      <header className="header">
+        <div className="shell header-inner">
+          <a className="brand" href="#top" aria-label="BorrowBack, back to top">
+            <Image src={appIcon} alt="" width={30} height={30} priority />
+            BorrowBack
+          </a>
+          <nav className="nav" aria-label="Main navigation">
+            <a href="#how">How it works</a>
+            <a href="#privacy">Privacy</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+          <StoreButton variant="sm" />
+        </div>
       </header>
 
-      <section className="hero shell" id="top">
-        <div className="hero-copy">
-          <div className="kicker"><Sparkles size={14} /> Private. Simple. Reliable.</div>
-          <h1>Never forget<br />what you <span>lent.</span></h1>
-          <p className="hero-lead">BorrowBack remembers the things you lend, so you don’t have to. No account, no subscription, and no unnecessary clutter.</p>
-          <div className="hero-actions"><AppStoreButton /><a className="text-link" href="#features">See how it works <ArrowRight size={16} /></a></div>
-          <div className="trust-row"><span><Check size={15} /> Free to download</span><span><Check size={15} /> Made for iPhone</span><span><Check size={15} /> No account</span></div>
+      <main id="top">
+        <section className="shell hero">
+          <div>
+            <p className="hero-meta">
+              <Sparkles size={14} strokeWidth={2} aria-hidden="true" />
+              Free · No account · iPhone
+            </p>
+            <h1 className="display">
+              Never forget what you <span className="accent">lent.</span>
+            </h1>
+            <p className="lead">
+              BorrowBack keeps a quiet list of the things you have lent out and when they are
+              due back — so the drill, the book and the camping stove all find their way home.
+            </p>
+            <div className="hero-actions">
+              <StoreButton />
+              <a className="btn btn--quiet" href="#how">
+                How it works
+                <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
+              </a>
+            </div>
+            <ul className="facts">
+              <li>
+                <Check size={15} strokeWidth={2.4} aria-hidden="true" />
+                Works offline
+              </li>
+              <li>
+                <Check size={15} strokeWidth={2.4} aria-hidden="true" />
+                No sign-up
+              </li>
+              <li>
+                <Check size={15} strokeWidth={2.4} aria-hidden="true" />
+                Nothing leaves your phone
+              </li>
+            </ul>
+          </div>
+
+          <div className="hero-stage">
+            <DeviceFrame screenshot="overview" alt="The BorrowBack overview, listing three active loans with their due dates">
+              <OverviewScreen />
+            </DeviceFrame>
+          </div>
+        </section>
+
+        <section className="section shell" id="how">
+          <span className="eyebrow">How it works</span>
+          <h2 className="display">
+            Three taps in.
+            <br />
+            One swipe out.
+          </h2>
+          <div className="steps" style={{ marginTop: "3rem" }}>
+            {steps.map((step, index) => (
+              <article className="step" key={step.title}>
+                <span className="step-index">{String(index + 1).padStart(2, "0")}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section shell">
+          <div className="split">
+            <div>
+              <span className="eyebrow">Adding a loan</span>
+              <h2 className="display">
+                No forms to fill.
+                <br />
+                Just the three things that matter.
+              </h2>
+              <p className="prose lead">
+                What you lent, who has it, when you want it back. The keyboard is already up
+                when the sheet opens, and a single tap saves it.
+              </p>
+              <ul className="checklist">
+                <li>
+                  <Plus size={17} strokeWidth={2.2} aria-hidden="true" />
+                  Two fields and a date — nothing optional to worry about
+                </li>
+                <li>
+                  <BellRing size={17} strokeWidth={2.2} aria-hidden="true" />
+                  Due dates default to two weeks out, and adjust with one tap
+                </li>
+                <li>
+                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
+                  Sorted into your overview the moment you save
+                </li>
+              </ul>
+            </div>
+            <div className="split-visual">
+              <DeviceFrame screenshot="add-loan" alt="The New Loan sheet with fields for item, person and return date">
+                <AddLoanScreen />
+              </DeviceFrame>
+            </div>
+          </div>
+        </section>
+
+        <section className="section shell">
+          <div className="split split--reverse">
+            <div>
+              <span className="eyebrow">After the return</span>
+              <h2 className="display">
+                Returned, not
+                <br />
+                <span className="accent">deleted.</span>
+              </h2>
+              <p className="prose lead">
+                Marking something as returned clears it from your overview but keeps it in the
+                archive, with the date it went out and the date it came back.
+              </p>
+              <ul className="checklist">
+                <li>
+                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
+                  Swipe right to return, swipe left to delete for good
+                </li>
+                <li>
+                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
+                  The archive stays sorted by most recently returned
+                </li>
+                <li>
+                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
+                  Overdue items are flagged the moment the day turns over
+                </li>
+              </ul>
+            </div>
+            <div className="split-visual">
+              <DeviceFrame screenshot="archive" alt="The archive, listing items that have already been returned">
+                <ArchiveScreen />
+              </DeviceFrame>
+            </div>
+          </div>
+        </section>
+
+        <section className="section shell" id="privacy">
+          <div className="centered">
+            <span className="eyebrow">Privacy</span>
+            <h2 className="display">
+              Everything you need.
+              <br />
+              <span className="accent">Nothing you don&rsquo;t.</span>
+            </h2>
+            <p className="lead">
+              BorrowBack is deliberately small. There is no account to create, no cloud to trust
+              and no upsell waiting a few screens in.
+            </p>
+          </div>
+          <div className="card-grid">
+            {promises.map(({ icon: Icon, title, text }) => (
+              <article className="card" key={title}>
+                <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section shell" id="faq">
+          <span className="eyebrow">FAQ</span>
+          <h2 className="display">Questions, answered.</h2>
+          <div className="faq-list">
+            {faq.map((item) => (
+              <details className="faq-item" key={item.q}>
+                <summary>
+                  {item.q}
+                  <Plus size={18} strokeWidth={2} aria-hidden="true" />
+                </summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="section shell" id="download">
+          <div className="cta">
+            <Image src={appIcon} alt="The BorrowBack app icon" width={84} height={84} />
+            <div>
+              <span className="eyebrow">Free. Private. Yours.</span>
+              <h2 className="display">Lend it. Track it. Get it back.</h2>
+              <p>
+                BorrowBack is a free download for iPhone. No account, no subscription, no
+                reason to think about it again.
+              </p>
+            </div>
+            <StoreButton variant="onDark" />
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer">
+        <div className="shell footer-inner">
+          <a className="brand" href="#top">
+            <Image src={appIcon} alt="" width={26} height={26} />
+            BorrowBack
+          </a>
+          <p style={{ margin: 0 }}>© {new Date().getFullYear()} BorrowBack</p>
+          <nav aria-label="Footer navigation">
+            <a href="#privacy">Privacy</a>
+            <a href="#faq">FAQ</a>
+            <a href="mailto:hello@borrowback.app">Contact</a>
+          </nav>
         </div>
-        <div className="hero-visual">
-          <div className="hero-glow" />
-          <div className="float-card float-card--top"><BellRing size={18} /><span><strong>Due soon</strong>Magic Keyboard</span></div>
-          <PhonePreview />
-          <div className="float-card float-card--bottom"><CheckCircle2 size={20} /><span><strong>Returned</strong>Archived instantly</span></div>
-        </div>
-      </section>
-
-      <section className="feature-rail shell" id="features" aria-label="Key features">
-        {features.map(({ icon: Icon, title, text }) => <article key={title}><span className="feature-icon"><Icon size={21} /></span><div><h2>{title}</h2><p>{text}</p></div></article>)}
-      </section>
-
-      <section className="clarity shell">
-        <div className="clarity-card"><div className="mini-window" aria-hidden="true">
-          <div className="mini-top"><Search size={16} /><span>Overview</span><Plus size={16} /></div>
-          <div className="mini-loan"><Gift /><span><strong>Picnic blanket</strong><small>With Sophie · due Sep 3</small></span><b>OK</b></div>
-          <div className="mini-loan"><Archive /><span><strong>Cordless drill</strong><small>With Paul · due tomorrow</small></span><b className="warn">Soon</b></div>
-        </div></div>
-        <div className="clarity-copy">
-          <span className="section-label">Everything at a glance</span>
-          <h2>Lent out.<br /><em>Not forgotten.</em></h2>
-          <p>A calm overview shows you what is currently out and when it should come back.</p>
-          <ul><li><CheckCircle2 /> Active loans neatly sorted</li><li><CheckCircle2 /> Clear cues for items due soon</li><li><CheckCircle2 /> Returned items stay in your archive</li></ul>
-        </div>
-      </section>
-
-      <section className="privacy shell" id="privacy">
-        <div className="privacy-heading"><span className="section-label">Less app. More peace of mind.</span><h2>Everything you need.<br /><em>Nothing you don’t.</em></h2></div>
-        <div className="detail-grid">{details.map(({ icon: Icon, title, text }) => <article key={title}><span><Icon /></span><h3>{title}</h3><p>{text}</p></article>)}</div>
-      </section>
-
-      <section className="download shell" id="download">
-        <div className="download-icon"><Image src={appIcon} alt="BorrowBack App Icon" width={88} height={88} /></div>
-        <div><span className="section-label">Free. Simple. Yours.</span><h2>Lending should feel simple.</h2><p>BorrowBack is completely free to use. No subscriptions, no ads.</p></div>
-        <AppStoreButton />
-      </section>
-
-      <section className="faq shell" id="faq">
-        <span className="section-label">Quick answers</span><h2>Frequently asked questions</h2>
-        <div className="faq-grid"><article><h3>Where is my data stored?</h3><p>Directly and locally on your iPhone. BorrowBack does not require an account.</p></article><article><h3>How much does BorrowBack cost?</h3><p>Nothing. BorrowBack is completely free, with no subscriptions or ads.</p></article></div>
-      </section>
-
-      <footer className="footer shell">
-        <a className="brand" href="#top"><Image src={appIcon} alt="" width={32} height={32} /><span>BorrowBack</span></a>
-        <p>Lend it. Track it. Get it back.</p>
-        <nav aria-label="Footer navigation"><a href="#privacy">Privacy</a><a href="mailto:hello@borrowback.app">Contact</a></nav>
       </footer>
-    </main>
+    </>
   );
 }

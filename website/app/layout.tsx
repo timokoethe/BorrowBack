@@ -1,6 +1,29 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
+
+/* Text face for the interface, serif for display headings — the serif echoes
+   the app, whose own title is set in SwiftUI's serif design. */
+const sans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const serif = Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f3ec" },
+    { media: "(prefers-color-scheme: dark)", color: "#14120f" },
+  ],
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -21,11 +44,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className="h-full antialiased"
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${sans.variable} ${serif.variable} antialiased`}>
+      <body>{children}</body>
     </html>
   );
 }
