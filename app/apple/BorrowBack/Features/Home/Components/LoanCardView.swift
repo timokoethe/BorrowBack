@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct LoanCardView: View {
+    @Environment(\.currentDay) private var today
+
     let loan: Loan
 
     var body: some View {
@@ -115,10 +117,6 @@ struct LoanCardView: View {
         } else {
             Color("BBTeal")
         }
-    }
-
-    private var today: Date {
-        Calendar.current.startOfDay(for: .now)
     }
 
     private var dueDay: Date {
