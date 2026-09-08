@@ -128,8 +128,15 @@ struct LoanCardView: View {
         Calendar.current.startOfDay(for: loan.dueDate)
     }
 
+    /// A loan counts as due soon within this many days of its due date.
+    private static let dueSoonWindowInDays = 5
+
     private var dueSoonThreshold: Date {
-        Calendar.current.date(byAdding: .day, value: 7, to: today) ?? today
+        Calendar.current.date(
+            byAdding: .day,
+            value: Self.dueSoonWindowInDays,
+            to: today
+        ) ?? today
     }
 }
 

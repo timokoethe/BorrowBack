@@ -17,8 +17,8 @@ As a user, I want to see whether a loan is on time, due soon, overdue, or return
 
 ## Acceptance Criteria
 
-- An active loan due in seven days or more displays an OK status.
-- An active loan due within seven days displays a Due soon status.
+- An active loan due in five days or more displays an OK status.
+- An active loan due within five days displays a Due soon status.
 - An active loan past its due date displays an Overdue status.
 - An archived loan displays a Returned status.
 - Overdue loans use coral, loans due soon use amber, and OK or returned loans use teal.

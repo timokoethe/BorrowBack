@@ -23,12 +23,6 @@ struct ContentView: View {
                     ArchiveView()
                 }
             }
-
-            Tab("More", systemImage: "ellipsis") {
-                NavigationStack {
-                    SettingsView()
-                }
-            }
         }
         .tint(.accentColor)
         .trackingCurrentDay()

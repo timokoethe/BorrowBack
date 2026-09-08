@@ -14,7 +14,11 @@ struct AddLoanView: View {
 
     @State private var title = ""
     @State private var borrower = Borrower.empty
-    @State private var dueDate = Date.now.addingTimeInterval(14 * 24 * 60 * 60)
+    @State private var dueDate = Calendar.current.date(
+        byAdding: .day,
+        value: AddLoanView.defaultLoanDurationInDays,
+        to: .now
+    ) ?? .now
     @State private var isShowingSaveError = false
     @FocusState private var isTitleFocused: Bool
 
@@ -77,6 +81,9 @@ struct AddLoanView: View {
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
     }
+
+    /// Days between today and the preselected due date of a new loan.
+    private static let defaultLoanDurationInDays = 14
 
     private var canSave: Bool {
         !trimmedTitle.isEmpty && borrower.isValid
