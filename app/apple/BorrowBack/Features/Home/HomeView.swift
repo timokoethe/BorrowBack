@@ -36,7 +36,6 @@ struct HomeView: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.circle)
                 .controlSize(.regular)
-                .tint(Color("BBTeal"))
                 .accessibilityLabel("New Loan")
             }
             .listRowInsets(.init(top: 20, leading: 20, bottom: 18, trailing: 20))
@@ -91,7 +90,7 @@ struct HomeView: View {
                             } label: {
                                 Label("Returned", systemImage: "checkmark")
                             }
-                            .tint(Color("BBTeal"))
+                            .tint(Color.accentColor)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
