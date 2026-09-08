@@ -14,6 +14,7 @@ BorrowBack is a native iOS app for tracking lent items, their borrowers, due dat
 - [App Navigation](docs/features/app-navigation.md)
 - [Active Loan Overview](docs/features/active-loan-overview.md)
 - [Create a Loan](docs/features/create-loan.md)
+- [Link a Borrower Contact](docs/features/link-borrower-contact.md)
 - [Loan Status](docs/features/loan-status.md)
 - [Sort Active Loans](docs/features/sort-active-loans.md)
 - [Return a Loan](docs/features/return-loan.md)

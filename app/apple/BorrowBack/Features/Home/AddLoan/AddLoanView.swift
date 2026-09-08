@@ -13,23 +13,21 @@ struct AddLoanView: View {
     @Environment(\.modelContext) private var modelContext
 
     @State private var title = ""
-    @State private var borrowerName = ""
+    @State private var borrower = Borrower.empty
     @State private var dueDate = Date.now.addingTimeInterval(14 * 24 * 60 * 60)
     @State private var isShowingSaveError = false
-    @FocusState private var focusedField: Field?
+    @FocusState private var isTitleFocused: Bool
 
     var body: some View {
         NavigationStack {
             Form {
                 Section("Loan") {
                     TextField("What did you lend?", text: $title)
-                        .focused($focusedField, equals: .title)
+                        .focused($isTitleFocused)
                 }
 
                 Section("Person") {
-                    TextField("Name", text: $borrowerName)
-                        .textContentType(.name)
-                        .focused($focusedField, equals: .borrowerName)
+                    BorrowerField(borrower: $borrower)
                 }
 
                 Section("Return") {
@@ -73,7 +71,7 @@ struct AddLoanView: View {
                 Text("The loan could not be saved.")
             }
             .onAppear {
-                focusedField = .title
+                isTitleFocused = true
             }
         }
         .presentationDetents([.medium, .large])
@@ -81,15 +79,11 @@ struct AddLoanView: View {
     }
 
     private var canSave: Bool {
-        !trimmedTitle.isEmpty && !trimmedBorrowerName.isEmpty
+        !trimmedTitle.isEmpty && borrower.isValid
     }
 
     private var trimmedTitle: String {
         title.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-
-    private var trimmedBorrowerName: String {
-        borrowerName.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private func save() {
@@ -97,7 +91,8 @@ struct AddLoanView: View {
 
         let loan = Loan(
             title: trimmedTitle,
-            borrowerName: trimmedBorrowerName,
+            borrowerName: borrower.persistedName,
+            contactIdentifier: borrower.contactIdentifier,
             dueDate: dueDate
         )
         modelContext.insert(loan)
@@ -109,11 +104,6 @@ struct AddLoanView: View {
             modelContext.delete(loan)
             isShowingSaveError = true
         }
-    }
-
-    private enum Field {
-        case title
-        case borrowerName
     }
 }
 

@@ -28,7 +28,8 @@ BorrowBack is a native iOS app for tracking items that have been lent to other p
 
 - `Loan` is the persisted domain model. Keep model-container registration in `BBModelContainer` aligned with every persisted model.
 - A loan is active while `returnedAt` is `nil` and archived after `returnedAt` receives the actual return timestamp.
-- Borrower names are currently entered as free text. `contactIdentifier` is reserved for a future Contacts integration; do not imply that contact lookup is already available.
+- A borrower is either a free-text name or a linked system contact, modelled by the `Borrower` enum in the add-loan feature. `borrowerName` always holds the displayed name; `contactIdentifier` holds the linked contact and is `nil` for a typed name.
+- The contact picker runs out of process, so the app needs no Contacts authorization and reads no contact data beyond the picked contact. Do not introduce direct Contacts database access, a usage description, or contact-based actions such as calling or messaging without a deliberate decision.
 - Runtime persistence must fail closed. If the persistent container cannot be created, show the unavailable state and do not silently fall back to an in-memory container.
 - In-memory containers are appropriate for previews and tests only.
 - Handle save failures explicitly. Roll back or remove pending changes as appropriate, keep the UI state consistent, and show the existing localized error treatment.
