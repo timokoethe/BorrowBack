@@ -36,7 +36,7 @@ struct LoanCardView: View {
                     .foregroundStyle(Color("DeepInk"))
                     .lineLimit(2)
 
-                Label(loan.borrowerName, systemImage: "person")
+                Label(loan.borrowerName, systemImage: borrowerSymbol)
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
 
@@ -89,6 +89,11 @@ struct LoanCardView: View {
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .shadow(color: .black.opacity(0.12), radius: 10, y: 5)
         .accessibilityElement(children: .combine)
+    }
+
+    /// A linked contact is marked on the card, a free-text name is not.
+    private var borrowerSymbol: String {
+        loan.contactIdentifier == nil ? "person" : "person.crop.circle.fill"
     }
 
     private var statusTitle: LocalizedStringKey {

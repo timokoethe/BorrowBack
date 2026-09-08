@@ -53,6 +53,16 @@
         }
       }
     },
+    "Choose contact" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontakt wählen"
+          }
+        }
+      }
+    },
     "Data unavailable" : {
       "localizations" : {
         "de" : {
@@ -219,6 +229,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Person"
+          }
+        }
+      }
+    },
+    "Remove contact" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontakt entfernen"
           }
         }
       }
