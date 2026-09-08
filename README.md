@@ -44,7 +44,7 @@ open app/apple/BorrowBack.xcodeproj
 To verify a command-line build:
 
 ```sh
-xcodebuild -project app/apple/BorrowBack.xcodeproj -scheme Plotty \
+xcodebuild -project app/apple/BorrowBack.xcodeproj -scheme BorrowBack \
   -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
 ```
 
@@ -69,7 +69,7 @@ details.
 
 ## Releases
 
-Releases use tags such as `v1.1.0` or `v1.1.0-beta1`. Pushing a release tag creates the corresponding GitHub release; native builds are handled separately by Xcode Cloud.
+Releases use tags such as `v1.1.0` or `v1.1.0-beta1`. Pushing a release tag creates the corresponding GitHub release and deploys the website to Vercel — stable tags to production, beta tags to a preview. Native builds are handled separately by Xcode Cloud. See [docs/release.md](docs/release.md) for the full process.
 
 ## Contributing
 
