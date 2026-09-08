@@ -113,16 +113,6 @@
         }
       }
     },
-    "Hello" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hallo"
-          }
-        }
-      }
-    },
     "Loan" : {
       "localizations" : {
         "de" : {
@@ -139,16 +129,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ausgeliehen:"
-          }
-        }
-      }
-    },
-    "More" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mehr"
           }
         }
       }
@@ -299,16 +279,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Speichern fehlgeschlagen"
-          }
-        }
-      }
-    },
-    "Settings" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einstellungen"
           }
         }
       }

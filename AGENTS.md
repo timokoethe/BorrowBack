@@ -8,7 +8,6 @@ BorrowBack is a native iOS app for tracking items that have been lent to other p
 - `app/apple/BorrowBack/App/`: app entry point, root tab composition, and SwiftData container setup.
 - `app/apple/BorrowBack/Features/Home/`: active-loan overview, sorting, swipe actions, and the add-loan sheet.
 - `app/apple/BorrowBack/Features/Archive/`: returned-loan history.
-- `app/apple/BorrowBack/Features/Settings/`: placeholder for the More tab.
 - `app/apple/BorrowBack/Models/Loan.swift`: persisted SwiftData loan model.
 - `app/apple/BorrowBack/Localizable.xcstrings`: English source strings and German translations.
 - `app/apple/BorrowBack/Assets.xcassets/` and `app/apple/Icon.icon/`: app colors and icon assets.
