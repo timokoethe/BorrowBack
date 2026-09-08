@@ -38,7 +38,6 @@ struct BorrowerField: View {
                     Image(systemName: "person.crop.circle")
                 }
                 .buttonStyle(.borderless)
-                .tint(Color("BBTeal"))
                 .accessibilityLabel("Choose contact")
             }
         case .contact(_, let name):

@@ -37,6 +37,7 @@ BorrowBack is a native iOS app for tracking items that have been lent to other p
 ## UI and Localization
 
 - Reuse the named colors already defined in `Assets.xcassets` instead of duplicating color values.
+- `BBTeal` is the app's accent color, set as the asset catalog's global accent in the Xcode project and seeded into the SwiftUI environment tint once in `ContentView`. Do not re-tint controls with the same color; use `.accentColor` where a control needs the accent named explicitly, such as a swipe action.
 - English is the development and source language. German is the supported secondary localization.
 - Add or update user-facing strings in `Localizable.xcstrings` for both languages.
 - Prefer SwiftUI localization-aware values such as `LocalizedStringKey` and locale-aware date formatting for text that must respond to the environment locale.

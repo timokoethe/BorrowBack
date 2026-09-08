@@ -30,7 +30,7 @@ struct ContentView: View {
                 }
             }
         }
-        .tint(Color("BBTeal"))
+        .tint(.accentColor)
         .trackingCurrentDay()
     }
 }
