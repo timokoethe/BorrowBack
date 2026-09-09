@@ -6,9 +6,9 @@ BorrowBack is a native iOS app for tracking items that have been lent to other p
 
 - `app/apple/BorrowBack.xcodeproj/`: Xcode project for the native iOS app.
 - `app/apple/BorrowBack/App/`: app entry point, root tab composition, and SwiftData container setup.
-- `app/apple/BorrowBack/Features/Home/`: active-loan overview, sorting, swipe actions, and the add-loan sheet.
+- `app/apple/BorrowBack/Features/Home/`: active-loan overview, sorting, swipe actions, and the sheets for creating and editing a loan. `AddLoan/` and `EditLoan/` hold one flow each; the form they share lives in `Components/LoanForm/`.
 - `app/apple/BorrowBack/Features/Archive/`: returned-loan history.
-- `app/apple/BorrowBack/Models/Loan.swift`: persisted SwiftData loan model.
+- `app/apple/BorrowBack/Models/`: the persisted SwiftData `Loan`, plus the value types the loan forms work with (`Borrower`, `LoanDraft`).
 - `app/apple/BorrowBack/Localizable.xcstrings`: English source strings and German translations.
 - `app/apple/BorrowBack/Assets.xcassets/` and `app/apple/Icon.icon/`: app colors and icon assets.
 - `docs/features/`: documentation for the currently implemented native features; use `_template.md` for new feature documents.
@@ -25,9 +25,10 @@ BorrowBack is a native iOS app for tracking items that have been lent to other p
 
 ## Loan Data and Lifecycle
 
+- A loan form collects its changes in a `LoanDraft` and writes them to the model only when the form is confirmed, so cancelling discards nothing that was persisted. Keep the mapping between draft and model in that type.
 - `Loan` is the persisted domain model. Keep model-container registration in `BBModelContainer` aligned with every persisted model.
 - A loan is active while `returnedAt` is `nil` and archived after `returnedAt` receives the actual return timestamp.
-- A borrower is either a free-text name or a linked system contact, modelled by the `Borrower` enum in the add-loan feature. `borrowerName` always holds the displayed name; `contactIdentifier` holds the linked contact and is `nil` for a typed name.
+- A borrower is either a free-text name or a linked system contact, modelled by the `Borrower` enum. `borrowerName` always holds the displayed name; `contactIdentifier` holds the linked contact and is `nil` for a typed name.
 - The contact picker runs out of process, so the app needs no Contacts authorization and reads no contact data beyond the picked contact. Do not introduce direct Contacts database access, a usage description, or contact-based actions such as calling or messaging without a deliberate decision.
 - Runtime persistence must fail closed. If the persistent container cannot be created, show the unavailable state and do not silently fall back to an in-memory container.
 - In-memory containers are appropriate for previews and tests only.

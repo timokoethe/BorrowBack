@@ -80,25 +80,30 @@ struct HomeView: View {
                 .listRowBackground(Color.clear)
             } else {
                 ForEach(sortedLoans) { loan in
-                    LoanCardView(loan: loan)
-                        .listRowInsets(.init(top: 8, leading: 20, bottom: 8, trailing: 20))
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                            Button {
-                                markAsReturned(loan)
-                            } label: {
-                                Label("Returned", systemImage: "checkmark")
-                            }
-                            .tint(Color.accentColor)
+                    Button {
+                        presentedSheet = .editLoan(loan)
+                    } label: {
+                        LoanCardView(loan: loan)
+                    }
+                    .buttonStyle(.plain)
+                    .listRowInsets(.init(top: 8, leading: 20, bottom: 8, trailing: 20))
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
+                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                        Button {
+                            markAsReturned(loan)
+                        } label: {
+                            Label("Returned", systemImage: "checkmark")
                         }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(role: .destructive) {
-                                delete(loan)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
+                        .tint(Color.accentColor)
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            delete(loan)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
                         }
+                    }
                 }
             }
         }
@@ -110,6 +115,8 @@ struct HomeView: View {
             switch sheet {
             case .addLoan:
                 AddLoanView()
+            case .editLoan(let loan):
+                EditLoanView(loan: loan)
             }
         }
         .alert("Save failed", isPresented: $isShowingPersistenceError) {

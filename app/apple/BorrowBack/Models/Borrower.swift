@@ -17,6 +17,16 @@ enum Borrower: Equatable {
     /// An unset borrower, ready for free-text entry.
     static let empty = Borrower.name("")
 
+    /// Rebuilds the borrower of a persisted loan, which stores the name and
+    /// the optional contact link in separate fields.
+    init(name: String, contactIdentifier: String?) {
+        if let contactIdentifier {
+            self = .contact(identifier: contactIdentifier, name: name)
+        } else {
+            self = .name(name)
+        }
+    }
+
     /// Name shown in the interface and persisted with the loan.
     var displayName: String {
         switch self {

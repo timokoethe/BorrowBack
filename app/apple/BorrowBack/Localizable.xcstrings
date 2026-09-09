@@ -113,6 +113,16 @@
         }
       }
     },
+    "Edit Loan" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausleihe bearbeiten"
+          }
+        }
+      }
+    },
     "Loan" : {
       "localizations" : {
         "de" : {
