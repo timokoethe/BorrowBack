@@ -5,8 +5,18 @@
 //  Created by Codex on 20.08.26.
 //
 
-enum HomeSheet: Hashable, Identifiable {
-    case addLoan
+import Foundation
 
-    var id: Self { self }
+enum HomeSheet: Identifiable {
+    case addLoan
+    case editLoan(Loan)
+
+    var id: String {
+        switch self {
+        case .addLoan:
+            "add-loan"
+        case .editLoan(let loan):
+            loan.id.uuidString
+        }
+    }
 }

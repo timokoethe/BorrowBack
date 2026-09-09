@@ -21,7 +21,7 @@ As a user, I want to record a new loan so that I do not forget who borrowed an i
 - The form accepts an item description, a borrower, and a due date.
 - The borrower is either a free-text name or a linked contact, as described in
   [Link a Borrower Contact](link-borrower-contact.md).
-- The due date cannot be earlier than the current date.
+- The due date cannot be earlier than the current date. Editing an existing loan relaxes this, as described in [Edit a Loan](edit-loan.md).
 - Saving is disabled while the item description or the borrower name is empty or contains only whitespace.
 - Confirming a valid form persists the loan and dismisses the sheet.
 - Closing the sheet with the cancel action does not create a loan.
