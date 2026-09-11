@@ -14,6 +14,7 @@ struct ArchiveView: View {
         filter: #Predicate<Loan> { $0.returnedAt != nil }
     ) private var loans: [Loan]
     @State private var isShowingPersistenceError = false
+    @State private var loanPendingDeletion: Loan?
 
     var body: some View {
         Group {
@@ -32,7 +33,7 @@ struct ArchiveView: View {
                             .listRowBackground(Color.clear)
                             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button(role: .destructive) {
-                                    delete(loan)
+                                    loanPendingDeletion = loan
                                 } label: {
                                     Label("Delete", systemImage: "trash")
                                 }
@@ -46,6 +47,18 @@ struct ArchiveView: View {
         }
         .background(Color("WarmIvory"))
         .navigationTitle("Archive")
+        .alert(
+            "Delete archived loan?",
+            isPresented: isShowingDeleteConfirmation,
+            presenting: loanPendingDeletion
+        ) { loan in
+            Button("Delete", role: .destructive) {
+                delete(loan)
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: { _ in
+            Text("This action cannot be undone.")
+        }
         .alert("Save failed", isPresented: $isShowingPersistenceError) {
             Button("OK", role: .cancel) {}
         } message: {
@@ -57,6 +70,17 @@ struct ArchiveView: View {
         loans.sorted {
             ($0.returnedAt ?? .distantPast) > ($1.returnedAt ?? .distantPast)
         }
+    }
+
+    private var isShowingDeleteConfirmation: Binding<Bool> {
+        Binding(
+            get: { loanPendingDeletion != nil },
+            set: { isPresented in
+                if !isPresented {
+                    loanPendingDeletion = nil
+                }
+            }
+        )
     }
 
     private func delete(_ loan: Loan) {

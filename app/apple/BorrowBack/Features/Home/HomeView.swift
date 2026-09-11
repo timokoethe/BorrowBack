@@ -16,6 +16,7 @@ struct HomeView: View {
     ) private var loans: [Loan]
     @State private var sort = HomeSort.dueDate
     @State private var isShowingPersistenceError = false
+    @State private var loanPendingDeletion: Loan?
 
     let onAddLoan: () -> Void
     let onEditLoan: (Loan) -> Void
@@ -98,7 +99,7 @@ struct HomeView: View {
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button(role: .destructive) {
-                            delete(loan)
+                            loanPendingDeletion = loan
                         } label: {
                             Label("Delete", systemImage: "trash")
                         }
@@ -120,6 +121,18 @@ struct HomeView: View {
                 .padding(.horizontal, 20)
                 .allowsHitTesting(false)
             }
+        }
+        .alert(
+            "Delete loan?",
+            isPresented: isShowingDeleteConfirmation,
+            presenting: loanPendingDeletion
+        ) { loan in
+            Button("Delete", role: .destructive) {
+                delete(loan)
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: { _ in
+            Text("This action cannot be undone.")
         }
         .alert("Save failed", isPresented: $isShowingPersistenceError) {
             Button("OK", role: .cancel) {}
@@ -143,6 +156,17 @@ struct HomeView: View {
                 $0.title.localizedStandardCompare($1.title) == .orderedAscending
             }
         }
+    }
+
+    private var isShowingDeleteConfirmation: Binding<Bool> {
+        Binding(
+            get: { loanPendingDeletion != nil },
+            set: { isPresented in
+                if !isPresented {
+                    loanPendingDeletion = nil
+                }
+            }
+        )
     }
 
     private func markAsReturned(_ loan: Loan) {
