@@ -50,7 +50,7 @@ struct LoanCardView: View {
                 if let returnedAt = loan.returnedAt {
                     Label {
                         HStack(spacing: 4) {
-                            Text("Loaned:")
+                            Text("Lent:")
                             Text(loan.loanedAt, format: .dateTime.day().month(.twoDigits).year())
                         }
                     } icon: {

@@ -11,12 +11,12 @@
         }
       }
     },
-    "Active loans appear here." : {
+    "Your active loans will appear here." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aktive Ausleihen erscheinen hier."
+            "value" : "Deine aktiven Ausleihen werden hier angezeigt."
           }
         }
       }
@@ -153,12 +153,12 @@
         }
       }
     },
-    "Loaned:" : {
+    "Lent:" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ausgeliehen:"
+            "value" : "Verliehen:"
           }
         }
       }
