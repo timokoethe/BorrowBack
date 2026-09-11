@@ -9,9 +9,11 @@ import SwiftData
 import SwiftUI
 
 struct ArchiveView: View {
+    @Environment(\.modelContext) private var modelContext
     @Query(
         filter: #Predicate<Loan> { $0.returnedAt != nil }
     ) private var loans: [Loan]
+    @State private var isShowingPersistenceError = false
 
     var body: some View {
         Group {
@@ -22,23 +24,49 @@ struct ArchiveView: View {
                     description: Text("Returned items appear here.")
                 )
             } else {
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(sortedLoans) { loan in
-                            LoanCardView(loan: loan)
-                        }
+                List {
+                    ForEach(sortedLoans) { loan in
+                        LoanCardView(loan: loan)
+                            .listRowInsets(.init(top: 8, leading: 20, bottom: 8, trailing: 20))
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button(role: .destructive) {
+                                    delete(loan)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
                     }
-                    .padding(20)
                 }
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .environment(\.defaultMinListRowHeight, 1)
             }
         }
         .background(Color("WarmIvory"))
         .navigationTitle("Archive")
+        .alert("Save failed", isPresented: $isShowingPersistenceError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("The change could not be saved.")
+        }
     }
 
     private var sortedLoans: [Loan] {
         loans.sorted {
             ($0.returnedAt ?? .distantPast) > ($1.returnedAt ?? .distantPast)
+        }
+    }
+
+    private func delete(_ loan: Loan) {
+        modelContext.delete(loan)
+
+        do {
+            try modelContext.save()
+        } catch {
+            modelContext.rollback()
+            isShowingPersistenceError = true
         }
     }
 }
