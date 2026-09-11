@@ -23,47 +23,54 @@ struct LoanCardView: View {
                 )
 
                 Image(systemName: "shippingbox.fill")
-                    .font(.system(size: 48, weight: .semibold))
+                    .font(.system(size: 30, weight: .semibold))
                     .foregroundStyle(Color("ThumbnailIcon"))
                     .accessibilityHidden(true)
             }
-            .frame(width: 140)
-            .clipped()
+            .frame(width: 92)
+            .frame(maxHeight: .infinity)
 
-            VStack(alignment: .leading, spacing: 15) {
-                Text(loan.title)
-                    .font(.title3.weight(.semibold))
-                    .foregroundStyle(Color("DeepInk"))
-                    .lineLimit(2)
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(loan.title)
+                        .font(.title3.weight(.semibold))
+                        .foregroundStyle(Color("DeepInk"))
+                        .lineLimit(2)
+
+                    Spacer(minLength: 4)
+
+                    statusBadge
+                }
 
                 Label(loan.borrowerName, systemImage: borrowerSymbol)
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
+                    .lineLimit(1)
 
                 if let returnedAt = loan.returnedAt {
                     Label {
                         HStack(spacing: 4) {
                             Text("Loaned:")
-                            Text(loan.loanedAt, format: .dateTime.day().month(.wide).year())
+                            Text(loan.loanedAt, format: .dateTime.day().month(.twoDigits).year())
                         }
                     } icon: {
                         Image(systemName: "calendar")
                     }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
-                    .lineLimit(2)
+                    .lineLimit(1)
 
                     Label {
                         HStack(spacing: 4) {
                             Text("Returned:")
-                            Text(returnedAt, format: .dateTime.day().month(.wide).year())
+                            Text(returnedAt, format: .dateTime.day().month(.twoDigits).year())
                         }
                     } icon: {
                         Image(systemName: "calendar.badge.checkmark")
                     }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
-                    .lineLimit(2)
+                    .lineLimit(1)
                 } else {
                     Label {
                         Text(loan.dueDate, format: .dateTime.day().month(.wide).year())
@@ -72,23 +79,28 @@ struct LoanCardView: View {
                     }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
+                    .lineLimit(1)
                 }
-
-                Text(statusTitle)
-                    .font(.subheadline.weight(.medium))
-                    .foregroundStyle(Color("DeepInk"))
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 7)
-                    .background(statusColor.opacity(0.28), in: Capsule())
-                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            .padding(16)
+            .padding(14)
         }
-        .frame(minHeight: 192)
         .background(Color("CardSurface"))
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .shadow(color: .black.opacity(0.12), radius: 10, y: 5)
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .stroke(Color("DeepInk").opacity(0.06), lineWidth: 1)
+        }
+        .shadow(color: .black.opacity(0.08), radius: 8, y: 4)
         .accessibilityElement(children: .combine)
+    }
+
+    private var statusBadge: some View {
+        Text(statusTitle)
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(Color("DeepInk").opacity(0.8))
+            .padding(.horizontal, 9)
+            .padding(.vertical, 5)
+            .background(statusColor.opacity(0.22), in: Capsule())
     }
 
     /// A linked contact is marked on the card, a free-text name is not.

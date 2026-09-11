@@ -21,4 +21,13 @@ enum HomeSort: String, CaseIterable, Hashable, Identifiable {
             "Name"
         }
     }
+
+    var shortTitle: LocalizedStringKey {
+        switch self {
+        case .dueDate:
+            "Due"
+        case .name:
+            "Name"
+        }
+    }
 }

@@ -14,38 +14,46 @@ struct HomeView: View {
         filter: #Predicate<Loan> { $0.returnedAt == nil },
         sort: \Loan.dueDate
     ) private var loans: [Loan]
-    @State private var presentedSheet: HomeSheet?
     @State private var sort = HomeSort.dueDate
     @State private var isShowingPersistenceError = false
 
+    let onAddLoan: () -> Void
+    let onEditLoan: (Loan) -> Void
+
+    init(
+        onAddLoan: @escaping () -> Void = {},
+        onEditLoan: @escaping (Loan) -> Void = { _ in }
+    ) {
+        self.onAddLoan = onAddLoan
+        self.onEditLoan = onEditLoan
+    }
+
     var body: some View {
         List {
-            HStack {
+            HStack(alignment: .center) {
                 Text("BorrowBack")
-                    .font(.system(size: 38, weight: .bold, design: .serif))
+                    .font(.system(size: 36, weight: .bold, design: .serif))
                     .foregroundStyle(Color("DeepInk"))
 
                 Spacer()
 
-                Button {
-                    presentedSheet = .addLoan
-                } label: {
+                Button(action: onAddLoan) {
                     Image(systemName: "plus")
-                        .fontWeight(.semibold)
+                        .font(.headline.weight(.semibold))
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.glassProminent)
                 .buttonBorderShape(.circle)
                 .controlSize(.regular)
                 .accessibilityLabel("New Loan")
             }
-            .listRowInsets(.init(top: 20, leading: 20, bottom: 18, trailing: 20))
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.clear)
+                .listRowInsets(.init(top: 20, leading: 20, bottom: 18, trailing: 20))
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
 
-            HStack {
-                Text("Overview")
+            HStack(alignment: .firstTextBaseline) {
+                Text("Active loans")
                     .font(.title3.weight(.bold))
-                    .foregroundStyle(Color("DeepInk"))
+                .foregroundStyle(Color("DeepInk"))
 
                 Spacer()
 
@@ -58,30 +66,21 @@ struct HomeView: View {
                     }
                 } label: {
                     HStack(spacing: 6) {
-                        Text(sort.title)
+                        Text(sort.shortTitle)
                         Image(systemName: "chevron.down")
                     }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.7))
                 }
             }
-            .listRowInsets(.init(top: 0, leading: 20, bottom: 10, trailing: 20))
+            .listRowInsets(.init(top: 0, leading: 20, bottom: 8, trailing: 20))
             .listRowSeparator(.hidden)
             .listRowBackground(Color.clear)
 
-            if loans.isEmpty {
-                ContentUnavailableView(
-                    "No loans",
-                    systemImage: "shippingbox",
-                    description: Text("Active loans appear here.")
-                )
-                .listRowInsets(.init(top: 48, leading: 20, bottom: 24, trailing: 20))
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color.clear)
-            } else {
+            if !loans.isEmpty {
                 ForEach(sortedLoans) { loan in
                     Button {
-                        presentedSheet = .editLoan(loan)
+                        onEditLoan(loan)
                     } label: {
                         LoanCardView(loan: loan)
                     }
@@ -111,12 +110,15 @@ struct HomeView: View {
         .scrollContentBackground(.hidden)
         .environment(\.defaultMinListRowHeight, 1)
         .background(Color("WarmIvory"))
-        .sheet(item: $presentedSheet) { sheet in
-            switch sheet {
-            case .addLoan:
-                AddLoanView()
-            case .editLoan(let loan):
-                EditLoanView(loan: loan)
+        .overlay {
+            if loans.isEmpty {
+                ContentUnavailableView(
+                    "No loans",
+                    systemImage: "shippingbox",
+                    description: Text("Active loans appear here.")
+                )
+                .padding(.horizontal, 20)
+                .allowsHitTesting(false)
             }
         }
         .alert("Save failed", isPresented: $isShowingPersistenceError) {
