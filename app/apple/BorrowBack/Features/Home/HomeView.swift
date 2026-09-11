@@ -115,7 +115,7 @@ struct HomeView: View {
                 ContentUnavailableView(
                     "No loans",
                     systemImage: "shippingbox",
-                    description: Text("Active loans appear here.")
+                    description: Text("Your active loans will appear here.")
                 )
                 .padding(.horizontal, 20)
                 .allowsHitTesting(false)
