@@ -32,9 +32,7 @@ struct HomeView: View {
     var body: some View {
         List {
             HStack(alignment: .center) {
-                Text("BorrowBack")
-                    .font(.system(size: 36, weight: .bold, design: .serif))
-                    .foregroundStyle(Color("DeepInk"))
+                BorrowBackWordmark()
 
                 Spacer()
 

@@ -19,4 +19,6 @@ As a user, I want to switch between the overview and the archive so that I can r
 
 - The app presents Overview and Archive as persistent tabs.
 - Selecting a tab displays its corresponding screen.
+- Both tabs use the shared BorrowBack wordmark and a screen-specific section
+  heading.
 - The selected tab uses the app's accent color.

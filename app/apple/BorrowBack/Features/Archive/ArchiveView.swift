@@ -17,36 +17,52 @@ struct ArchiveView: View {
     @State private var loanPendingDeletion: Loan?
 
     var body: some View {
-        Group {
+        List {
+            HStack {
+                BorrowBackWordmark()
+
+                Spacer()
+            }
+            .listRowInsets(.init(top: 20, leading: 20, bottom: 18, trailing: 20))
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
+
+            Text("Archive")
+                .font(.title3.weight(.bold))
+                .foregroundStyle(Color("DeepInk"))
+                .listRowInsets(.init(top: 0, leading: 20, bottom: 8, trailing: 20))
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+
+            ForEach(sortedLoans) { loan in
+                LoanCardView(loan: loan)
+                    .listRowInsets(.init(top: 8, leading: 20, bottom: 8, trailing: 20))
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            loanPendingDeletion = loan
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
+            }
+        }
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .environment(\.defaultMinListRowHeight, 1)
+        .background(Color("WarmIvory"))
+        .overlay {
             if loans.isEmpty {
                 ContentUnavailableView(
                     "No archived loans",
                     systemImage: "archivebox",
                     description: Text("Returned items appear here.")
                 )
-            } else {
-                List {
-                    ForEach(sortedLoans) { loan in
-                        LoanCardView(loan: loan)
-                            .listRowInsets(.init(top: 8, leading: 20, bottom: 8, trailing: 20))
-                            .listRowSeparator(.hidden)
-                            .listRowBackground(Color.clear)
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button(role: .destructive) {
-                                    loanPendingDeletion = loan
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }
-                    }
-                }
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
-                .environment(\.defaultMinListRowHeight, 1)
+                .padding(.horizontal, 20)
+                .allowsHitTesting(false)
             }
         }
-        .background(Color("WarmIvory"))
-        .navigationTitle("Archive")
         .alert(
             "Delete archived loan?",
             isPresented: isShowingDeleteConfirmation,

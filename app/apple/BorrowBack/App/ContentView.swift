@@ -30,6 +30,7 @@ struct ContentView: View {
             Tab("Archive", systemImage: "archivebox") {
                 NavigationStack {
                     ArchiveView()
+                        .toolbar(.hidden, for: .navigationBar)
                 }
             }
         }
