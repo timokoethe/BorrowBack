@@ -17,7 +17,7 @@ As a user, I want to record a new loan so that I do not forget who borrowed an i
 
 ## Acceptance Criteria
 
-- The plus button on the overview opens the new-loan sheet.
+- The plus button in the overview header opens the new-loan sheet.
 - The form accepts an item description, a borrower, and a due date.
 - The borrower is either a free-text name or a linked contact, as described in
   [Link a Borrower Contact](link-borrower-contact.md).

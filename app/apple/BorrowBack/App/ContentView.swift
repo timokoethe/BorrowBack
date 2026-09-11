@@ -9,12 +9,21 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @State private var presentedSheet: HomeSheet?
+
     var body: some View {
         TabView {
             Tab("Overview", systemImage: "house.fill") {
                 NavigationStack {
-                    HomeView()
-                        .toolbar(.hidden, for: .navigationBar)
+                    HomeView(
+                        onAddLoan: {
+                            presentedSheet = .addLoan
+                        },
+                        onEditLoan: { loan in
+                            presentedSheet = .editLoan(loan)
+                        }
+                    )
+                    .toolbar(.hidden, for: .navigationBar)
                 }
             }
 
@@ -26,6 +35,14 @@ struct ContentView: View {
         }
         .tint(.accentColor)
         .trackingCurrentDay()
+        .sheet(item: $presentedSheet) { sheet in
+            switch sheet {
+            case .addLoan:
+                AddLoanView()
+            case .editLoan(let loan):
+                EditLoanView(loan: loan)
+            }
+        }
     }
 }
 
