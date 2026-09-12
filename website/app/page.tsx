@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
   BellRing,
@@ -94,7 +95,7 @@ export default function Home() {
           </a>
           <nav className="nav" aria-label="Main navigation">
             <a href="#how">How it works</a>
-            <a href="#privacy">Privacy</a>
+            <Link href="/privacy">Privacy</Link>
             <a href="#faq">FAQ</a>
           </nav>
           <StoreButton variant="sm" />
@@ -299,7 +300,7 @@ export default function Home() {
           </a>
           <p style={{ margin: 0 }}>© {new Date().getFullYear()} BorrowBack</p>
           <nav aria-label="Footer navigation">
-            <a href="#privacy">Privacy</a>
+            <Link href="/privacy">Privacy</Link>
             <a href="#faq">FAQ</a>
             <a href="mailto:hello@borrowback.app">Contact</a>
           </nav>
