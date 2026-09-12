@@ -10,7 +10,21 @@ import SwiftData
 
 @main
 struct BorrowBackApp: App {
-    private let modelSetup = BBModelContainer.make()
+    private let modelSetup: BBModelContainer.Setup
+
+    init() {
+        switch BBModelContainer.make() {
+        case .ready(let modelContainer):
+            do {
+                try BBModelContainer.seed(modelContainer.mainContext)
+                modelSetup = .ready(modelContainer)
+            } catch {
+                modelSetup = .unavailable
+            }
+        case .unavailable:
+            modelSetup = .unavailable
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
