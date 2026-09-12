@@ -16,7 +16,7 @@ import { DeviceFrame } from "./components/DeviceFrame";
 const steps = [
   {
     title: "Add it in seconds",
-    text: "Item, person, due date. Three fields and the sheet closes again.",
+    text: "Item, person, due date. Three fields, then save and return to your overview.",
   },
   {
     title: "See what is out",
@@ -31,8 +31,8 @@ const steps = [
 const promises = [
   {
     icon: WifiOff,
-    title: "Stays on your iPhone",
-    text: "Everything is stored locally. No server holds your loans, so there is nothing to sync or leak.",
+    title: "Private by design",
+    text: "Your loans stay available on your iPhone and can sync through your private iCloud account. BorrowBack cannot access your records.",
   },
   {
     icon: ShieldCheck,
@@ -49,7 +49,7 @@ const promises = [
 const faq = [
   {
     q: "Where is my data stored?",
-    a: "Locally on your iPhone, in the app's own database. BorrowBack has no backend and no account system, so your loans never leave the device.",
+    a: "Locally on your iPhone, in the app's own database. When iCloud is available, your loans also sync through your private iCloud account so they stay up to date across your devices. BorrowBack cannot access your records.",
   },
   {
     q: "What does BorrowBack cost?",
@@ -57,7 +57,7 @@ const faq = [
   },
   {
     q: "Does it work offline?",
-    a: "Always. Because there is no server involved, the app behaves exactly the same in airplane mode as it does at home.",
+    a: "Yes. You can view and change your loans without a network connection. Changes made offline sync through iCloud after you reconnect.",
   },
   {
     q: "What happens to returned items?",
@@ -133,7 +133,7 @@ export default function Home() {
               </li>
               <li>
                 <Check size={15} strokeWidth={2.4} aria-hidden="true" />
-                Nothing leaves your phone
+                Private iCloud sync
               </li>
             </ul>
           </div>
@@ -177,7 +177,7 @@ export default function Home() {
               </h2>
               <p className="prose lead">
                 What you lent, who has it, when you want it back. The keyboard is already up
-                when the sheet opens, and a single tap saves it.
+                when the page opens, and a single tap saves it.
               </p>
               <ul className="checklist">
                 <li>
@@ -249,8 +249,8 @@ export default function Home() {
               <span className="accent">Nothing you don&rsquo;t.</span>
             </h2>
             <p className="lead">
-              BorrowBack is deliberately small. There is no account to create, no cloud to trust
-              and no upsell waiting a few screens in.
+              BorrowBack is deliberately small. There is no BorrowBack account to create, no
+              advertising profile and no upsell waiting a few screens in.
             </p>
           </div>
           <div className="card-grid">
@@ -306,7 +306,7 @@ export default function Home() {
           <nav aria-label="Footer navigation">
             <Link href="/privacy">Privacy</Link>
             <a href="#faq">FAQ</a>
-            <a href="mailto:hello@borrowback.app">Contact</a>
+            <a href="mailto:borrowback@itstimo.me">Contact</a>
           </nav>
         </div>
       </footer>
