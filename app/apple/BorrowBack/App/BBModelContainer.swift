@@ -8,13 +8,17 @@
 import SwiftData
 
 enum BBModelContainer {
+    private static let cloudKitContainerIdentifier = "iCloud.com.timokoethe.BorrowBack"
+
     enum Setup {
         case ready(ModelContainer)
         case unavailable
     }
 
     static func make() -> Setup {
-        let configuration = ModelConfiguration(cloudKitDatabase: .none)
+        let configuration = ModelConfiguration(
+            cloudKitDatabase: .private(cloudKitContainerIdentifier)
+        )
 
         do {
             return .ready(
