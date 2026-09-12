@@ -21,6 +21,7 @@ final class Loan {
     var createdAt: Date
 
     init(
+        id: UUID = UUID(),
         title: String,
         borrowerName: String,
         contactIdentifier: String? = nil,
@@ -30,7 +31,7 @@ final class Loan {
         imageFilename: String? = nil,
         createdAt: Date = .now
     ) {
-        id = UUID()
+        self.id = id
         self.title = title
         self.borrowerName = borrowerName
         self.contactIdentifier = contactIdentifier
