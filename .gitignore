@@ -39,3 +39,6 @@ cpd-output.xml
 ## Swift Package Manager
 # Packages/
 .build/
+
+.codex
+.claude
