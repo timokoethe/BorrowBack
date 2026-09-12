@@ -44,7 +44,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable} antialiased`}>
+    <html
+      lang="en"
+      className={`${sans.variable} ${serif.variable} antialiased`}
+      data-scroll-behavior="smooth"
+    >
       <body>{children}</body>
     </html>
   );
