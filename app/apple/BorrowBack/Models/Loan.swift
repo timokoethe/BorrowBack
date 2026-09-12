@@ -10,15 +10,15 @@ import SwiftData
 
 @Model
 final class Loan {
-    @Attribute(.unique) var id: UUID
-    var title: String
-    var borrowerName: String
+    var id: UUID = UUID()
+    var title: String = ""
+    var borrowerName: String = ""
     var contactIdentifier: String?
-    var loanedAt: Date
-    var dueDate: Date
+    var loanedAt: Date = Date.now
+    var dueDate: Date = Date.now
     var returnedAt: Date?
     var imageFilename: String?
-    var createdAt: Date
+    var createdAt: Date = Date.now
 
     init(
         id: UUID = UUID(),
