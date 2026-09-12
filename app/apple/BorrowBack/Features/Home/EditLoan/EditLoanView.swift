@@ -24,13 +24,18 @@ struct EditLoanView: View {
     }
 
     var body: some View {
-        LoanFormView(
-            draft: $draft,
-            navigationTitle: "Edit Loan",
-            earliestDueDate: earliestDueDate,
-            focusesTitle: false,
-            onSave: save
-        )
+        NavigationStack {
+            LoanFormView(
+                draft: $draft,
+                navigationTitle: "Edit Loan",
+                earliestDueDate: earliestDueDate,
+                focusesTitle: false,
+                presentationStyle: .sheet,
+                onSave: save
+            )
+        }
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.visible)
         .alert("Save failed", isPresented: $isShowingSaveError) {
             Button("OK", role: .cancel) {}
         } message: {

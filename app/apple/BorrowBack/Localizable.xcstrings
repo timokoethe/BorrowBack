@@ -1,6 +1,26 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "7 days" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7 Tage"
+          }
+        }
+      }
+    },
+    "14 days" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "14 Tage"
+          }
+        }
+      }
+    },
     "Active loans" : {
       "localizations" : {
         "de" : {
@@ -69,6 +89,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontakt wählen"
+          }
+        }
+      }
+    },
+    "Custom date" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eigenes Datum"
           }
         }
       }

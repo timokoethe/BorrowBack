@@ -10,20 +10,27 @@ import SwiftData
 
 struct ContentView: View {
     @State private var presentedSheet: HomeSheet?
+    @State private var homePath: [HomeRoute] = []
 
     var body: some View {
         TabView {
             Tab("Overview", systemImage: "house.fill") {
-                NavigationStack {
+                NavigationStack(path: $homePath) {
                     HomeView(
                         onAddLoan: {
-                            presentedSheet = .addLoan
+                            homePath.append(.addLoan)
                         },
                         onEditLoan: { loan in
                             presentedSheet = .editLoan(loan)
                         }
                     )
                     .toolbar(.hidden, for: .navigationBar)
+                    .navigationDestination(for: HomeRoute.self) { route in
+                        switch route {
+                        case .addLoan:
+                            AddLoanView()
+                        }
+                    }
                 }
             }
 
@@ -38,8 +45,6 @@ struct ContentView: View {
         .trackingCurrentDay()
         .sheet(item: $presentedSheet) { sheet in
             switch sheet {
-            case .addLoan:
-                AddLoanView()
             case .editLoan(let loan):
                 EditLoanView(loan: loan)
             }
