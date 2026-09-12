@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct ArchiveView: View {
+    @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @Environment(\.modelContext) private var modelContext
     @Query(
         filter: #Predicate<Loan> { $0.returnedAt != nil }
@@ -76,14 +77,22 @@ struct ArchiveView: View {
     }
 
     private func delete(_ loan: Loan) {
-        modelContext.delete(loan)
+        withAnimation(loanRemovalAnimation) {
+            modelContext.delete(loan)
 
-        do {
-            try modelContext.save()
-        } catch {
-            modelContext.rollback()
-            isShowingPersistenceError = true
+            do {
+                try modelContext.save()
+            } catch {
+                modelContext.rollback()
+                isShowingPersistenceError = true
+            }
         }
+    }
+
+    private var loanRemovalAnimation: Animation? {
+        accessibilityReduceMotion
+            ? nil
+            : .snappy(duration: 0.22, extraBounce: 0)
     }
 }
 
