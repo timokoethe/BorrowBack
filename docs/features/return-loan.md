@@ -18,6 +18,7 @@ As a user, I want to mark an item as returned so that it leaves my active list w
 ## Acceptance Criteria
 
 - Swiping an active loan from the leading edge reveals a return action.
+- Long-pressing an active loan reveals a context menu with a return action.
 - Completing the action records the current date and time as the return time.
 - A returned loan is removed from the active overview and appears in the archive.
 - A failed update is rolled back and displays an error.

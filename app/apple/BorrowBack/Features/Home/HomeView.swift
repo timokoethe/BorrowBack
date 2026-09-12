@@ -83,6 +83,21 @@ struct HomeView: View {
                         LoanCardView(loan: loan)
                     }
                     .buttonStyle(.plain)
+                    .contextMenu {
+                        Button {
+                            markAsReturned(loan)
+                        } label: {
+                            Label("Returned", systemImage: "checkmark")
+                        }
+                        .tint(Color.primary)
+
+                        Button(role: .destructive) {
+                            delete(loan)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(.red)
+                    }
                     .listRowInsets(.init(top: 8, leading: 20, bottom: 8, trailing: 20))
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
