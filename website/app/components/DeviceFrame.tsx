@@ -1,37 +1,30 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
 import Image from "next/image";
-import type { ReactNode } from "react";
 
-/**
- * iPhone frame authored in iOS points: `--pt` scales the whole thing, so the
- * mock inside keeps authentic type sizes instead of unreadable 6px labels.
- *
- * Drop a real screenshot at `public/screens/<name>.png` (1179 x 2556) and it
- * replaces the mock automatically — no code change needed.
- */
+const responsiveSizes = {
+  hero: "(max-width: 380px) 224px, (max-width: 560px) 257px, (max-width: 900px) 307px, (max-width: 1080px) 274px, 315px",
+  feature: "(max-width: 380px) 224px, (max-width: 560px) 257px, (max-width: 900px) 307px, (max-width: 1080px) 249px, 266px",
+} as const;
+
 export function DeviceFrame({
   screenshot,
   alt,
-  children,
+  placement = "feature",
+  preload = false,
 }: {
-  screenshot?: string;
+  screenshot: string;
   alt: string;
-  children: ReactNode;
+  placement?: keyof typeof responsiveSizes;
+  preload?: boolean;
 }) {
-  const file = screenshot ? `screens/${screenshot}.png` : undefined;
-  const hasScreenshot = file ? existsSync(path.join(process.cwd(), "public", file)) : false;
-
   return (
-    <div className="device" role="img" aria-label={alt}>
-      <div className="device-screen">
-        <span className="device-island" aria-hidden="true" />
-        {hasScreenshot ? (
-          <Image src={`/${file}`} alt="" width={1179} height={2556} sizes="400px" />
-        ) : (
-          children
-        )}
-      </div>
-    </div>
+    <Image
+      className="device"
+      src={`/screens/${screenshot}.png`}
+      alt={alt}
+      width={1319}
+      height={2748}
+      sizes={responsiveSizes[placement]}
+      preload={preload}
+    />
   );
 }

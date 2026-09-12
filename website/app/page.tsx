@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import appIcon from "./icon.png";
 import { DeviceFrame } from "./components/DeviceFrame";
-import { AddLoanScreen, ArchiveScreen, OverviewScreen } from "./components/AppScreens";
 
 const steps = [
   {
@@ -140,9 +139,12 @@ export default function Home() {
           </div>
 
           <div className="hero-stage">
-            <DeviceFrame screenshot="overview" alt="The BorrowBack overview, listing three active loans with their due dates">
-              <OverviewScreen />
-            </DeviceFrame>
+            <DeviceFrame
+              screenshot="home-view-light"
+              alt="The BorrowBack overview, listing four active loans with their due dates"
+              placement="hero"
+              preload
+            />
           </div>
         </section>
 
@@ -193,9 +195,10 @@ export default function Home() {
               </ul>
             </div>
             <div className="split-visual">
-              <DeviceFrame screenshot="add-loan" alt="The New Loan sheet with fields for item, person and return date">
-                <AddLoanScreen />
-              </DeviceFrame>
+              <DeviceFrame
+                screenshot="add-view-light"
+                alt="The New Loan screen with fields for item, person and return date"
+              />
             </div>
           </div>
         </section>
@@ -229,9 +232,10 @@ export default function Home() {
               </ul>
             </div>
             <div className="split-visual">
-              <DeviceFrame screenshot="archive" alt="The archive, listing items that have already been returned">
-                <ArchiveScreen />
-              </DeviceFrame>
+              <DeviceFrame
+                screenshot="archive-view-light"
+                alt="The archive, listing items that have already been returned"
+              />
             </div>
           </div>
         </section>
