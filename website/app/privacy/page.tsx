@@ -151,7 +151,7 @@ export default function PrivacyPage() {
             children or anyone else. The app sends no personal information to us;
             if iCloud synchronization is used, app data is stored by Apple in the
             user&apos;s iCloud account. BorrowBack contains no advertising, tracking,
-            or user-generated content.
+            public sharing, or social features.
           </p>
         </section>
 
