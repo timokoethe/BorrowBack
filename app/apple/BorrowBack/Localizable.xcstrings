@@ -123,26 +123,6 @@
         }
       }
     },
-    "Delete archived loan?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Archivierte Ausleihe löschen?"
-          }
-        }
-      }
-    },
-    "Delete loan?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ausleihe löschen?"
-          }
-        }
-      }
-    },
     "Due" : {
       "localizations" : {
         "de" : {
@@ -389,16 +369,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Die Ausleihe konnte nicht gespeichert werden."
-          }
-        }
-      }
-    },
-    "This action cannot be undone." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diese Aktion kann nicht rückgängig gemacht werden."
           }
         }
       }
