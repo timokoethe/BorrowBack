@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next"
 import { headers } from "next/headers";
 import { Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
@@ -49,7 +50,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sans.variable} ${serif.variable} antialiased`}
       data-scroll-behavior="smooth"
     >
-      <body>{children}</body>
+      <body>{children}
+        <Analytics />
+      </body>
     </html>
   );
 }
