@@ -22,6 +22,7 @@ struct AddLoanView: View {
             navigationTitle: "New Loan",
             earliestDueDate: .now,
             focusesTitle: true,
+            presentationStyle: .pushed,
             onSave: save
         )
         .alert("Save failed", isPresented: $isShowingSaveError) {
@@ -48,6 +49,8 @@ struct AddLoanView: View {
 }
 
 #Preview {
-    AddLoanView()
-        .modelContainer(BBModelContainer.preview())
+    NavigationStack {
+        AddLoanView()
+    }
+    .modelContainer(BBModelContainer.preview())
 }
