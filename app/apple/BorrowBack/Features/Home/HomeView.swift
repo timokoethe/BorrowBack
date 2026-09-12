@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
+    @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @Environment(\.modelContext) private var modelContext
     @Query(
         filter: #Predicate<Loan> { $0.returnedAt == nil },
@@ -159,13 +160,23 @@ struct HomeView: View {
     }
 
     private func markAsReturned(_ loan: Loan) {
-        loan.returnedAt = .now
-        saveChanges()
+        withAnimation(loanRemovalAnimation) {
+            loan.returnedAt = .now
+            saveChanges()
+        }
     }
 
     private func delete(_ loan: Loan) {
-        modelContext.delete(loan)
-        saveChanges()
+        withAnimation(loanRemovalAnimation) {
+            modelContext.delete(loan)
+            saveChanges()
+        }
+    }
+
+    private var loanRemovalAnimation: Animation? {
+        accessibilityReduceMotion
+            ? nil
+            : .snappy(duration: 0.22, extraBounce: 0)
     }
 
     private func saveChanges() {
