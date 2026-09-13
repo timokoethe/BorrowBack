@@ -32,7 +32,7 @@ struct HomeView: View {
     var body: some View {
         List {
             HStack(alignment: .center) {
-                BorrowBackWordmark()
+                BorrowBackWordmark(animatesOnAppear: true)
 
                 Spacer()
 
