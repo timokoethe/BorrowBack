@@ -11,6 +11,7 @@ BorrowBack is a native iOS app for tracking items that have been lent to other p
 - `app/apple/BorrowBack/Models/`: the persisted SwiftData `Loan`, plus the value types the loan forms work with (`Borrower`, `LoanDraft`).
 - `app/apple/BorrowBack/Localizable.xcstrings`: English source strings and German translations.
 - `app/apple/BorrowBack/Assets.xcassets/` and `app/apple/Icon.icon/`: app colors and icon assets.
+- `app/apple/BorrowBack/PrivacyInfo.xcprivacy`: privacy manifest. It currently declares no tracking, no collected data, and no required-reason API use. Update it when introducing a required-reason API or a third-party SDK.
 - `docs/features/`: documentation for the currently implemented native features; use `_template.md` for new feature documents.
 - `website/`: separate Next.js site; read `website/AGENTS.md` before editing it.
 
