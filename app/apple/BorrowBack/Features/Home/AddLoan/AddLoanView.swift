@@ -20,7 +20,6 @@ struct AddLoanView: View {
         LoanFormView(
             draft: $draft,
             navigationTitle: "New Loan",
-            earliestDueDate: .now,
             focusesTitle: true,
             presentationStyle: .pushed,
             onSave: save

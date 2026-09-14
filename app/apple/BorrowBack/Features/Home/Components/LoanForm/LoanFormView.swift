@@ -25,15 +25,11 @@ struct LoanFormView: View {
     @Binding var draft: LoanDraft
 
     let navigationTitle: LocalizedStringKey
-    /// The earliest date the due date picker offers. A new loan cannot be due
-    /// in the past, while an existing one may already be overdue.
-    let earliestDueDate: Date
     /// Whether the title field takes focus when the form appears.
     let focusesTitle: Bool
     let presentationStyle: PresentationStyle
     let onSave: () -> Void
 
-    @Environment(\.currentDay) private var currentDay
     @Environment(\.dismiss) private var dismiss
     @FocusState private var isTitleFocused: Bool
     @State private var dueDatePreset = DueDatePreset.fourteenDays
@@ -43,6 +39,13 @@ struct LoanFormView: View {
             Section("Loan") {
                 TextField("What did you lend?", text: $draft.title)
                     .focused($isTitleFocused)
+
+                DatePicker(
+                    "Lent on",
+                    selection: $draft.loanedAt,
+                    in: ...Date.now,
+                    displayedComponents: .date
+                )
             }
 
             Section("Person") {
@@ -53,7 +56,7 @@ struct LoanFormView: View {
                 DatePicker(
                     "Due on",
                     selection: $draft.dueDate,
-                    in: earliestDueDate...,
+                    in: draft.loanedAt...,
                     displayedComponents: .date
                 )
 
@@ -119,10 +122,12 @@ struct LoanFormView: View {
                 dueDatePreset = matchingPreset(for: newDate)
             }
         }
-        .onChange(of: currentDay) {
+        .onChange(of: draft.loanedAt) {
             if presentationStyle == .pushed,
-               let updatedDate = date(for: dueDatePreset) {
-                draft.dueDate = updatedDate
+               let presetDate = date(for: dueDatePreset) {
+                draft.dueDate = presetDate
+            } else if draft.dueDate < draft.loanedAt {
+                draft.dueDate = draft.loanedAt
             }
         }
     }
@@ -130,19 +135,21 @@ struct LoanFormView: View {
     private func matchingPreset(for dueDate: Date) -> DueDatePreset {
         let calendar = Calendar.current
 
-        if let sevenDaysFromNow = date(for: .sevenDays),
-           calendar.isDate(dueDate, inSameDayAs: sevenDaysFromNow) {
+        if let sevenDaysAfterLoan = date(for: .sevenDays),
+           calendar.isDate(dueDate, inSameDayAs: sevenDaysAfterLoan) {
             return .sevenDays
         }
 
-        if let fourteenDaysFromNow = date(for: .fourteenDays),
-           calendar.isDate(dueDate, inSameDayAs: fourteenDaysFromNow) {
+        if let fourteenDaysAfterLoan = date(for: .fourteenDays),
+           calendar.isDate(dueDate, inSameDayAs: fourteenDaysAfterLoan) {
             return .fourteenDays
         }
 
         return .custom
     }
 
+    /// A preset due date is measured from the loan date, so a loan recorded
+    /// after the fact keeps the term the preset promises.
     private func date(for preset: DueDatePreset) -> Date? {
         let numberOfDays: Int
 
@@ -158,7 +165,7 @@ struct LoanFormView: View {
         return Calendar.current.date(
             byAdding: .day,
             value: numberOfDays,
-            to: currentDay
+            to: draft.loanedAt
         )
     }
 
@@ -196,7 +203,6 @@ struct LoanFormView: View {
     LoanFormView(
         draft: $draft,
         navigationTitle: "New Loan",
-        earliestDueDate: .now,
         focusesTitle: true,
         presentationStyle: .pushed,
         onSave: {}

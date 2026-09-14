@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Let students record an item they have lent, the borrower's name, and the expected return date.
+Let students record an item they have lent, the borrower's name, the date it was lent, and the expected return date.
 
 ## User Story
 
@@ -19,11 +19,13 @@ As a user, I want to record a new loan so that I do not forget who borrowed an i
 
 - The plus button in the overview header navigates to the new-loan page.
 - The new-loan page uses the standard back button in the navigation bar.
-- The form accepts an item description, a borrower, and a due date.
+- The form accepts an item description, a borrower, a loan date, and a due date.
 - The borrower is either a free-text name or a linked contact, as described in
   [Link a Borrower Contact](link-borrower-contact.md).
-- The due date cannot be earlier than the current date. Editing an existing loan relaxes this, as described in [Edit a Loan](edit-loan.md).
-- The new-loan page offers quick choices for seven days, fourteen days, or a custom due date.
+- The loan date is preselected with the current date so recording a loan right away needs no date entry.
+- The loan date can be moved into the past to record a loan after the fact, and cannot be set to a future date.
+- The due date cannot be earlier than the loan date.
+- The new-loan page offers quick choices for seven days, fourteen days, or a custom due date. A quick choice is counted from the loan date.
 - Saving is disabled while the item description or the borrower name is empty or contains only whitespace.
 - A save checkmark is displayed in the top-right corner of the new-loan page.
 - Confirming a valid form persists the loan and returns to the overview.

@@ -13,15 +13,17 @@ import Foundation
 struct LoanDraft: Equatable {
     var title: String
     var borrower: Borrower
+    var loanedAt: Date
     var dueDate: Date
 
-    /// Days between today and the preselected due date of a new loan.
+    /// Days between the loan date and the preselected due date of a new loan.
     static let defaultLoanDurationInDays = 14
 
-    /// An empty draft for a new loan.
+    /// An empty draft for a new loan, lent today.
     init() {
         title = ""
         borrower = .empty
+        loanedAt = .now
         dueDate = Calendar.current.date(
             byAdding: .day,
             value: Self.defaultLoanDurationInDays,
@@ -36,6 +38,7 @@ struct LoanDraft: Equatable {
             name: loan.borrowerName,
             contactIdentifier: loan.contactIdentifier
         )
+        loanedAt = loan.loanedAt
         dueDate = loan.dueDate
     }
 
@@ -55,17 +58,19 @@ struct LoanDraft: Equatable {
             title: persistedTitle,
             borrowerName: borrower.persistedName,
             contactIdentifier: borrower.contactIdentifier,
+            loanedAt: loanedAt,
             dueDate: dueDate
         )
     }
 
-    /// Writes this draft's content onto an existing loan. The loan's lifecycle
-    /// dates stay untouched: a form edits what was lent to whom and when it is
-    /// due, not whether the loan is returned.
+    /// Writes this draft's content onto an existing loan. Whether the loan is
+    /// returned stays untouched: a form edits what was lent to whom and when it
+    /// was lent and is due, not its returned state.
     func apply(to loan: Loan) {
         loan.title = persistedTitle
         loan.borrowerName = borrower.persistedName
         loan.contactIdentifier = borrower.contactIdentifier
+        loan.loanedAt = loanedAt
         loan.dueDate = dueDate
     }
 }

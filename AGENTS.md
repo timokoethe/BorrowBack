@@ -70,6 +70,20 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild \
   CODE_SIGNING_ALLOWED=NO build
 ```
 
+That build compiles the app but cannot run it. Without code signing the app
+carries no iCloud entitlements, so it crashes on launch while Core Data sets up
+CloudKit. Use a regularly signed build to install and run the app in a
+simulator:
+
+```sh
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild \
+  -project app/apple/BorrowBack.xcodeproj \
+  -scheme BorrowBack \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  -derivedDataPath /tmp/borrowback-simulator \
+  build
+```
+
 - There are currently no native test targets. For code changes, run the build and describe relevant manual verification.
 - Documentation-only changes do not require an Xcode build; run `git diff --check` and verify the documents against the current implementation.
 - Do not add or run UI tests unless the user explicitly requests them.

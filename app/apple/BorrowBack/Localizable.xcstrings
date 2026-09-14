@@ -193,6 +193,16 @@
         }
       }
     },
+    "Lent on" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verliehen am"
+          }
+        }
+      }
+    },
     "Name" : {
       "localizations" : {
         "de" : {
