@@ -10,8 +10,10 @@ import SwiftData
 
 extension BBModelContainer {
     /// Adds stable sample loans for product screenshots without duplicating them
-    /// on subsequent launches.
-    static func seed(_ modelContext: ModelContext) throws {
+    /// on subsequent launches. Debug builds only, so no installed app writes
+    /// sample loans into a user's store or iCloud account.
+    static func seedSampleData(_ modelContext: ModelContext) throws {
+        #if DEBUG
         let existingIDs = Set(
             try modelContext.fetch(FetchDescriptor<Loan>()).map(\.id)
         )
@@ -26,8 +28,10 @@ extension BBModelContainer {
             modelContext.rollback()
             throw error
         }
+        #endif
     }
 
+    #if DEBUG
     private static let sampleLoans: [Loan] = [
         Loan(
             id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA801")!,
@@ -105,4 +109,5 @@ extension BBModelContainer {
 
         return date
     }
+    #endif
 }
