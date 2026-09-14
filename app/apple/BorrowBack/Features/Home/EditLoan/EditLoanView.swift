@@ -28,7 +28,6 @@ struct EditLoanView: View {
             LoanFormView(
                 draft: $draft,
                 navigationTitle: "Edit Loan",
-                earliestDueDate: earliestDueDate,
                 focusesTitle: false,
                 presentationStyle: .sheet,
                 onSave: save
@@ -41,12 +40,6 @@ struct EditLoanView: View {
         } message: {
             Text("The change could not be saved.")
         }
-    }
-
-    /// An overdue loan keeps its due date selectable, so editing the title of
-    /// a late loan does not force its date forward.
-    private var earliestDueDate: Date {
-        min(loan.dueDate, .now)
     }
 
     private func save() {
