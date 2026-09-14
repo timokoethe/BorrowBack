@@ -16,7 +16,7 @@ struct BorrowBackApp: App {
         switch BBModelContainer.make() {
         case .ready(let modelContainer):
             do {
-                try BBModelContainer.seed(modelContainer.mainContext)
+                try BBModelContainer.seedSampleData(modelContainer.mainContext)
                 modelSetup = .ready(modelContainer)
             } catch {
                 modelSetup = .unavailable
