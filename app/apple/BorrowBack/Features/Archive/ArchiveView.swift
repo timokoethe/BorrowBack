@@ -39,6 +39,29 @@ struct ArchiveView: View {
                     .listRowInsets(.init(top: 8, leading: 20, bottom: 8, trailing: 20))
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
+                    .contextMenu {
+                        Button {
+                            restore(loan)
+                        } label: {
+                            Label("Restore", systemImage: "arrow.uturn.backward")
+                        }
+                        .tint(Color.primary)
+
+                        Button(role: .destructive) {
+                            delete(loan)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(.red)
+                    }
+                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                        Button {
+                            restore(loan)
+                        } label: {
+                            Label("Restore", systemImage: "arrow.uturn.backward")
+                        }
+                        .tint(Color.accentColor)
+                    }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button(role: .destructive) {
                             delete(loan)
@@ -76,16 +99,19 @@ struct ArchiveView: View {
         }
     }
 
+    /// Clears the return of an archived loan so it becomes active again. The
+    /// due date stays as it was, so a loan restored after that date is overdue.
+    private func restore(_ loan: Loan) {
+        withAnimation(loanRemovalAnimation) {
+            loan.returnedAt = nil
+            saveChanges()
+        }
+    }
+
     private func delete(_ loan: Loan) {
         withAnimation(loanRemovalAnimation) {
             modelContext.delete(loan)
-
-            do {
-                try modelContext.save()
-            } catch {
-                modelContext.rollback()
-                isShowingPersistenceError = true
-            }
+            saveChanges()
         }
     }
 
@@ -93,6 +119,15 @@ struct ArchiveView: View {
         accessibilityReduceMotion
             ? nil
             : .snappy(duration: 0.22, extraBounce: 0)
+    }
+
+    private func saveChanges() {
+        do {
+            try modelContext.save()
+        } catch {
+            modelContext.rollback()
+            isShowingPersistenceError = true
+        }
     }
 }
 
