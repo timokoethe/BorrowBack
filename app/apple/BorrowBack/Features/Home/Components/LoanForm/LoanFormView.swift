@@ -65,6 +65,8 @@ struct LoanFormView: View {
                         dueDatePresetButton("7 days", preset: .sevenDays)
                         dueDatePresetButton("14 days", preset: .fourteenDays)
                         dueDatePresetButton("Custom date", preset: .custom)
+
+                        Spacer(minLength: 0)
                     }
                     .accessibilityElement(children: .contain)
                     .accessibilityLabel("Due date")
@@ -185,7 +187,7 @@ struct LoanFormView: View {
                 .foregroundStyle(
                     isSelected ? Color("AccentForeground") : Color("DeepInk").opacity(0.7)
                 )
-                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 12)
                 .padding(.vertical, 8)
                 .background(
                     isSelected ? Color.accentColor : Color("MistGray"),
