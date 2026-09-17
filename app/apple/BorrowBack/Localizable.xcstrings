@@ -173,6 +173,36 @@
         }
       }
     },
+    "Everything you lend, right where you need it." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alles Verliehene genau dort, wo du es brauchst."
+          }
+        }
+      }
+    },
+    "Get started" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loslegen"
+          }
+        }
+      }
+    },
+    "Keep track of every loan, due date, and return in one calm place." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Behalte Ausleihen, Fälligkeiten und Rückgaben übersichtlich an einem Ort."
+          }
+        }
+      }
+    },
     "Loan" : {
       "localizations" : {
         "de" : {
