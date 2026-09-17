@@ -17,13 +17,19 @@ struct AddLoanView: View {
     @State private var isShowingSaveError = false
 
     var body: some View {
-        LoanFormView(
-            draft: $draft,
-            navigationTitle: "New Loan",
-            focusesTitle: true,
-            presentationStyle: .pushed,
-            onSave: save
-        )
+        ZStack {
+            Color("WarmIvory")
+                .ignoresSafeArea()
+
+            LoanFormView(
+                draft: $draft,
+                navigationTitle: "New Loan",
+                focusesTitle: true,
+                presentationStyle: .pushed,
+                onSave: save
+            )
+        }
+        .toolbar(.hidden, for: .tabBar)
         .alert("Save failed", isPresented: $isShowingSaveError) {
             Button("OK", role: .cancel) {}
         } message: {

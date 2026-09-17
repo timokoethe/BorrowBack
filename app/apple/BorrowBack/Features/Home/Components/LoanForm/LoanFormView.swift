@@ -33,6 +33,7 @@ struct LoanFormView: View {
     @Environment(\.dismiss) private var dismiss
     @FocusState private var isTitleFocused: Bool
     @State private var dueDatePreset = DueDatePreset.fourteenDays
+    @State private var hasRequestedInitialFocus = false
 
     var body: some View {
         Form {
@@ -105,11 +106,17 @@ struct LoanFormView: View {
                 .accessibilityLabel("Save")
             }
         }
-        .onAppear {
+        .background {
             if focusesTitle {
-                isTitleFocused = true
-            }
+                NavigationAppearanceObserver {
+                    guard !hasRequestedInitialFocus else { return }
 
+                    hasRequestedInitialFocus = true
+                    isTitleFocused = true
+                }
+            }
+        }
+        .onAppear {
             if presentationStyle == .pushed {
                 dueDatePreset = matchingPreset(for: draft.dueDate)
             }
