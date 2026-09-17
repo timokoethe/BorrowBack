@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct BorrowBackApp: App {
+    @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     private let modelSetup: BBModelContainer.Setup
 
     init() {
@@ -30,11 +32,29 @@ struct BorrowBackApp: App {
         WindowGroup {
             switch modelSetup {
             case .ready(let modelContainer):
-                ContentView()
+                Group {
+                    if hasCompletedOnboarding {
+                        ContentView()
+                            .transition(.opacity)
+                    } else {
+                        OnboardingView {
+                            withAnimation(onboardingTransitionAnimation) {
+                                hasCompletedOnboarding = true
+                            }
+                        }
+                        .transition(.opacity)
+                    }
+                }
                     .modelContainer(modelContainer)
             case .unavailable:
                 PersistenceUnavailableView()
             }
         }
+    }
+
+    private var onboardingTransitionAnimation: Animation? {
+        accessibilityReduceMotion
+            ? nil
+            : .easeInOut(duration: 0.25)
     }
 }
