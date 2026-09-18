@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
+    @State private var isContentVisible = false
+    @State private var isCompleting = false
+
     let onComplete: () -> Void
 
     init(onComplete: @escaping () -> Void = {}) {
@@ -18,11 +22,12 @@ struct OnboardingView: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack(spacing: 0) {
-                    BorrowBackWordmark()
+                    BorrowBackWordmark(animatesOnAppear: true)
 
                     Spacer(minLength: 44)
 
-                    heroIllustration
+                    OnboardingLogoView()
+                        .padding(.horizontal, 48)
 
                     Spacer(minLength: 40)
 
@@ -38,6 +43,9 @@ struct OnboardingView: View {
                             .multilineTextAlignment(.center)
                             .lineSpacing(3)
                     }
+                    .opacity(isContentVisible ? 1 : 0)
+                    .offset(y: isContentVisible ? 0 : 10)
+                    .animation(contentAnimation, value: isContentVisible)
 
                     Spacer(minLength: 128)
                 }
@@ -49,7 +57,7 @@ struct OnboardingView: View {
             .scrollIndicators(.hidden)
         }
         .safeAreaInset(edge: .bottom) {
-            Button(action: onComplete) {
+            Button(action: completeOnboarding) {
                 HStack {
                     Text("Get started")
                         .fontWeight(.semibold)
@@ -64,35 +72,41 @@ struct OnboardingView: View {
             .buttonStyle(.glassProminent)
             .buttonBorderShape(.capsule)
             .controlSize(.large)
+            .disabled(isCompleting)
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
         }
-        .background(Color("WarmIvory"))
+        .scaleEffect(isCompleting ? 0.96 : 1)
+        .opacity(isCompleting ? 0 : 1)
+        .background(Color("WarmIvory").ignoresSafeArea())
+        .allowsHitTesting(!isCompleting)
+        .onAppear {
+            isContentVisible = true
+        }
     }
 
-    private var heroIllustration: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 44, style: .continuous)
-                .fill(Color("CardSurface"))
-                .shadow(color: Color("DeepInk").opacity(0.08), radius: 24, y: 12)
+    private var contentAnimation: Animation? {
+        guard !accessibilityReduceMotion else { return nil }
+        return .easeOut(duration: 0.42).delay(0.28)
+    }
 
-            Circle()
-                .fill(Color("BBTeal").opacity(0.12))
-                .frame(width: 142, height: 142)
+    private func completeOnboarding() {
+        guard !isCompleting else { return }
 
-            Image(systemName: "shippingbox.fill")
-                .font(.system(size: 72, weight: .medium))
-                .foregroundStyle(Color("BBTeal"))
-                .symbolRenderingMode(.hierarchical)
-
-            Image(systemName: "arrow.uturn.backward.circle.fill")
-                .font(.system(size: 42, weight: .semibold))
-                .foregroundStyle(Color("BBTeal"), Color("CardSurface"))
-                .offset(x: 72, y: 70)
+        guard !accessibilityReduceMotion else {
+            onComplete()
+            return
         }
-        .frame(width: 232, height: 232)
-        .accessibilityHidden(true)
+
+        withAnimation(
+            .easeOut(duration: 0.16),
+            completionCriteria: .logicallyComplete
+        ) {
+            isCompleting = true
+        } completion: {
+            onComplete()
+        }
     }
 }
 
