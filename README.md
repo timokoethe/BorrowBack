@@ -1,86 +1,158 @@
-# BorrowBack
+<p align="center">
+  <img src="website/app/icon.png" width="112" alt="BorrowBack app icon">
+</p>
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-orange)](https://opensource.org/license/mit)
-[![Release](https://img.shields.io/github/v/release/timokoethe/BorrowBack?color=orange)](https://github.com/timokoethe/BorrowBack/releases/latest)
-![Framework](https://img.shields.io/badge/SwiftUI-orange)
-![Platform](https://img.shields.io/badge/Platform-iOS-orange)
-![Xcode](https://img.shields.io/badge/Xcode-26-orange)
-![iOS](https://img.shields.io/badge/iOS-26-orange)
+<h1 align="center">BorrowBack</h1>
 
-BorrowBack is a native iOS app for tracking lent items, their borrowers, due dates, and returns.
+<p align="center">
+  <strong>Keep track of what you lend — and get it back.</strong>
+</p>
 
-## Features
+<p align="center">
+  A calm, native iOS app for recording lent items, borrowers, due dates, and returns.
+</p>
 
-- [App Navigation](docs/features/app-navigation.md)
-- [Active Loan Overview](docs/features/active-loan-overview.md)
-- [Create a Loan](docs/features/create-loan.md)
-- [Edit a Loan](docs/features/edit-loan.md)
-- [Link a Borrower Contact](docs/features/link-borrower-contact.md)
-- [Loan Status](docs/features/loan-status.md)
-- [Sort Active Loans](docs/features/sort-active-loans.md)
-- [Return a Loan](docs/features/return-loan.md)
-- [Restore a Loan](docs/features/restore-loan.md)
-- [Delete a Loan](docs/features/delete-loan.md)
-- [Loan Archive](docs/features/loan-archive.md)
-- [Local Persistence](docs/features/local-persistence.md)
-- [English and German Localization](docs/features/localization.md)
+<p align="center">
+  <a href="https://opensource.org/license/mit"><img src="https://img.shields.io/badge/license-MIT-0E7C86" alt="MIT license"></a>
+  <a href="https://github.com/timokoethe/BorrowBack/releases/latest"><img src="https://img.shields.io/github/v/release/timokoethe/BorrowBack?color=0E7C86" alt="Latest release"></a>
+  <img src="https://img.shields.io/badge/UI-SwiftUI-0E7C86" alt="SwiftUI">
+  <img src="https://img.shields.io/badge/platform-iOS%2026-0E7C86" alt="iOS 26">
+  <img src="https://img.shields.io/badge/Xcode-26-0E7C86" alt="Xcode 26">
+</p>
 
-## Project Structure
+## At a Glance
 
-- [`app/apple/`](app/apple/) contains the native iOS app and Xcode project.
-- [`docs/features/`](docs/features/) contains the native iOS feature
-  documentation.
-- [`website/`](website/) contains the separate Next.js-based landing page.
+BorrowBack keeps the full lifecycle of a loan in one place: create it, see what
+is due, mark it as returned, and find it again in the archive. The interface is
+purposefully small and uses native iOS patterns throughout.
 
-## Development
+<p align="center">
+  <img src="website/public/screens/home-view-light.png" width="30%" alt="BorrowBack active-loan overview">
+  &nbsp;
+  <img src="website/public/screens/add-view-light.png" width="30%" alt="BorrowBack add-loan form">
+  &nbsp;
+  <img src="website/public/screens/archive-view-light.png" width="30%" alt="BorrowBack returned-loan archive">
+</p>
 
-### iOS app
+<p align="center">
+  <sub>Active loans · Add a loan · Returned-loan archive</sub>
+</p>
 
-Requirements: Xcode 26 or later and an iPhone or simulator running iOS 26 or later.
+## Highlights
 
-Open the project in Xcode and run the `BorrowBack` scheme:
+- **Stay oriented:** See active loans at a glance, including borrower, due date,
+  and a clear status indicator.
+- **Capture the essentials:** Record an item, borrower, lending date, and due
+  date in a focused form.
+- **Use the system contact picker:** Link a borrower without granting the app
+  broad access to the Contacts database.
+- **Complete the lifecycle:** Edit, return, restore, archive, and delete loans.
+- **Find what matters first:** Sort active loans by due date, creation date,
+  title, or borrower.
+- **Keep data available:** Store loans locally with SwiftData and synchronize
+  them through the user's private iCloud database.
+- **Use the app in English or German:** Interface text and date presentation
+  respond to the selected locale.
+
+The behavior of every implemented feature is documented in
+[`docs/features/`](docs/features/), including
+[onboarding](docs/features/onboarding.md),
+[loan status](docs/features/loan-status.md),
+[the archive](docs/features/loan-archive.md), and
+[iCloud sync](docs/features/icloud-sync.md).
+
+## Privacy by Design
+
+BorrowBack does not request general Contacts access. Contact selection happens
+in Apple's out-of-process picker, and the app retains only the selected contact
+identifier and display name. Loan data synchronizes through the user's private
+CloudKit database.
+
+The current [privacy manifest](app/apple/BorrowBack/PrivacyInfo.xcprivacy)
+declares no tracking, collected data, or required-reason API use.
+
+## Technology
+
+| Area | Implementation |
+| --- | --- |
+| Interface | SwiftUI |
+| Persistence | SwiftData |
+| Synchronization | Private CloudKit database |
+| Contact linking | Native system contact picker |
+| Localization | String Catalog with English and German |
+| Website | Next.js and TypeScript |
+
+## Project Status
+
+BorrowBack is under active development and currently runs from source. It is
+not advertised as available on the App Store yet.
+
+## Getting Started
+
+### Native iOS app
+
+You need Xcode 26 or later and an iPhone or simulator running iOS 26 or later.
+
+Open the project and run the `BorrowBack` scheme:
 
 ```sh
 open app/apple/BorrowBack.xcodeproj
 ```
 
-To verify a command-line build:
+Because runtime persistence uses CloudKit, installing and running the app
+requires a regularly signed build. For a signing-independent compile check,
+use:
 
 ```sh
-xcodebuild -project app/apple/BorrowBack.xcodeproj -scheme BorrowBack \
-  -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild \
+  -project app/apple/BorrowBack.xcodeproj \
+  -scheme BorrowBack \
+  -destination 'generic/platform=iOS' \
+  -derivedDataPath /tmp/borrowback-build \
+  CODE_SIGNING_ALLOWED=NO build
 ```
+
+This verifies compilation but does not produce an app that can run with its
+iCloud-backed container.
 
 ### Website
 
-The BorrowBack website is developed separately in [`website/`](website/). Its
-Next.js application code is located in [`website/app/`](website/app/), with the
-landing page in [`website/app/page.tsx`](website/app/page.tsx).
-
-To run the website locally:
+The separate landing page lives in [`website/`](website/). To run it locally:
 
 ```sh
 cd website
-npm install
+npm ci
 npm run dev
 ```
 
-The development server is available at
-[http://localhost:3000](http://localhost:3000). See the
-[website README](website/README.md) for the available scripts and deployment
-details.
+Then open [http://localhost:3000](http://localhost:3000). See the
+[website README](website/README.md) for scripts and deployment details.
+
+## Repository Layout
+
+```text
+BorrowBack/
+├── app/apple/       Native iOS app and Xcode project
+├── docs/features/   Observable feature behavior and acceptance criteria
+└── website/         Separate Next.js landing page
+```
 
 ## Releases
 
-Releases use tags such as `v1.1.0` or `v1.1.0-beta1`. Pushing a release tag creates the corresponding GitHub release and deploys the website to Vercel — stable tags to production, beta tags to a preview. Native builds are handled separately by Xcode Cloud. See [docs/release.md](docs/release.md) for the full process.
+Stable releases use tags such as `v1.1.0`; beta releases use tags such as
+`v1.1.0-beta1`. A pushed release tag creates the corresponding GitHub Release
+and deploys the website to Vercel. Native builds run separately in Xcode Cloud.
+
+See [docs/release.md](docs/release.md) for the complete release and verification
+process.
 
 ## Contributing
 
-Contributions are welcome.
-Please keep changes focused and see [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+Contributions are welcome. Please keep changes focused and read
+[CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 Report security issues privately as described in [SECURITY.md](SECURITY.md).
 
 ## License
 
-BorrowBack is released under the MIT License. See [LICENSE](LICENSE).
+BorrowBack is available under the [MIT License](LICENSE).
