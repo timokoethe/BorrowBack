@@ -6,7 +6,7 @@ Area: App / Website
 
 ## Verification
 
-<!-- How did you verify this? Manual steps are enough. There are intentionally no required tests at the moment. -->
+<!-- How did you verify this? Manual steps are enough. -->
 
 ## Checklist
 
