@@ -82,11 +82,6 @@ declares no tracking, collected data, or required-reason API use.
 | Localization | String Catalog with English and German |
 | Website | Next.js and TypeScript |
 
-## Project Status
-
-BorrowBack is under active development and currently runs from source. It is
-not advertised as available on the App Store yet.
-
 ## Getting Started
 
 ### Native iOS app
