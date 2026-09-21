@@ -40,14 +40,10 @@ struct AddLoanView: View {
     private func save() {
         guard draft.isValid else { return }
 
-        let loan = draft.makeLoan()
-        modelContext.insert(loan)
-
         do {
-            try modelContext.save()
+            try LoanService(modelContext: modelContext).create(from: draft)
             dismiss()
         } catch {
-            modelContext.delete(loan)
             isShowingSaveError = true
         }
     }

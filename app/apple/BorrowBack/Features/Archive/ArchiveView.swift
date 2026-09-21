@@ -103,15 +103,21 @@ struct ArchiveView: View {
     /// due date stays as it was, so a loan restored after that date is overdue.
     private func restore(_ loan: Loan) {
         withAnimation(loanRemovalAnimation) {
-            loan.returnedAt = nil
-            saveChanges()
+            do {
+                try LoanService(modelContext: modelContext).restore(loan)
+            } catch {
+                isShowingPersistenceError = true
+            }
         }
     }
 
     private func delete(_ loan: Loan) {
         withAnimation(loanRemovalAnimation) {
-            modelContext.delete(loan)
-            saveChanges()
+            do {
+                try LoanService(modelContext: modelContext).delete(loan)
+            } catch {
+                isShowingPersistenceError = true
+            }
         }
     }
 
@@ -119,15 +125,6 @@ struct ArchiveView: View {
         accessibilityReduceMotion
             ? nil
             : .snappy(duration: 0.22, extraBounce: 0)
-    }
-
-    private func saveChanges() {
-        do {
-            try modelContext.save()
-        } catch {
-            modelContext.rollback()
-            isShowingPersistenceError = true
-        }
     }
 }
 
