@@ -161,15 +161,21 @@ struct HomeView: View {
 
     private func markAsReturned(_ loan: Loan) {
         withAnimation(loanRemovalAnimation) {
-            loan.returnedAt = .now
-            saveChanges()
+            do {
+                try LoanService(modelContext: modelContext).markAsReturned(loan)
+            } catch {
+                isShowingPersistenceError = true
+            }
         }
     }
 
     private func delete(_ loan: Loan) {
         withAnimation(loanRemovalAnimation) {
-            modelContext.delete(loan)
-            saveChanges()
+            do {
+                try LoanService(modelContext: modelContext).delete(loan)
+            } catch {
+                isShowingPersistenceError = true
+            }
         }
     }
 
@@ -177,15 +183,6 @@ struct HomeView: View {
         accessibilityReduceMotion
             ? nil
             : .snappy(duration: 0.22, extraBounce: 0)
-    }
-
-    private func saveChanges() {
-        do {
-            try modelContext.save()
-        } catch {
-            modelContext.rollback()
-            isShowingPersistenceError = true
-        }
     }
 }
 

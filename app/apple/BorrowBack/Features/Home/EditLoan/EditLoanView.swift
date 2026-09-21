@@ -45,13 +45,10 @@ struct EditLoanView: View {
     private func save() {
         guard draft.isValid else { return }
 
-        draft.apply(to: loan)
-
         do {
-            try modelContext.save()
+            try LoanService(modelContext: modelContext).update(loan, from: draft)
             dismiss()
         } catch {
-            modelContext.rollback()
             isShowingSaveError = true
         }
     }
