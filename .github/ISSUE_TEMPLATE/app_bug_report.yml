@@ -28,7 +28,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: BorrowBack Version
+      label: BorrowBack Version or Commit
       placeholder: v0.1.0
     validations:
       required: true
