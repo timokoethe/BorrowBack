@@ -34,6 +34,8 @@ I can record who borrowed an item in the way that suits the situation.
 - Removing a linked contact clears the person field and restores free-text
   entry.
 - Cancelling the contact picker leaves the person field unchanged.
+- Cancelling the phone-number choice for a contact with several numbers leaves
+  the person field unchanged.
 - A loan with a linked contact is marked with a contact symbol next to the
   borrower name.
 - Saving is disabled while no contact is linked and the typed name is empty or
