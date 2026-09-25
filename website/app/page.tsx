@@ -3,8 +3,10 @@ import Link from "next/link";
 import {
   ArrowRight,
   BellRing,
+  ContactRound,
   Check,
   Infinity as InfinityIcon,
+  MessageCircle,
   Plus,
   ShieldCheck,
   Sparkles,
@@ -15,16 +17,34 @@ import { DeviceFrame } from "./components/DeviceFrame";
 
 const steps = [
   {
-    title: "Add it in seconds",
-    text: "Item, person, due date. Three fields, then save and return to your overview.",
+    title: "Add the loan",
+    text: "Record the item, who has it, and when it should come back. Type a name or link a contact.",
   },
   {
-    title: "See what is out",
-    text: "One list, sorted by return date, with a quiet badge for anything due soon.",
+    title: "Follow up when it matters",
+    text: "See what is due soon or overdue, then prepare a reminder for a linked contact without retyping the details.",
   },
   {
-    title: "Swipe when it is back",
-    text: "A returned item moves straight into the archive, out of your way.",
+    title: "Archive — or undo",
+    text: "Mark a returned item with a swipe. It moves to the archive and can be restored if the return was recorded by mistake.",
+  },
+];
+
+const followUpFeatures = [
+  {
+    icon: ContactRound,
+    title: "Link the right person",
+    text: "Choose someone with the system contact picker or simply type a name. BorrowBack cannot browse your contacts.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Write a reminder",
+    text: "For a linked contact with a phone number, BorrowBack prepares an editable SMS or iMessage with the item and due date.",
+  },
+  {
+    icon: BellRing,
+    title: "Stay in control",
+    text: "Nothing is sent automatically. You review and confirm every reminder in the system message composer.",
   },
 ];
 
@@ -151,9 +171,9 @@ export default function Home() {
         <section className="section shell" id="how">
           <span className="eyebrow">How it works</span>
           <h2 className="display">
-            Three taps in.
+            Add it. Follow up.
             <br />
-            One swipe out.
+            Get it back.
           </h2>
           <div className="steps" style={{ marginTop: "3rem" }}>
             {steps.map((step, index) => (
@@ -171,26 +191,26 @@ export default function Home() {
             <div>
               <span className="eyebrow">Adding a loan</span>
               <h2 className="display">
-                No forms to fill.
+                Only the details
                 <br />
-                Just the three things that matter.
+                that help it come back.
               </h2>
               <p className="prose lead">
-                What you lent, who has it, when you want it back. The keyboard is already up
-                when the page opens, and a single tap saves it.
+                Record what you lent, who has it, when it went out, and when you want it back.
+                Type a name or link the borrower from the system contact picker.
               </p>
               <ul className="checklist">
                 <li>
                   <Plus size={17} strokeWidth={2.2} aria-hidden="true" />
-                  Two fields and a date — nothing optional to worry about
+                  The loan date defaults to today but can be moved into the past
                 </li>
                 <li>
                   <BellRing size={17} strokeWidth={2.2} aria-hidden="true" />
-                  Due dates default to two weeks out, and adjust with one tap
+                  Pick seven days, fourteen days, or a custom due date
                 </li>
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  Sorted into your overview the moment you save
+                  Open an active loan later to correct its details or extend the due date
                 </li>
               </ul>
             </div>
@@ -200,6 +220,30 @@ export default function Home() {
                 alt="The New Loan screen with fields for item, person and return date"
               />
             </div>
+          </div>
+        </section>
+
+        <section className="section shell">
+          <div className="centered">
+            <span className="eyebrow">Following up</span>
+            <h2 className="display">
+              A thoughtful reminder,
+              <br />
+              <span className="accent">ready when you need it.</span>
+            </h2>
+            <p className="lead">
+              Link a borrower once and BorrowBack can prepare the message when a return date is
+              getting close — or has already passed.
+            </p>
+          </div>
+          <div className="card-grid">
+            {followUpFeatures.map(({ icon: Icon, title, text }) => (
+              <article className="card" key={title}>
+                <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -227,7 +271,7 @@ export default function Home() {
                 </li>
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  Overdue items are flagged the moment the day turns over
+                  Restore an archived loan if you marked it as returned by mistake
                 </li>
               </ul>
             </div>
