@@ -26,8 +26,8 @@ an upcoming or missed return date with little effort.
   reminder action.
 - An active loan with a stored phone number offers a reminder action in its
   context menu.
-- The system message composer opens with the phone number and a localized,
-  editable reminder containing the item and due date.
+- The system SMS/iMessage composer opens with the phone number and a
+  localized, editable reminder containing the item and due date.
 - An overdue loan receives wording that acknowledges the missed due date.
 - The app never sends a reminder without the user confirming it in the system
   message composer.
