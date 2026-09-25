@@ -136,6 +136,7 @@ struct HomeView: View {
             }
         }
         .listStyle(.plain)
+        .scrollDisabled(loans.isEmpty)
         .scrollContentBackground(.hidden)
         .environment(\.defaultMinListRowHeight, 1)
         .background(Color("WarmIvory"))
