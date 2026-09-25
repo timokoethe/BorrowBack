@@ -24,6 +24,10 @@ I can record who borrowed an item in the way that suits the situation.
 - A contact action next to the person field opens the system contact picker.
 - Selecting a contact replaces the person field with the contact's name and
   links the contact to the loan.
+- A selected contact's only phone number is stored automatically; if several
+  numbers are available, the user chooses one.
+- A contact without a phone number can still be linked, but cannot receive a
+  reminder message.
 - A contact without a personal name is linked under its organization name.
 - A contact with neither a personal name nor an organization name is not
   linked, and the person field stays available for a typed name.
@@ -36,3 +40,5 @@ I can record who borrowed an item in the way that suits the situation.
   contains only whitespace.
 - The borrower name of a saved loan remains available without access to the
   contacts database.
+- A saved phone number can be used to prepare a reminder as described in
+  [Send a Loan Reminder](send-loan-reminder.md).

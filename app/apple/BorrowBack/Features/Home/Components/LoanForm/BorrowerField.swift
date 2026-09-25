@@ -14,14 +14,37 @@ struct BorrowerField: View {
     @Binding var borrower: Borrower
 
     @State private var isShowingContactPicker = false
+    @State private var isChoosingPhoneNumber = false
+    @State private var pendingContact: BorrowerContactSelection?
 
     var body: some View {
         content
             .background(
                 ContactPickerPresenter(isPresented: $isShowingContactPicker) {
-                    borrower = $0
+                    handleContactSelection($0)
                 }
             )
+            .confirmationDialog(
+                "Choose a phone number",
+                isPresented: $isChoosingPhoneNumber,
+                titleVisibility: .visible,
+                presenting: pendingContact
+            ) { selection in
+                ForEach(selection.phoneNumbers) { phoneNumber in
+                    Button {
+                        borrower = selection.borrower(phoneNumber: phoneNumber.value)
+                        pendingContact = nil
+                    } label: {
+                        Text(verbatim: "\(phoneNumber.label): \(phoneNumber.value)")
+                    }
+                }
+
+                Button("Cancel", role: .cancel) {
+                    pendingContact = nil
+                }
+            } message: { _ in
+                Text("This number will be used for reminder messages.")
+            }
     }
 
     @ViewBuilder
@@ -40,11 +63,20 @@ struct BorrowerField: View {
                 .buttonStyle(.borderless)
                 .accessibilityLabel("Choose contact")
             }
-        case .contact(_, let name):
+        case .contact(_, let name, let phoneNumber):
             HStack(spacing: 12) {
-                Label(name, systemImage: "person.crop.circle.fill")
-                    .foregroundStyle(Color("DeepInk"))
-                    .lineLimit(1)
+                VStack(alignment: .leading, spacing: 2) {
+                    Label(name, systemImage: "person.crop.circle.fill")
+                        .foregroundStyle(Color("DeepInk"))
+                        .lineLimit(1)
+
+                    if let phoneNumber {
+                        Text(phoneNumber)
+                            .font(.caption)
+                            .foregroundStyle(Color("DeepInk").opacity(0.6))
+                            .lineLimit(1)
+                    }
+                }
 
                 Spacer()
 
@@ -68,13 +100,26 @@ struct BorrowerField: View {
             set: { borrower = .name($0) }
         )
     }
+
+    private func handleContactSelection(_ selection: BorrowerContactSelection) {
+        switch selection.phoneNumbers.count {
+        case 0:
+            borrower = selection.borrower(phoneNumber: nil)
+        case 1:
+            borrower = selection.borrower(phoneNumber: selection.phoneNumbers[0].value)
+        default:
+            pendingContact = selection
+            isChoosingPhoneNumber = true
+        }
+    }
 }
 
 #Preview {
     @Previewable @State var freeText = Borrower.empty
     @Previewable @State var linked = Borrower.contact(
         identifier: "preview",
-        name: "Tobias Wagner"
+        name: "Tobias Wagner",
+        phoneNumber: "+49 151 23456789"
     )
 
     Form {

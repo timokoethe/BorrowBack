@@ -93,6 +93,16 @@
         }
       }
     },
+    "Choose a phone number" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telefonnummer wählen"
+          }
+        }
+      }
+    },
     "Custom date" : {
       "localizations" : {
         "de" : {
@@ -193,6 +203,26 @@
         }
       }
     },
+    "Hi! Just a quick reminder: You still have my “%1$@”. It was due back on %2$@. When would be a good time to return it?" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi! Kurze Erinnerung: Du hast noch mein „%1$@“. Die Rückgabe war für den %2$@ geplant. Wann passt es dir, es zurückzugeben?"
+          }
+        }
+      }
+    },
+    "Hi! Just a quick reminder: You still have my “%1$@”. We planned for it to be returned on %2$@. Does that still work for you?" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi! Kurze Erinnerung: Du hast noch mein „%1$@“. Wir hatten die Rückgabe für den %2$@ geplant. Passt das weiterhin für dich?"
+          }
+        }
+      }
+    },
     "Keep track of every loan, due date, and return in one calm place." : {
       "localizations" : {
         "de" : {
@@ -239,6 +269,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name"
+          }
+        }
+      }
+    },
+    "Messages unavailable" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nachrichten nicht verfügbar"
+          }
+        }
+      }
+    },
+    "Message not sent" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nachricht nicht gesendet"
           }
         }
       }
@@ -413,6 +463,36 @@
         }
       }
     },
+    "The reminder could not be sent. Please try again." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Erinnerung konnte nicht gesendet werden. Bitte versuche es erneut."
+          }
+        }
+      }
+    },
+    "This device is not configured to send messages." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses Gerät ist nicht zum Senden von Nachrichten eingerichtet."
+          }
+        }
+      }
+    },
+    "This number will be used for reminder messages." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Nummer wird für Erinnerungsnachrichten verwendet."
+          }
+        }
+      }
+    },
     "The loan could not be saved." : {
       "localizations" : {
         "de" : {
@@ -429,6 +509,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Was wurde verliehen?"
+          }
+        }
+      }
+    },
+    "Write reminder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erinnerung schreiben"
           }
         }
       }

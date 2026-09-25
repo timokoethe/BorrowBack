@@ -36,7 +36,8 @@ struct LoanDraft: Equatable {
         title = loan.title
         borrower = Borrower(
             name: loan.borrowerName,
-            contactIdentifier: loan.contactIdentifier
+            contactIdentifier: loan.contactIdentifier,
+            phoneNumber: loan.borrowerPhoneNumber
         )
         loanedAt = loan.loanedAt
         dueDate = loan.dueDate
@@ -58,6 +59,7 @@ struct LoanDraft: Equatable {
             title: persistedTitle,
             borrowerName: borrower.persistedName,
             contactIdentifier: borrower.contactIdentifier,
+            borrowerPhoneNumber: borrower.phoneNumber,
             loanedAt: loanedAt,
             dueDate: dueDate
         )
@@ -70,6 +72,7 @@ struct LoanDraft: Equatable {
         loan.title = persistedTitle
         loan.borrowerName = borrower.persistedName
         loan.contactIdentifier = borrower.contactIdentifier
+        loan.borrowerPhoneNumber = borrower.phoneNumber
         loan.loanedAt = loanedAt
         loan.dueDate = dueDate
     }
