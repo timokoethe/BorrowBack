@@ -65,11 +65,12 @@ The behavior of every implemented feature is documented in
 
 BorrowBack does not request general Contacts access. Contact selection happens
 in Apple's out-of-process picker, and the app retains only the selected contact
-identifier and display name. Loan data synchronizes through the user's private
-CloudKit database.
+identifier, display name, and optional reminder phone number. Loan data
+synchronizes through the user's private CloudKit database.
 
 The current [privacy manifest](app/apple/BorrowBack/PrivacyInfo.xcprivacy)
-declares no tracking, collected data, or required-reason API use.
+declares the stored names and phone numbers as data linked to the user for app
+functionality. It declares no tracking or required-reason API use.
 
 ## Technology
 

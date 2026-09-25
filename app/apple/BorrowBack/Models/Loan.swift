@@ -14,6 +14,7 @@ final class Loan {
     var title: String = ""
     var borrowerName: String = ""
     var contactIdentifier: String?
+    var borrowerPhoneNumber: String?
     var loanedAt: Date = Date.now
     var dueDate: Date = Date.now
     var returnedAt: Date?
@@ -25,6 +26,7 @@ final class Loan {
         title: String,
         borrowerName: String,
         contactIdentifier: String? = nil,
+        borrowerPhoneNumber: String? = nil,
         loanedAt: Date = .now,
         dueDate: Date,
         returnedAt: Date? = nil,
@@ -35,6 +37,7 @@ final class Loan {
         self.title = title
         self.borrowerName = borrowerName
         self.contactIdentifier = contactIdentifier
+        self.borrowerPhoneNumber = borrowerPhoneNumber
         self.loanedAt = loanedAt
         self.dueDate = dueDate
         self.returnedAt = returnedAt

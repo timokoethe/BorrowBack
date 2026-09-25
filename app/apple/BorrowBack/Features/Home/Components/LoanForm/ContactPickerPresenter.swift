@@ -19,7 +19,7 @@ struct ContactPickerPresenter: UIViewControllerRepresentable {
 
     /// Called with the selected contact. Not called when the user cancels or
     /// when the contact carries no usable name.
-    let onSelect: (Borrower) -> Void
+    let onSelect: (BorrowerContactSelection) -> Void
 
     func makeUIViewController(context: Context) -> UIViewController {
         UIViewController()
@@ -33,6 +33,7 @@ struct ContactPickerPresenter: UIViewControllerRepresentable {
 
         let picker = CNContactPickerViewController()
         picker.delegate = context.coordinator
+        picker.displayedPropertyKeys = [CNContactPhoneNumbersKey]
         host.present(picker, animated: true)
     }
 
@@ -41,10 +42,13 @@ struct ContactPickerPresenter: UIViewControllerRepresentable {
     }
 
     final class Coordinator: NSObject, CNContactPickerDelegate {
-        var onSelect: (Borrower) -> Void
+        var onSelect: (BorrowerContactSelection) -> Void
         var onFinish: () -> Void
 
-        init(onSelect: @escaping (Borrower) -> Void, onFinish: @escaping () -> Void) {
+        init(
+            onSelect: @escaping (BorrowerContactSelection) -> Void,
+            onFinish: @escaping () -> Void
+        ) {
             self.onSelect = onSelect
             self.onFinish = onFinish
         }
@@ -53,8 +57,8 @@ struct ContactPickerPresenter: UIViewControllerRepresentable {
             _ picker: CNContactPickerViewController,
             didSelect contact: CNContact
         ) {
-            if let borrower = Borrower(contact: contact) {
-                onSelect(borrower)
+            if let selection = BorrowerContactSelection(contact: contact) {
+                onSelect(selection)
             }
 
             onFinish()
@@ -66,7 +70,17 @@ struct ContactPickerPresenter: UIViewControllerRepresentable {
     }
 }
 
-extension Borrower {
+struct BorrowerContactSelection {
+    struct PhoneNumber: Identifiable {
+        let id = UUID()
+        let label: String
+        let value: String
+    }
+
+    let identifier: String
+    let name: String
+    let phoneNumbers: [PhoneNumber]
+
     /// Links a picked contact, preferring its formatted name and falling back
     /// to the organization. Returns `nil` for a contact without any usable
     /// name, because a loan cannot be saved without one.
@@ -81,6 +95,23 @@ extension Borrower {
             return nil
         }
 
-        self = .contact(identifier: contact.identifier, name: name)
+        identifier = contact.identifier
+        self.name = name
+        phoneNumbers = contact.phoneNumbers.map { phoneNumber in
+            PhoneNumber(
+                label: CNLabeledValue<NSString>.localizedString(
+                    forLabel: phoneNumber.label ?? CNLabelPhoneNumberMain
+                ),
+                value: phoneNumber.value.stringValue
+            )
+        }
+    }
+
+    func borrower(phoneNumber: String?) -> Borrower {
+        .contact(
+            identifier: identifier,
+            name: name,
+            phoneNumber: phoneNumber
+        )
     }
 }

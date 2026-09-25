@@ -10,23 +10,29 @@ import SwiftData
 
 struct HomeView: View {
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
+    @Environment(\.currentDay) private var today
+    @Environment(\.locale) private var locale
     @Environment(\.modelContext) private var modelContext
     @Query(
         filter: #Predicate<Loan> { $0.returnedAt == nil },
         sort: \Loan.dueDate
     ) private var loans: [Loan]
     @State private var sort = HomeSort.dueDate
+    @State private var isShowingMessagingUnavailable = false
     @State private var isShowingPersistenceError = false
 
     let onAddLoan: () -> Void
     let onEditLoan: (Loan) -> Void
+    let onWriteReminder: (LoanReminderMessage) -> Void
 
     init(
         onAddLoan: @escaping () -> Void = {},
-        onEditLoan: @escaping (Loan) -> Void = { _ in }
+        onEditLoan: @escaping (Loan) -> Void = { _ in },
+        onWriteReminder: @escaping (LoanReminderMessage) -> Void = { _ in }
     ) {
         self.onAddLoan = onAddLoan
         self.onEditLoan = onEditLoan
+        self.onWriteReminder = onWriteReminder
     }
 
     var body: some View {
@@ -85,6 +91,15 @@ struct HomeView: View {
                     }
                     .buttonStyle(.plain)
                     .contextMenu {
+                        if loan.borrowerPhoneNumber != nil {
+                            Button {
+                                writeReminder(for: loan)
+                            } label: {
+                                Label("Write reminder", systemImage: "message")
+                            }
+                            .tint(Color.primary)
+                        }
+
                         Button {
                             markAsReturned(loan)
                         } label: {
@@ -140,6 +155,11 @@ struct HomeView: View {
         } message: {
             Text("The change could not be saved.")
         }
+        .alert("Messages unavailable", isPresented: $isShowingMessagingUnavailable) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("This device is not configured to send messages.")
+        }
     }
 
     private var sortedLoans: [Loan] {
@@ -177,6 +197,23 @@ struct HomeView: View {
                 isShowingPersistenceError = true
             }
         }
+    }
+
+    private func writeReminder(for loan: Loan) {
+        guard MessageComposerView.canSendText else {
+            isShowingMessagingUnavailable = true
+            return
+        }
+
+        guard let message = LoanReminderMessage(
+            loan: loan,
+            today: today,
+            locale: locale
+        ) else {
+            return
+        }
+
+        onWriteReminder(message)
     }
 
     private var loanRemovalAnimation: Animation? {
