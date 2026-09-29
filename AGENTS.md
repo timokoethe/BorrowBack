@@ -11,7 +11,7 @@ BorrowBack is a native iOS app for tracking items that have been lent to other p
 - `app/apple/BorrowBack/Models/`: the persisted SwiftData `Loan`, plus the value types the loan forms work with (`Borrower`, `LoanDraft`).
 - `app/apple/BorrowBack/Localizable.xcstrings`: English source strings and German translations.
 - `app/apple/BorrowBack/Assets.xcassets/` and `app/apple/Icon.icon/`: app colors and icon assets.
-- `app/apple/BorrowBack/PrivacyInfo.xcprivacy`: privacy manifest. It currently declares no tracking, no collected data, and no required-reason API use. Update it when introducing a required-reason API or a third-party SDK.
+- `app/apple/BorrowBack/PrivacyInfo.xcprivacy`: privacy manifest. It currently declares stored names and phone numbers for app functionality, no tracking, and no required-reason API use. Keep it aligned with the app's data handling when behavior changes.
 - `docs/features/`: documentation for the currently implemented native features; use `_template.md` for new feature documents.
 - `website/`: separate Next.js site; read `website/AGENTS.md` before editing it.
 
@@ -88,6 +88,12 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild \
 - There are currently no native test targets. For code changes, run the build and describe relevant manual verification.
 - Documentation-only changes do not require an Xcode build; run `git diff --check` and verify the documents against the current implementation.
 - Do not add or run UI tests unless the user explicitly requests them.
+
+## Release Reviews
+
+- TestFlight is already part of release validation. In app reviews, identify specific behavior that still needs verification, but do not present adopting or setting up TestFlight as an outstanding task.
+- App Store Connect administration and submission are handled separately. Exclude administrative checklists from app reviews unless explicitly requested. Still report concrete privacy, security, or release issues, even if resolving them involves App Store Connect.
+- This repository is public. Do not add credentials, vulnerability details, or exploit instructions to public files; communicate security-sensitive findings to the owner without committing them.
 
 ## Working Guidelines
 
