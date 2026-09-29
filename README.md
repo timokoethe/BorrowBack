@@ -47,8 +47,7 @@ purposefully small and uses native iOS patterns throughout.
 - **Use the system contact picker:** Link a borrower without granting the app
   broad access to the Contacts database.
 - **Complete the lifecycle:** Edit, return, restore, archive, and delete loans.
-- **Find what matters first:** Sort active loans by due date, creation date,
-  title, or borrower.
+- **Find what matters first:** Sort active loans by due date or item name.
 - **Keep data available:** Store loans locally with SwiftData and synchronize
   them through the user's private iCloud database.
 - **Use the app in English or German:** Interface text and date presentation
@@ -71,17 +70,6 @@ synchronizes through the user's private CloudKit database.
 The current [privacy manifest](app/apple/BorrowBack/PrivacyInfo.xcprivacy)
 declares the stored names and phone numbers as data linked to the user for app
 functionality. It declares no tracking or required-reason API use.
-
-## Technology
-
-| Area | Implementation |
-| --- | --- |
-| Interface | SwiftUI |
-| Persistence | SwiftData |
-| Synchronization | Private CloudKit database |
-| Contact linking | Native system contact picker |
-| Localization | String Catalog with English and German |
-| Website | Next.js and TypeScript |
 
 ## Getting Started
 
