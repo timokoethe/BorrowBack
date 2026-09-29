@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(origin),
     title,
     description,
-    openGraph: { title, description, type: "website", images: [{ url: `${origin}/og.png`, width: 1200, height: 630, alt: "BorrowBack app – Keep track of everything you lend" }] },
+    openGraph: { title, description, type: "website", images: [{ url: `${origin}/og.png`, width: 1200, height: 640, alt: "BorrowBack app – Keep track of everything you lend" }] },
     twitter: { card: "summary_large_image", title, description, images: [`${origin}/og.png`] },
   };
 }
