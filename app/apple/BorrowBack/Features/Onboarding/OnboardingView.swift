@@ -11,6 +11,7 @@ struct OnboardingView: View {
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @State private var isContentVisible = false
     @State private var isCompleting = false
+    @State private var needsScrolling = false
 
     let onComplete: () -> Void
 
@@ -47,14 +48,21 @@ struct OnboardingView: View {
                     .offset(y: isContentVisible ? 0 : 10)
                     .animation(contentAnimation, value: isContentVisible)
 
-                    Spacer(minLength: 128)
+                    Spacer(minLength: 28)
                 }
                 .frame(maxWidth: .infinity)
-                .frame(minHeight: geometry.size.height)
                 .padding(.horizontal, 28)
                 .padding(.top, 28)
+                .frame(minHeight: geometry.size.height)
             }
             .scrollIndicators(.hidden)
+            .scrollBounceBehavior(.basedOnSize, axes: .vertical)
+            .onScrollGeometryChange(for: Bool.self) { scrollGeometry in
+                scrollGeometry.contentSize.height > geometry.size.height + 1
+            } action: { _, needsScrolling in
+                self.needsScrolling = needsScrolling
+            }
+            .scrollDisabled(!needsScrolling)
         }
         .safeAreaInset(edge: .bottom) {
             Button(action: completeOnboarding) {
