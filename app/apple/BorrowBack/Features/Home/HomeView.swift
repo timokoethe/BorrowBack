@@ -45,6 +45,7 @@ struct HomeView: View {
                 Button(action: onAddLoan) {
                     Image(systemName: "plus")
                         .font(.headline.weight(.semibold))
+                        .frame(width: 24, height: 24)
                 }
                 .buttonStyle(.glassProminent)
                 .buttonBorderShape(.circle)
