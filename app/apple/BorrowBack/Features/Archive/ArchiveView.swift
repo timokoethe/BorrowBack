@@ -29,6 +29,7 @@ struct ArchiveView: View {
                 } label: {
                     Image(systemName: "info")
                         .font(.headline.weight(.semibold))
+                        .frame(width: 24, height: 24)
                 }
                 .buttonStyle(.glassProminent)
                 .buttonBorderShape(.circle)
