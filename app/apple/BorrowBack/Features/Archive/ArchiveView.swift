@@ -15,13 +15,25 @@ struct ArchiveView: View {
         filter: #Predicate<Loan> { $0.returnedAt != nil }
     ) private var loans: [Loan]
     @State private var isShowingPersistenceError = false
+    @State private var isShowingAppInfo = false
 
     var body: some View {
         List {
-            HStack {
-                BorrowBackWordmark()
+            HStack(alignment: .center) {
+                BorrowBackWordmark(animatesOnAppear: true)
 
                 Spacer()
+
+                Button {
+                    isShowingAppInfo = true
+                } label: {
+                    Image(systemName: "info")
+                        .font(.headline.weight(.semibold))
+                }
+                .buttonStyle(.glassProminent)
+                .buttonBorderShape(.circle)
+                .controlSize(.regular)
+                .accessibilityLabel("About BorrowBack")
             }
             .listRowInsets(.init(top: 20, leading: 20, bottom: 18, trailing: 20))
             .listRowSeparator(.hidden)
@@ -85,6 +97,9 @@ struct ArchiveView: View {
                 .padding(.horizontal, 20)
                 .allowsHitTesting(false)
             }
+        }
+        .sheet(isPresented: $isShowingAppInfo) {
+            AppInfoView()
         }
         .alert("Save failed", isPresented: $isShowingPersistenceError) {
             Button("OK", role: .cancel) {}
