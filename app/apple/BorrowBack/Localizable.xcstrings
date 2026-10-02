@@ -21,6 +21,16 @@
         }
       }
     },
+    "About BorrowBack" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Über BorrowBack"
+          }
+        }
+      }
+    },
     "Active loans" : {
       "localizations" : {
         "de" : {
@@ -99,6 +109,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telefonnummer wählen"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
           }
         }
       }
@@ -363,6 +383,16 @@
         }
       }
     },
+    "Privacy Policy" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datenschutzerklärung"
+          }
+        }
+      }
+    },
     "Remove contact" : {
       "localizations" : {
         "de" : {
@@ -499,6 +529,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Die Ausleihe konnte nicht gespeichert werden."
+          }
+        }
+      }
+    },
+    "Version" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        }
+      }
+    },
+    "Website" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website"
           }
         }
       }
