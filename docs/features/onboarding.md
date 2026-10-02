@@ -23,4 +23,8 @@ As a new user, I want a brief introduction so that I understand what BorrowBack 
 - Onboarding entrance and completion motion are omitted when Reduce Motion is enabled.
 - The onboarding screen explains that BorrowBack tracks loans, due dates, and returns.
 - A prominent action opens the main interface.
+- The introduction scrolls only when its content exceeds the available screen
+  height, including when larger text sizes are used.
+- When the introduction fits, scroll gestures are disabled. The start action
+  stays visible outside the scrolling content.
 - After completing onboarding, later launches open the main interface directly.
