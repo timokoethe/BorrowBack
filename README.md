@@ -27,11 +27,11 @@ is due, mark it as returned, and find it again in the archive. The interface is
 purposefully small and uses native iOS patterns throughout.
 
 <p align="center">
-  <img src="website/public/screens/home-view-light.png" width="30%" alt="BorrowBack active-loan overview">
+  <img src="website/public/screens/HomeView.png" width="30%" alt="BorrowBack active-loan overview">
   &nbsp;
-  <img src="website/public/screens/add-view-light.png" width="30%" alt="BorrowBack add-loan form">
+  <img src="website/public/screens/AddView.png" width="30%" alt="BorrowBack add-loan form">
   &nbsp;
-  <img src="website/public/screens/archive-view-light.png" width="30%" alt="BorrowBack returned-loan archive">
+  <img src="website/public/screens/ArchiveView.png" width="30%" alt="BorrowBack returned-loan archive">
 </p>
 
 <p align="center">
