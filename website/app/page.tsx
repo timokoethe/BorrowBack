@@ -14,6 +14,20 @@ import {
 } from "lucide-react";
 import appIcon from "./icon.png";
 import { DeviceFrame } from "./components/DeviceFrame";
+import {
+  APP_STORE_URL,
+  createPageMetadata,
+  homeStructuredData,
+  SITE_AUTHOR,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+} from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  path: "/",
+});
 
 const steps = [
   {
@@ -93,11 +107,12 @@ function StoreButton({ variant = "primary" }: { variant?: "primary" | "onDark" |
         ? "btn btn--onDark"
         : "btn btn--primary";
 
+  if (!APP_STORE_URL) {
+    return <span className={`${className} btn--unavailable`}>Coming soon on the App Store</span>;
+  }
+
   return (
-    <a className={className} href="#download">
-      <span className="glyph" aria-hidden="true">
-        
-      </span>
+    <a className={className} href={APP_STORE_URL}>
       Download on the App Store
     </a>
   );
@@ -106,6 +121,12 @@ function StoreButton({ variant = "primary" }: { variant?: "primary" | "onDark" |
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homeStructuredData()).replace(/</g, "\\u003c"),
+        }}
+      />
       <header className="header">
         <div className="shell header-inner">
           <a className="brand" href="#top" aria-label="BorrowBack, back to top">
@@ -331,8 +352,10 @@ export default function Home() {
               <span className="eyebrow">Free. Private. Yours.</span>
               <h2 className="display">Lend it. Track it. Get it back.</h2>
               <p>
-                BorrowBack is a free download for iPhone. No account, no subscription, no
-                reason to think about it again.
+                {APP_STORE_URL
+                  ? "BorrowBack is a free download for iPhone."
+                  : "BorrowBack is coming soon to the App Store as a free iPhone app."}
+                {" "}No account, no subscription. Requires iOS 26 or later.
               </p>
             </div>
             <StoreButton variant="onDark" />
@@ -351,6 +374,7 @@ export default function Home() {
             <Link href="/privacy">Privacy</Link>
             <a href="#faq">FAQ</a>
             <a href="mailto:borrowback@itstimo.me">Contact</a>
+            <a href={SITE_AUTHOR.url}>{SITE_AUTHOR.name}</a>
           </nav>
         </div>
       </footer>
