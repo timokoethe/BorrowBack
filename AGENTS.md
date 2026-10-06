@@ -13,6 +13,7 @@ BorrowBack is a native iOS app for tracking items that have been lent to other p
 - `app/apple/BorrowBack/Assets.xcassets/` and `app/apple/Icon.icon/`: app colors and icon assets.
 - `app/apple/BorrowBack/PrivacyInfo.xcprivacy`: privacy manifest. It currently declares stored names and phone numbers for app functionality, no tracking, and no required-reason API use. Keep it aligned with the app's data handling when behavior changes.
 - `docs/features/`: documentation for the currently implemented native features; use `_template.md` for new feature documents.
+- `scripts/export-images.sh`: frame simulator screenshots and update both `docs/assets/` and `website/public/screens/`; see [docs/screenshots.md](docs/screenshots.md) for usage and image names.
 - `website/`: separate Next.js site; read `website/AGENTS.md` before editing it.
 
 ## Native App Architecture

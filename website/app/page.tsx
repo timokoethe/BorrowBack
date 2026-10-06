@@ -160,7 +160,7 @@ export default function Home() {
 
           <div className="hero-stage">
             <DeviceFrame
-              screenshot="home-view-light"
+              screenshot="HomeView"
               alt="The BorrowBack overview, listing four active loans with their due dates"
               placement="hero"
               preload
@@ -216,7 +216,7 @@ export default function Home() {
             </div>
             <div className="split-visual">
               <DeviceFrame
-                screenshot="add-view-light"
+                screenshot="AddView"
                 alt="The New Loan screen with fields for item, person and return date"
               />
             </div>
@@ -277,7 +277,7 @@ export default function Home() {
             </div>
             <div className="split-visual">
               <DeviceFrame
-                screenshot="archive-view-light"
+                screenshot="ArchiveView"
                 alt="The archive, listing items that have already been returned"
               />
             </div>
