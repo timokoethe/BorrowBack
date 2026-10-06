@@ -10,7 +10,7 @@ export const metadata = createPageMetadata({
   path: "/privacy",
 });
 
-const lastUpdated = "12 September 2026";
+const lastUpdated = "6 October 2026";
 
 export default function PrivacyPage() {
   return (
@@ -60,10 +60,13 @@ export default function PrivacyPage() {
             <li>
               <strong>Selected contacts</strong> — if you choose a borrower with
               the system contact picker, the app stores that contact&apos;s display
-              name and identifier with the loan. BorrowBack cannot browse your
+              name and identifier with the loan, plus one phone number if the
+              contact has one. If the contact has multiple phone numbers, you
+              choose which number to store. BorrowBack cannot browse your
               contacts database and receives no details about contacts you do not
-              select. If iCloud synchronization is used, the stored name and
-              identifier may be synchronized as part of the loan record.
+              select. If iCloud synchronization is used, the stored name,
+              identifier, and phone number may be synchronized as part of the
+              loan record.
             </li>
             <li>
               <strong>Website log data</strong> — opening a page on this site
@@ -76,6 +79,16 @@ export default function PrivacyPage() {
 
         <section aria-labelledby="use-title">
           <h2 id="use-title">How we use information</h2>
+          <p>
+            For a loan linked to a contact with a stored phone number, you can
+            prepare an SMS or iMessage reminder. BorrowBack passes that number
+            and a suggested message containing the item title and due date to
+            the system message composer. You can edit or cancel the message;
+            it is sent only when you confirm sending. If you send it, the
+            message is shared with the recipient through Apple&apos;s iMessage
+            service or your mobile carrier, depending on the message type.
+            We do not receive the phone number or message content.
+          </p>
           <p>
             iCloud data is used only to keep your loan records available and up
             to date across your devices. We do not use that data for analytics,
