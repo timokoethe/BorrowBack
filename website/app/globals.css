@@ -208,6 +208,8 @@ h3.display { font-size: clamp(1.375rem, 2vw, 1.625rem); line-height: 1.15; }
 
 .btn:active { transform: scale(0.985); }
 
+.btn--unavailable { cursor: default; pointer-events: none; }
+
 .btn--primary {
   background: var(--accent);
   color: var(--on-accent);

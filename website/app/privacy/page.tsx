@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import appIcon from "../icon.png";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Privacy Policy — BorrowBack",
   description:
     "How the BorrowBack iPhone app and this website handle data, including optional iCloud synchronization of loan records.",
-};
+  path: "/privacy",
+});
 
 const lastUpdated = "12 September 2026";
 
