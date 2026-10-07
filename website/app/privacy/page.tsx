@@ -1,7 +1,6 @@
 import { createPageMetadata } from "@/lib/seo";
-import Image from "next/image";
-import Link from "next/link";
-import appIcon from "../icon.png";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
 
 export const metadata = createPageMetadata({
   title: "Privacy Policy — BorrowBack",
@@ -19,12 +18,7 @@ export default function PrivacyPage() {
         Skip to privacy policy
       </a>
 
-      <header className="legal-header">
-        <Link className="brand" href="/" aria-label="BorrowBack home">
-          <Image src={appIcon} alt="" width={34} height={34} priority />
-          BorrowBack
-        </Link>
-      </header>
+      <SiteHeader />
 
       <main className="legal-page" id="privacy">
         <p className="eyebrow">Legal</p>
@@ -215,6 +209,7 @@ export default function PrivacyPage() {
 
         <p className="legal-updated">Last updated: {lastUpdated}</p>
       </main>
+      <SiteFooter />
     </>
   );
 }
