@@ -10,7 +10,7 @@ export const metadata = createPageMetadata({
   path: "/privacy",
 });
 
-const lastUpdated = "6 October 2026";
+const lastUpdated = "7 October 2026";
 
 export default function PrivacyPage() {
   return (
@@ -74,6 +74,16 @@ export default function PrivacyPage() {
               your IP address, the requested URL, the time of the request, and
               your browser&apos;s user agent.
             </li>
+            <li>
+              <strong>Website analytics</strong> — this website uses Vercel Web
+              Analytics to record page views. Data may include the page URL,
+              referrer, filtered query parameters, timestamp, approximate
+              location, and browser, operating system, and device type. Vercel
+              provides aggregated statistics and uses a request-derived hash
+              to distinguish visitors without cookies or identification across
+              websites. Loan records and selected contacts are not part of this
+              website analytics.
+            </li>
           </ul>
         </section>
 
@@ -101,13 +111,22 @@ export default function PrivacyPage() {
             identify you or build a profile. We do not sell personal information
             or use it for advertising.
           </p>
+          <p>
+            Website analytics helps us understand which pages people visit and
+            improve the site. We do not use it for advertising or combine it
+            with app data. Vercel describes its data handling in its{" "}
+            <a href="https://vercel.com/docs/analytics/privacy-policy">
+              Web Analytics privacy documentation
+            </a>.
+          </p>
         </section>
 
         <section aria-labelledby="providers-title">
           <h2 id="providers-title">Service providers</h2>
           <p>
-            This website is hosted by Vercel Inc., which processes the log data
-            described above as our processor under a data processing agreement.
+            This website is hosted by Vercel Inc., which also provides Web
+            Analytics and processes the website log and analytics data described
+            above under a data processing agreement.
             Apple distributes the app through the App Store and handles that
             relationship under its own privacy policy. If iCloud synchronization
             is used, Apple also transmits and stores the synchronized app data in
@@ -130,13 +149,22 @@ export default function PrivacyPage() {
             hosting provider&apos;s retention schedule. We hold no user database, so
             there is no app data for us to delete on your behalf.
           </p>
+          <p>
+            Vercel discards the analytics visitor session after 24 hours; this
+            does not mean all page-view statistics are deleted after 24 hours.
+            Analytics reporting windows depend on the Vercel plan, and Vercel
+            may retain statistics beyond that window, as explained in its{" "}
+            <a href="https://vercel.com/docs/analytics/limits-and-pricing#what-is-the-reporting-window">
+              reporting-window documentation
+            </a>.
+          </p>
         </section>
 
         <section aria-labelledby="security-title">
           <h2 id="security-title">Security and international processing</h2>
           <p>
             This site is served over encrypted connections. Because Vercel is
-            based in the United States, the log data described above may be
+            based in the United States, website log and analytics data may be
             transferred to a third country; that transfer is safeguarded by the
             EU Standard Contractual Clauses included in Vercel&apos;s data
             processing agreement. Apple protects iCloud data according to its own
@@ -154,15 +182,16 @@ export default function PrivacyPage() {
             hold no app data that identifies you and cannot access data stored on
             your device or in your private iCloud account. You can manage that
             data through the app, your device settings, and Apple. A request to
-            us can therefore only concern the hosting log data described above.
+            us can therefore concern the website log and analytics data
+            described above. We cannot identify an individual visitor in the
+            aggregated analytics statistics available to us.
           </p>
         </section>
 
         <section aria-labelledby="children-title">
           <h2 id="children-title">Children&apos;s privacy</h2>
           <p>
-            BorrowBack does not knowingly collect personal information from
-            children or anyone else. The app sends no personal information to us;
+            The BorrowBack app sends no personal information to us;
             if iCloud synchronization is used, app data is stored by Apple in the
             user&apos;s iCloud account. BorrowBack contains no advertising, tracking,
             public sharing, or social features.
