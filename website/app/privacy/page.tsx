@@ -6,7 +6,7 @@ import appIcon from "../icon.png";
 export const metadata = createPageMetadata({
   title: "Privacy Policy — BorrowBack",
   description:
-    "How the BorrowBack iPhone app and this website handle data, including optional iCloud synchronization of loan records.",
+    "How the BorrowBack iPhone app and this website handle data, including automatic iCloud synchronization of loan records when iCloud is enabled for the app.",
   path: "/privacy",
 });
 
@@ -34,19 +34,22 @@ export default function PrivacyPage() {
           This Privacy Policy explains how BorrowBack (&ldquo;BorrowBack,&rdquo;
           &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) handles
           information when you use the app and this website. The short version:
-          your loan records are stored on your device and may also be stored in
-          your private iCloud account to keep them synchronized across your
-          devices. We do not receive or have access to those records.
+          your loan records are stored on your device. When iCloud is enabled
+          for BorrowBack in your Apple device settings, the app automatically
+          synchronizes those records through your private iCloud account across
+          devices signed in to the same Apple Account. We do not receive or have
+          access to those records.
         </p>
 
         <section aria-labelledby="collect-title">
           <h2 id="collect-title">Information we collect</h2>
           <p>
             The app has no BorrowBack account, analytics, advertising, or
-            developer-operated backend. It may use Apple&apos;s iCloud service to
-            synchronize your data across devices signed in to your Apple Account.
-            Apart from this optional synchronization, your app data remains on
-            your device and is not sent to us:
+            developer-operated backend. BorrowBack uses Apple&apos;s iCloud service
+            automatically when it is enabled for the app in your device
+            settings. There is no separate iCloud switch in BorrowBack;
+            synchronization is controlled through your Apple device settings.
+            Your app data is not sent to us:
           </p>
           <ul>
             <li>
