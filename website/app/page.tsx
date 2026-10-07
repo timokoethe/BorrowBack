@@ -1,5 +1,7 @@
+import { SiteHeader } from "./components/SiteHeader";
+import { SiteFooter } from "./components/SiteFooter";
+import { StoreButton } from "./components/StoreButton";
 import Image from "next/image";
-import Link from "next/link";
 import {
   ArrowRight,
   BellRing,
@@ -18,7 +20,6 @@ import {
   APP_STORE_URL,
   createPageMetadata,
   homeStructuredData,
-  SITE_AUTHOR,
   SITE_DESCRIPTION,
   SITE_TITLE,
 } from "@/lib/seo";
@@ -82,6 +83,10 @@ const promises = [
 
 const faq = [
   {
+    q: "Which devices and iOS versions are supported?",
+    a: "BorrowBack is designed for iPhone and requires iOS 26 or later. The app is available in English and German and follows your app or system language settings.",
+  },
+  {
     q: "Where is my data stored?",
     a: "Locally on your iPhone, in the app's own database. When iCloud is available, your loans also sync through your private iCloud account so they stay up to date across your devices. BorrowBack cannot access your records.",
   },
@@ -94,29 +99,15 @@ const faq = [
     a: "Yes. You can view and change your loans without a network connection. Changes made offline sync through iCloud after you reconnect.",
   },
   {
+    q: "Does BorrowBack send reminders automatically?",
+    a: "No. For an active loan linked to a contact with a phone number, you can prepare an SMS or iMessage from the loan's context menu. BorrowBack fills in the item and due date, and you can edit or cancel the message. It is sent only when you confirm sending in the system message composer.",
+  },
+  {
     q: "What happens to returned items?",
     a: "A swipe marks a loan as returned and moves it to the archive, where it stays with its loan and return date in case you need to look it up later.",
   },
 ];
 
-function StoreButton({ variant = "primary" }: { variant?: "primary" | "onDark" | "sm" }) {
-  const className =
-    variant === "sm"
-      ? "btn btn--ghost btn--sm"
-      : variant === "onDark"
-        ? "btn btn--onDark"
-        : "btn btn--primary";
-
-  if (!APP_STORE_URL) {
-    return <span className={`${className} btn--unavailable`}>Coming soon on the App Store</span>;
-  }
-
-  return (
-    <a className={className} href={APP_STORE_URL}>
-      Download on the App Store
-    </a>
-  );
-}
 
 export default function Home() {
   return (
@@ -127,20 +118,7 @@ export default function Home() {
           __html: JSON.stringify(homeStructuredData()).replace(/</g, "\\u003c"),
         }}
       />
-      <header className="header">
-        <div className="shell header-inner">
-          <a className="brand" href="#top" aria-label="BorrowBack, back to top">
-            <Image src={appIcon} alt="" width={30} height={30} priority />
-            BorrowBack
-          </a>
-          <nav className="nav" aria-label="Main navigation">
-            <a href="#how">How it works</a>
-            <Link href="/privacy">Privacy</Link>
-            <a href="#faq">FAQ</a>
-          </nav>
-          <StoreButton variant="sm" />
-        </div>
-      </header>
+      <SiteHeader home />
 
       <main id="top">
         <section className="shell hero">
@@ -363,21 +341,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="shell footer-inner">
-          <a className="brand" href="#top">
-            <Image src={appIcon} alt="" width={26} height={26} />
-            BorrowBack
-          </a>
-          <p style={{ margin: 0 }}>© {new Date().getFullYear()} BorrowBack</p>
-          <nav aria-label="Footer navigation">
-            <Link href="/privacy">Privacy</Link>
-            <a href="#faq">FAQ</a>
-            <a href="mailto:borrowback@itstimo.me">Contact</a>
-            <a href={SITE_AUTHOR.url}>{SITE_AUTHOR.name}</a>
-          </nav>
-        </div>
-      </footer>
+      <SiteFooter home />
     </>
   );
 }

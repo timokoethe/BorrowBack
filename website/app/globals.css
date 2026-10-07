@@ -516,18 +516,10 @@ h3.display { font-size: clamp(1.375rem, 2vw, 1.625rem); line-height: 1.15; }
 
 /* --- Legal -------------------------------------------------------------- */
 
-.legal-header {
-  display: flex;
-  align-items: center;
-  width: min(720px, calc(100% - 48px));
-  height: 4.5rem;
-  margin-inline: auto;
-}
-
 .legal-page {
   width: min(720px, calc(100% - 48px));
   margin-inline: auto;
-  padding: 2rem 0 6rem;
+  padding: clamp(3.5rem, 7vw, 6rem) 0 0;
 }
 
 .legal-page h1 {
@@ -761,7 +753,9 @@ h3.display { font-size: clamp(1.375rem, 2vw, 1.625rem); line-height: 1.15; }
 }
 
 @media (max-width: 900px) {
-  .nav { display: none; }
+  .header-inner { gap: 1rem; flex-wrap: wrap; height: auto; min-height: 4.25rem; padding-block: 0.75rem; }
+  .header-inner .btn { margin-left: auto; }
+  .nav { order: 1; width: 100%; gap: 1.5rem; }
   .hero { grid-template-columns: minmax(0, 1fr); gap: 3.5rem; }
   .hero-stage::before { inset: 4% -6%; }
   .split { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
@@ -781,7 +775,7 @@ h3.display { font-size: clamp(1.375rem, 2vw, 1.625rem); line-height: 1.15; }
 }
 
 @media (max-width: 560px) {
-  .header-inner { height: 3.75rem; }
+  .header-inner { min-height: 3.75rem; }
   .header-inner .btn { display: none; }
   .hero-actions { gap: 1rem; }
   .hero-actions .btn--primary { width: 100%; }
