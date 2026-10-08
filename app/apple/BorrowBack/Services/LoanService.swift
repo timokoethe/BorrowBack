@@ -29,10 +29,15 @@ struct LoanService {
         try saveChanges()
     }
 
-    func update(_ loan: Loan, from draft: LoanDraft) throws {
-        guard draft.isValid else { throw LoanServiceError.invalidDraft }
+    func update(_ loan: Loan, from draft: LoanDraft, original: LoanDraft) throws {
+        guard !loan.isDeleted, loan.modelContext != nil
+        else { throw LoanServiceError.invalidDraft }
 
-        draft.apply(to: loan)
+        let merged = draft.mergingChanges(since: original, into: LoanDraft(loan: loan))
+        guard merged.isValid, merged.dueDate >= merged.loanedAt
+        else { throw LoanServiceError.invalidDraft }
+
+        merged.apply(to: loan)
         try saveChanges()
     }
 

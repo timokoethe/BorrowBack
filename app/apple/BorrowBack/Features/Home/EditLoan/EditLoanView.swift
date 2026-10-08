@@ -16,11 +16,13 @@ struct EditLoanView: View {
     private let loan: Loan
 
     @State private var draft: LoanDraft
+    @State private var originalDraft: LoanDraft
     @State private var isShowingSaveError = false
 
     init(loan: Loan) {
         self.loan = loan
         _draft = State(initialValue: LoanDraft(loan: loan))
+        _originalDraft = State(initialValue: LoanDraft(loan: loan))
     }
 
     var body: some View {
@@ -46,7 +48,9 @@ struct EditLoanView: View {
         guard draft.isValid else { return }
 
         do {
-            try LoanService(modelContext: modelContext).update(loan, from: draft)
+            try LoanService(modelContext: modelContext).update(
+                loan, from: draft, original: originalDraft
+            )
             dismiss()
         } catch {
             isShowingSaveError = true

@@ -29,7 +29,18 @@ postponed return date does not force me to delete and recreate the record.
 - The loan date can be corrected and cannot be set to a future date.
 - The due date cannot be moved before the loan date.
 - Confirming the form applies the changes and closes it.
+- Saving preserves changes already synchronized to this device for fields left
+  unchanged in the form.
+- If the same field was changed in the form and a synchronized change has
+  already arrived on this device, the form's edit wins when saving.
+  The borrower's name, contact link, and phone number are saved together.
+- If merged dates would put the due date before the loan date, saving fails
+  without changing the loan and the form stays open with an error.
+- Saving fails instead of recreating a loan if its deletion has already been
+  applied on this device.
 - Closing the form with the cancel action leaves the loan unchanged.
 - A failed change is rolled back and displays an error.
 - Editing a loan does not change its returned state.
-- Archived loans are not editable.
+- Archived loans cannot be opened for editing from the archive.
+- If a return synchronizes while the edit form is open, the form can still be
+  saved; the loan remains archived with its synchronized return timestamp.
