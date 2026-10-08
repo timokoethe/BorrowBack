@@ -65,6 +65,26 @@ struct LoanDraft: Equatable {
         )
     }
 
+    /// Merges only edits made since the form opened into the latest values.
+    /// Borrower details form one unit so a name cannot be paired with another
+    /// contact's identifier or phone number. Local edits win for the same field.
+    func mergingChanges(since original: LoanDraft, into current: LoanDraft) -> LoanDraft {
+        var merged = current
+        if persistedTitle != original.persistedTitle {
+            merged.title = title
+        }
+        if borrower != original.borrower {
+            merged.borrower = borrower
+        }
+        if loanedAt != original.loanedAt {
+            merged.loanedAt = loanedAt
+        }
+        if dueDate != original.dueDate {
+            merged.dueDate = dueDate
+        }
+        return merged
+    }
+
     /// Writes this draft's content onto an existing loan. Whether the loan is
     /// returned stays untouched: a form edits what was lent to whom and when it
     /// was lent and is due, not its returned state.
