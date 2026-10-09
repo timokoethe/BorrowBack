@@ -44,3 +44,4 @@ I can record who borrowed an item in the way that suits the situation.
   contacts database.
 - A saved phone number can be used to prepare a reminder as described in
   [Send a Loan Reminder](send-loan-reminder.md).
+- At accessibility text sizes, the selected contact name and phone number can wrap onto multiple lines.

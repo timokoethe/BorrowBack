@@ -33,3 +33,4 @@ As a user, I want to record a new loan so that I do not forget who borrowed an i
 - Confirming a valid form persists the loan and returns to the overview.
 - Navigating back without saving does not create a loan.
 - A failed save keeps the page open and displays an error.
+- At accessibility text sizes, due-date quick choices are stacked vertically and their labels can wrap.

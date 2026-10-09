@@ -30,6 +30,7 @@ struct LoanFormView: View {
     let presentationStyle: PresentationStyle
     let onSave: () -> Void
 
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dismiss) private var dismiss
     @FocusState private var isTitleFocused: Bool
     @State private var dueDatePreset = DueDatePreset.fourteenDays
@@ -62,12 +63,14 @@ struct LoanFormView: View {
                 )
 
                 if presentationStyle == .pushed {
-                    HStack(spacing: 8) {
+                    dueDatePresetLayout {
                         dueDatePresetButton("7 days", preset: .sevenDays)
                         dueDatePresetButton("14 days", preset: .fourteenDays)
                         dueDatePresetButton("Custom date", preset: .custom)
 
-                        Spacer(minLength: 0)
+                        if !dynamicTypeSize.isAccessibilitySize {
+                            Spacer(minLength: 0)
+                        }
                     }
                     .accessibilityElement(children: .contain)
                     .accessibilityLabel("Due date")
@@ -141,6 +144,12 @@ struct LoanFormView: View {
         }
     }
 
+    private var dueDatePresetLayout: AnyLayout {
+        dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+            : AnyLayout(HStackLayout(spacing: 8))
+    }
+
     private func matchingPreset(for dueDate: Date) -> DueDatePreset {
         let calendar = Calendar.current
 
@@ -189,8 +198,9 @@ struct LoanFormView: View {
         } label: {
             Text(title)
                 .font(.subheadline.weight(.semibold))
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 1 : 0.8)
+                .fixedSize(horizontal: false, vertical: true)
                 .foregroundStyle(
                     isSelected ? Color("AccentForeground") : Color("DeepInk").opacity(0.7)
                 )

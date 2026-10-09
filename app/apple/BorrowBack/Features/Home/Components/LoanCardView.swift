@@ -9,47 +9,42 @@ import SwiftUI
 import SwiftData
 
 struct LoanCardView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.currentDay) private var today
 
     let loan: Loan
 
     var body: some View {
         HStack(spacing: 0) {
-            ZStack {
-                LinearGradient(
-                    colors: [Color("BBTeal").opacity(0.78), Color("ThumbnailInk")],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+            if !dynamicTypeSize.isAccessibilitySize {
+                ZStack {
+                    LinearGradient(
+                        colors: [Color("BBTeal").opacity(0.78), Color("ThumbnailInk")],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
 
-                Image(systemName: "shippingbox.fill")
-                    .font(.system(size: 30, weight: .semibold))
-                    .foregroundStyle(Color("ThumbnailIcon"))
-                    .accessibilityHidden(true)
+                    Image(systemName: "shippingbox.fill")
+                        .font(.system(size: 30, weight: .semibold))
+                        .foregroundStyle(Color("ThumbnailIcon"))
+                        .accessibilityHidden(true)
+                }
+                .frame(width: 92)
+                .frame(maxHeight: .infinity)
             }
-            .frame(width: 92)
-            .frame(maxHeight: .infinity)
 
             VStack(alignment: .leading, spacing: 10) {
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(loan.title)
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(Color("DeepInk"))
-                        .lineLimit(2)
-
-                    Spacer(minLength: 4)
-
-                    statusBadge
-                }
+                titleAndStatus
 
                 Label(loan.borrowerName, systemImage: borrowerSymbol)
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
-                    .lineLimit(1)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 if let returnedAt = loan.returnedAt {
                     Label {
-                        HStack(spacing: 4) {
+                        dateLayout {
                             Text("Lent:")
                             Text(loan.loanedAt, format: .dateTime.day().month(.twoDigits).year())
                         }
@@ -58,10 +53,11 @@ struct LoanCardView: View {
                     }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
-                    .lineLimit(1)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                    .fixedSize(horizontal: false, vertical: true)
 
                     Label {
-                        HStack(spacing: 4) {
+                        dateLayout {
                             Text("Returned:")
                             Text(returnedAt, format: .dateTime.day().month(.twoDigits).year())
                         }
@@ -70,7 +66,8 @@ struct LoanCardView: View {
                     }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
-                    .lineLimit(1)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                    .fixedSize(horizontal: false, vertical: true)
                 } else {
                     Label {
                         Text(loan.dueDate, format: .dateTime.day().month(.wide).year())
@@ -79,10 +76,12 @@ struct LoanCardView: View {
                     }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
-                    .lineLimit(1)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                    .fixedSize(horizontal: false, vertical: true)
                 }
             }
             .padding(14)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .background(Color("CardSurface"))
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
@@ -92,6 +91,44 @@ struct LoanCardView: View {
         }
         .shadow(color: .black.opacity(0.08), radius: 8, y: 4)
         .accessibilityElement(children: .combine)
+    }
+
+    @ViewBuilder
+    private var titleAndStatus: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    title.fixedSize()
+                    Spacer(minLength: 4)
+                    statusBadge.fixedSize()
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    title
+                    statusBadge
+                }
+            }
+        } else {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                title
+                Spacer(minLength: 4)
+                statusBadge
+            }
+        }
+    }
+
+    private var title: some View {
+        Text(loan.title)
+            .font(.title3.weight(.semibold))
+            .foregroundStyle(Color("DeepInk"))
+            .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var dateLayout: AnyLayout {
+        dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 4))
+            : AnyLayout(HStackLayout(spacing: 4))
     }
 
     private var statusBadge: some View {
