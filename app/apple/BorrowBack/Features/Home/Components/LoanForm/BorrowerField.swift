@@ -11,6 +11,8 @@ import SwiftUI
 /// the button next to it links a system contact instead. A linked contact is
 /// removed again to return to free-text entry.
 struct BorrowerField: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     @Binding var borrower: Borrower
 
     @State private var isShowingContactPicker = false
@@ -68,13 +70,15 @@ struct BorrowerField: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Label(name, systemImage: "person.crop.circle.fill")
                         .foregroundStyle(Color("DeepInk"))
-                        .lineLimit(1)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     if let phoneNumber {
                         Text(phoneNumber)
                             .font(.caption)
                             .foregroundStyle(Color("DeepInk").opacity(0.6))
-                            .lineLimit(1)
+                            .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
 
