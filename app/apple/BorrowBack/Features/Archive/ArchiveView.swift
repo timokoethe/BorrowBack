@@ -75,7 +75,7 @@ struct ArchiveView: View {
                         }
                         .tint(Color.accentColor)
                     }
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         Button(role: .destructive) {
                             delete(loan)
                         } label: {
