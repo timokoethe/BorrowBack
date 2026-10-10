@@ -19,6 +19,7 @@ As a user, I want to delete a loan so that incorrect or irrelevant records no lo
 
 - Swiping an active loan from the trailing edge reveals a destructive delete action.
 - Swiping an archived loan from the trailing edge reveals a destructive delete action.
+- A full swipe does not delete a loan; the user must activate the revealed delete button.
 - Long-pressing an active loan reveals a context menu with a destructive delete action.
 - Long-pressing an archived loan reveals a context menu with a destructive delete action.
 - Deleting a loan from either list completes immediately without showing a confirmation alert.
