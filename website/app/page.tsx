@@ -270,7 +270,7 @@ export default function Home() {
               <ul className="checklist">
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  Swipe right to return, swipe left to delete for good
+                  Swipe right to return; swipe left, then tap Delete to remove a loan permanently
                 </li>
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
