@@ -91,6 +91,14 @@ const faq = [
     a: "Locally on your iPhone, in the app's own database. When iCloud is available, your loans also sync through your private iCloud account so they stay up to date across your devices. BorrowBack cannot access your records.",
   },
   {
+    q: "Do I need iCloud?",
+    a: "No. BorrowBack works locally without iCloud. When iCloud is enabled for BorrowBack in your device settings, your loans sync automatically across devices signed in to the same Apple Account. There is no separate sync switch in the app.",
+  },
+  {
+    q: "Does BorrowBack support accessibility features?",
+    a: "Yes. BorrowBack supports VoiceOver and Voice Control, so you can manage your loans using spoken feedback or voice commands.",
+  },
+  {
     q: "What does BorrowBack cost?",
     a: "Nothing. There is no subscription, no in-app purchase and no advertising. Every feature is available from the moment you install it.",
   },
@@ -100,7 +108,7 @@ const faq = [
   },
   {
     q: "Does BorrowBack send reminders automatically?",
-    a: "No. For an active loan linked to a contact with a phone number, you can prepare an SMS or iMessage from the loan's context menu. BorrowBack fills in the item and due date, and you can edit or cancel the message. It is sent only when you confirm sending in the system message composer.",
+    a: "No. For an active loan linked to a contact with a phone number, touch and hold the loan, then choose Write reminder to prepare an SMS or iMessage. BorrowBack fills in the item and due date, and you can edit or cancel the message. It is sent only when you confirm sending in the system message composer.",
   },
   {
     q: "What happens to returned items?",
