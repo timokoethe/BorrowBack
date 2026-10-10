@@ -76,7 +76,7 @@ struct BorrowerField: View {
                     if let phoneNumber {
                         Text(phoneNumber)
                             .font(.caption)
-                            .foregroundStyle(Color("DeepInk").opacity(0.6))
+                            .foregroundStyle(Color("DeepInk").opacity(0.7))
                             .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -90,7 +90,7 @@ struct BorrowerField: View {
                     Image(systemName: "xmark.circle.fill")
                 }
                 .buttonStyle(.borderless)
-                .tint(Color("DeepInk").opacity(0.4))
+                .tint(Color("DeepInk").opacity(0.7))
                 .accessibilityLabel("Remove contact")
             }
         }
