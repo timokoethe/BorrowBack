@@ -18,6 +18,7 @@ As a user, I want to record a new loan so that I do not forget who borrowed an i
 ## Acceptance Criteria
 
 - The plus button in the overview header navigates to the new-loan page.
+- The plus button exposes localized input names for new loan, add loan, and plus to assistive input tools.
 - The new-loan page uses the standard back button in the navigation bar.
 - The new-loan page finishes opening before the item field receives focus and the keyboard rises from the bottom edge.
 - The app background continues behind the keyboard without exposing the tab bar.

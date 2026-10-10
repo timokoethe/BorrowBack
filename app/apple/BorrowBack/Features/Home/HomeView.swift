@@ -51,6 +51,11 @@ struct HomeView: View {
                 .buttonBorderShape(.circle)
                 .controlSize(.regular)
                 .accessibilityLabel("New Loan")
+                .accessibilityInputLabels([
+                    Text("New Loan"),
+                    Text("Add loan"),
+                    Text("Plus")
+                ])
             }
                 .listRowInsets(.init(top: 20, leading: 20, bottom: 18, trailing: 20))
                 .listRowSeparator(.hidden)
@@ -78,6 +83,9 @@ struct HomeView: View {
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.7))
                 }
+                .accessibilityLabel("Sort order")
+                .accessibilityValue(Text(sort.title))
+                .accessibilityInputLabels([Text("Sort order"), Text(sort.shortTitle)])
             }
             .listRowInsets(.init(top: 0, leading: 20, bottom: 8, trailing: 20))
             .listRowSeparator(.hidden)
@@ -91,6 +99,7 @@ struct HomeView: View {
                         LoanCardView(loan: loan)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityInputLabels([Text(verbatim: loan.title)])
                     .contextMenu {
                         if loan.borrowerPhoneNumber != nil {
                             Button {

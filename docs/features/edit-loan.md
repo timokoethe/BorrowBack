@@ -20,6 +20,7 @@ postponed return date does not force me to delete and recreate the record.
 ## Acceptance Criteria
 
 - Tapping an active loan in the overview opens it in the loan form.
+- Active loan buttons expose the item description as a short name for assistive input tools, while VoiceOver retains the complete card information.
 - The form opens filled with the loan's current item description, borrower,
   loan date, and due date.
 - A loan with a linked contact opens with that contact still linked.
