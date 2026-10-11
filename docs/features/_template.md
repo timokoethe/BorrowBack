@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Briefly describe what the feature does and why it is useful to students.
+Briefly describe what the feature does and why it is useful to users.
 
 ## User Story
 
