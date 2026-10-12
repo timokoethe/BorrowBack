@@ -48,4 +48,11 @@ I can record who borrowed an item in the way that suits the situation.
 - A saved phone number can be used to prepare a reminder as described in
   [Send a Loan Reminder](send-loan-reminder.md).
 - At accessibility text sizes, the selected contact name and phone number can wrap onto multiple lines.
+- The selected phone number appears below and aligned with the contact name,
+  with spacing between the two lines and the contact icon vertically centered
+  alongside them.
+- The selected contact icon uses the same scalable size as the contact-picker
+  and remove-contact icons.
 - The selected phone number and remove-contact control remain legible against the form background in light and dark mode.
+- The remove-contact icon scales with the text size and has a tappable area
+  of at least 44 × 44 points.
