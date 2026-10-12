@@ -31,6 +31,7 @@ As a user, I want to record a new loan so that I do not forget who borrowed an i
 - The due date cannot be earlier than the loan date.
 - Saving a loan with a due date earlier than its loan date is rejected without creating a record. Equal dates are allowed.
 - The new-loan page offers quick choices for seven days, fourteen days, or a custom due date. A quick choice is counted from the loan date.
+- Due-date quick choices briefly animate their text and background colors when selection changes. With Reduce Motion enabled, the colors change immediately.
 - Saving is disabled while the item description or the borrower name is empty or contains only whitespace.
 - A save checkmark is displayed in the top-right corner of the new-loan page.
 - Confirming a valid form persists the loan and returns to the overview.

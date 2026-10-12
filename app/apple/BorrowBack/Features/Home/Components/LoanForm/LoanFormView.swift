@@ -31,6 +31,7 @@ struct LoanFormView: View {
     let onSave: () -> Void
 
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @Environment(\.dismiss) private var dismiss
     @FocusState private var isTitleFocused: Bool
     @FocusState private var isNotesFocused: Bool
@@ -235,6 +236,10 @@ struct LoanFormView: View {
                 .background(
                     isSelected ? Color.accentColor : Color("MistGray"),
                     in: Capsule()
+                )
+                .animation(
+                    accessibilityReduceMotion ? nil : .easeInOut(duration: 0.15),
+                    value: isSelected
                 )
         }
         .buttonStyle(.plain)
