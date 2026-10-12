@@ -57,11 +57,18 @@ struct ContactPickerPresenter: UIViewControllerRepresentable {
             _ picker: CNContactPickerViewController,
             didSelect contact: CNContact
         ) {
-            if let selection = BorrowerContactSelection(contact: contact) {
-                onSelect(selection)
-            }
+            let selection = BorrowerContactSelection(contact: contact)
 
-            onFinish()
+            // Finish the UIKit transition before SwiftUI presents the number
+            // choice. Presenting it while the picker still dims the underlying
+            // navigation stack can leave the dialog's actions looking disabled.
+            picker.dismiss(animated: true) { [self] in
+                onFinish()
+
+                if let selection {
+                    onSelect(selection)
+                }
+            }
         }
 
         func contactPickerDidCancel(_ picker: CNContactPickerViewController) {

@@ -48,6 +48,7 @@ struct BorrowerField: View {
             } message: { _ in
                 Text("This number will be used for reminder messages.")
             }
+            .tint(isChoosingPhoneNumber ? .primary : nil)
     }
 
     @ViewBuilder
