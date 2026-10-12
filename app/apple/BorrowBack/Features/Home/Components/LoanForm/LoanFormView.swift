@@ -77,6 +77,10 @@ struct LoanFormView: View {
                     .accessibilityLabel("Due date")
                 }
             }
+
+            Section("Notes (optional)") {
+                NotesField(notes: $draft.notes)
+            }
         }
         .formStyle(.grouped)
         .scrollContentBackground(.hidden)

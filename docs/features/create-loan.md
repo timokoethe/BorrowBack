@@ -23,6 +23,7 @@ As a user, I want to record a new loan so that I do not forget who borrowed an i
 - The new-loan page finishes opening before the item field receives focus and the keyboard rises from the bottom edge.
 - The app background continues behind the keyboard without exposing the tab bar.
 - The form accepts an item description, a borrower, a loan date, and a due date.
+- Optional [loan notes](loan-notes.md) can be entered at the bottom of the form.
 - The borrower is either a free-text name or a linked contact, as described in
   [Link a Borrower Contact](link-borrower-contact.md).
 - The loan date is preselected with the current date so recording a loan right away needs no date entry.

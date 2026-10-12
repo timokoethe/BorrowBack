@@ -12,6 +12,7 @@ import SwiftData
 final class Loan {
     var id: UUID = UUID()
     var title: String = ""
+    var notes: String?
     var borrowerName: String = ""
     var contactIdentifier: String?
     var borrowerPhoneNumber: String?
@@ -24,6 +25,7 @@ final class Loan {
     init(
         id: UUID = UUID(),
         title: String,
+        notes: String? = nil,
         borrowerName: String,
         contactIdentifier: String? = nil,
         borrowerPhoneNumber: String? = nil,
@@ -35,6 +37,7 @@ final class Loan {
     ) {
         self.id = id
         self.title = title
+        self.notes = notes
         self.borrowerName = borrowerName
         self.contactIdentifier = contactIdentifier
         self.borrowerPhoneNumber = borrowerPhoneNumber
