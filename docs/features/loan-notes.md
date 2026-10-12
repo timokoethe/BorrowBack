@@ -19,6 +19,8 @@ details such as accessories or the item's condition.
 ## Acceptance Criteria
 
 - New-loan and edit-loan forms end with an optional, multiline notes field.
+- Focusing the notes field scrolls the form to keep the notes and character
+  counter visible above the keyboard, in both new-loan and edit-loan forms.
 - Notes are limited to 200 characters, including line breaks and spaces.
 - A visible counter shows the current character count and limit.
 - At 200 characters, further input cannot increase the visible text; deleting

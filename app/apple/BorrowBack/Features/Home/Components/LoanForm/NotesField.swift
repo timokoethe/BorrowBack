@@ -4,16 +4,19 @@ import SwiftUI
 struct NotesField: View {
     @Binding var notes: String
     @State private var input: String
+    let isFocused: FocusState<Bool>.Binding
 
-    init(notes: Binding<String>) {
+    init(notes: Binding<String>, isFocused: FocusState<Bool>.Binding) {
         _notes = notes
         _input = State(initialValue: notes.wrappedValue)
+        self.isFocused = isFocused
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             TextField("Add a note…", text: $input, axis: .vertical)
                 .lineLimit(3...6)
+                .focused(isFocused)
                 .accessibilityLabel("Notes (optional)")
                 .onChange(of: input) { oldValue, newValue in
                     // Keep a separate input state so a rejected edit triggers
@@ -44,10 +47,11 @@ struct NotesField: View {
 
 #Preview {
     @Previewable @State var notes = ""
+    @Previewable @FocusState var isFocused: Bool
 
     Form {
         Section("Notes (optional)") {
-            NotesField(notes: $notes)
+            NotesField(notes: $notes, isFocused: $isFocused)
         }
     }
 }

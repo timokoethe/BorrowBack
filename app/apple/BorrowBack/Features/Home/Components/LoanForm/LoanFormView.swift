@@ -33,53 +33,67 @@ struct LoanFormView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dismiss) private var dismiss
     @FocusState private var isTitleFocused: Bool
+    @FocusState private var isNotesFocused: Bool
+    @Namespace private var notesFieldID
     @State private var dueDatePreset = DueDatePreset.fourteenDays
     @State private var hasRequestedInitialFocus = false
 
     var body: some View {
-        Form {
-            Section("Loan") {
-                TextField("What did you lend?", text: $draft.title)
-                    .focused($isTitleFocused)
+        ScrollViewReader { proxy in
+            Form {
+                Section("Loan") {
+                    TextField("What did you lend?", text: $draft.title)
+                        .focused($isTitleFocused)
 
-                DatePicker(
-                    "Lent on",
-                    selection: $draft.loanedAt,
-                    in: ...Date.now,
-                    displayedComponents: .date
-                )
-            }
+                    DatePicker(
+                        "Lent on",
+                        selection: $draft.loanedAt,
+                        in: ...Date.now,
+                        displayedComponents: .date
+                    )
+                }
 
-            Section("Person") {
-                BorrowerField(borrower: $draft.borrower)
-                    .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 10))
-            }
+                Section("Person") {
+                    BorrowerField(borrower: $draft.borrower)
+                        .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 10))
+                }
 
-            Section("Return") {
-                DatePicker(
-                    "Due on",
-                    selection: $draft.dueDate,
-                    in: draft.loanedAt...,
-                    displayedComponents: .date
-                )
+                Section("Return") {
+                    DatePicker(
+                        "Due on",
+                        selection: $draft.dueDate,
+                        in: draft.loanedAt...,
+                        displayedComponents: .date
+                    )
 
-                if presentationStyle == .pushed {
-                    dueDatePresetLayout {
-                        dueDatePresetButton("7 days", preset: .sevenDays)
-                        dueDatePresetButton("14 days", preset: .fourteenDays)
-                        dueDatePresetButton("Custom date", preset: .custom)
+                    if presentationStyle == .pushed {
+                        dueDatePresetLayout {
+                            dueDatePresetButton("7 days", preset: .sevenDays)
+                            dueDatePresetButton("14 days", preset: .fourteenDays)
+                            dueDatePresetButton("Custom date", preset: .custom)
 
-                        if !dynamicTypeSize.isAccessibilitySize {
-                            Spacer(minLength: 0)
+                            if !dynamicTypeSize.isAccessibilitySize {
+                                Spacer(minLength: 0)
+                            }
                         }
+                        .accessibilityElement(children: .contain)
+                        .accessibilityLabel("Due date")
                     }
-                    .accessibilityElement(children: .contain)
-                    .accessibilityLabel("Due date")
+                }
+
+                Section("Notes (optional)") {
+                    NotesField(notes: $draft.notes, isFocused: $isNotesFocused)
+                        .id(notesFieldID)
                 }
             }
-
-            Section("Notes (optional)") {
-                NotesField(notes: $draft.notes)
+            .onChange(of: isNotesFocused) {
+                scrollToNotes(using: proxy)
+            }
+            .onGeometryChange(for: CGFloat.self) { geometry in
+                geometry.size.height
+            } action: { _ in
+                // Reposition after the keyboard or sheet changes the viewport.
+                scrollToNotes(using: proxy)
             }
         }
         .formStyle(.grouped)
@@ -146,6 +160,13 @@ struct LoanFormView: View {
             } else if draft.dueDate < draft.loanedAt {
                 draft.dueDate = draft.loanedAt
             }
+        }
+    }
+
+    private func scrollToNotes(using proxy: ScrollViewProxy) {
+        guard isNotesFocused else { return }
+        withAnimation(.easeInOut(duration: 0.2)) {
+            proxy.scrollTo(notesFieldID, anchor: .bottom)
         }
     }
 
