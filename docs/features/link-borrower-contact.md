@@ -22,6 +22,9 @@ I can record who borrowed an item in the way that suits the situation.
 - The person field of the new-loan form accepts either a typed name or a
   selected contact, never both.
 - A contact action next to the person field opens the system contact picker.
+- In the new-loan and edit-loan forms, the contact-picker icon scales with the
+  text size and has a tappable area of at least 44 × 44 points.
+- The person row uses compact vertical padding around the contact control.
 - Selecting a contact replaces the person field with the contact's name and
   links the contact to the loan.
 - A selected contact's only phone number is stored automatically; if several

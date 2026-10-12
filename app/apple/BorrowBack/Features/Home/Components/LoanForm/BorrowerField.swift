@@ -12,6 +12,7 @@ import SwiftUI
 /// removed again to return to free-text entry.
 struct BorrowerField: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .body) private var contactIconSize = 24.0
 
     @Binding var borrower: Borrower
 
@@ -61,6 +62,9 @@ struct BorrowerField: View {
                     isShowingContactPicker = true
                 } label: {
                     Image(systemName: "person.crop.circle")
+                        .font(.system(size: contactIconSize))
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(.borderless)
                 .accessibilityLabel("Choose contact")
