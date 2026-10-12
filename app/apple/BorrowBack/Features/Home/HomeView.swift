@@ -152,15 +152,22 @@ struct HomeView: View {
         .environment(\.defaultMinListRowHeight, 1)
         .background(Color("WarmIvory"))
         .overlay {
-            if loans.isEmpty {
-                ContentUnavailableView(
-                    "No loans",
-                    systemImage: "shippingbox",
-                    description: Text("Your active loans will appear here.")
-                )
-                .padding(.horizontal, 20)
-                .allowsHitTesting(false)
+            ZStack {
+                if loans.isEmpty {
+                    ContentUnavailableView(
+                        "No loans",
+                        systemImage: "shippingbox",
+                        description: Text("Your active loans will appear here.")
+                    )
+                    .padding(.horizontal, 20)
+                    .transition(.opacity)
+                }
             }
+            .animation(
+                accessibilityReduceMotion ? nil : .easeInOut(duration: 0.18),
+                value: loans.isEmpty
+            )
+            .allowsHitTesting(false)
         }
         .alert("Save failed", isPresented: $isShowingPersistenceError) {
             Button("OK", role: .cancel) {}

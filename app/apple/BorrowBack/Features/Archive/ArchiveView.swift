@@ -89,15 +89,22 @@ struct ArchiveView: View {
         .environment(\.defaultMinListRowHeight, 1)
         .background(Color("WarmIvory"))
         .overlay {
-            if loans.isEmpty {
-                ContentUnavailableView(
-                    "No archived loans",
-                    systemImage: "archivebox",
-                    description: Text("Returned items appear here.")
-                )
-                .padding(.horizontal, 20)
-                .allowsHitTesting(false)
+            ZStack {
+                if loans.isEmpty {
+                    ContentUnavailableView(
+                        "No archived loans",
+                        systemImage: "archivebox",
+                        description: Text("Returned items appear here.")
+                    )
+                    .padding(.horizontal, 20)
+                    .transition(.opacity)
+                }
             }
+            .animation(
+                accessibilityReduceMotion ? nil : .easeInOut(duration: 0.18),
+                value: loans.isEmpty
+            )
+            .allowsHitTesting(false)
         }
         .sheet(isPresented: $isShowingAppInfo) {
             AppInfoView()

@@ -20,6 +20,7 @@ As a user, I want to see my active loans in one place so that I can keep track o
 - The overview displays only loans that have not been returned.
 - Each loan displays its title, borrower name, and due date.
 - An empty state is displayed when there are no active loans.
+- The empty state briefly fades in or out when the overview becomes empty or receives its first loan. With Reduce Motion enabled, it changes immediately.
 - The empty overview does not scroll its header or sorting control.
 - Changes to persisted loans are reflected in the overview.
 - Tapping a loan opens it for editing, as described in [Edit a Loan](edit-loan.md).
