@@ -36,6 +36,9 @@ vMAJOR.MINOR.PATCH-betaN
 Other suffixes, a missing `v`, or beta number `0` are not supported. The GitHub
 release workflow and the Xcode Cloud pre-build script validate the tag
 independently and reject the same set of invalid tags.
+The pre-build script validates the complete tag before deriving version values
+or changing the project. Incomplete suffixes such as `v1.0.0-` and
+`v1.0.0-beta` are rejected as well.
 
 ## Before Tagging
 

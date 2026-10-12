@@ -8,49 +8,14 @@ if [ -z "${CI_TAG:-}" ]; then
   exit 0
 fi
 
-if ! expr "$CI_TAG" : '^v' >/dev/null; then
+if ! expr "$CI_TAG" : '^v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*$' >/dev/null &&
+   ! expr "$CI_TAG" : '^v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*-beta[1-9][0-9]*$' >/dev/null; then
   echo "Tag '$CI_TAG' does not match expected format vMAJOR.MINOR.PATCH or vMAJOR.MINOR.PATCH-betaN."
   exit 1
 fi
 
 TAG_VERSION="${CI_TAG#v}"
 VERSION_CORE="${TAG_VERSION%%-*}"
-VERSION_SUFFIX=""
-BETA_COUNTER=""
-
-if [ "$TAG_VERSION" != "$VERSION_CORE" ]; then
-  VERSION_SUFFIX="${TAG_VERSION#*-}"
-fi
-
-case "$VERSION_SUFFIX" in
-  "")
-    ;;
-  beta*)
-    BETA_COUNTER="${VERSION_SUFFIX#beta}"
-    ;;
-  *)
-    echo "Tag '$CI_TAG' does not match expected format vMAJOR.MINOR.PATCH or vMAJOR.MINOR.PATCH-betaN."
-    exit 1
-    ;;
-esac
-
-IFS=. read -r MAJOR MINOR PATCH <<EOF
-$VERSION_CORE
-EOF
-
-if ! expr "$MAJOR" : '^[0-9][0-9]*$' >/dev/null ||
-   ! expr "$MINOR" : '^[0-9][0-9]*$' >/dev/null ||
-   ! expr "$PATCH" : '^[0-9][0-9]*$' >/dev/null; then
-  echo "Tag '$CI_TAG' does not match expected format vMAJOR.MINOR.PATCH or vMAJOR.MINOR.PATCH-betaN."
-  exit 1
-fi
-
-if [ -n "$BETA_COUNTER" ]; then
-  if ! expr "$BETA_COUNTER" : '^[1-9][0-9]*$' >/dev/null; then
-    echo "Tag '$CI_TAG' does not match expected beta format vMAJOR.MINOR.PATCH-betaN."
-    exit 1
-  fi
-fi
 
 if [ -n "${CI_BUILD_NUMBER:-}" ]; then
   if ! expr "$CI_BUILD_NUMBER" : '^[1-9][0-9]*$' >/dev/null; then
