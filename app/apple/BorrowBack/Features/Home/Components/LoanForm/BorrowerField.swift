@@ -38,7 +38,11 @@ struct BorrowerField: View {
                         borrower = selection.borrower(phoneNumber: phoneNumber.value)
                         pendingContact = nil
                     } label: {
-                        Text(verbatim: "\(phoneNumber.label): \(phoneNumber.value)")
+                        if let label = phoneNumber.label {
+                            Text(verbatim: "\(label): \(phoneNumber.value)")
+                        } else {
+                            Text(verbatim: phoneNumber.value)
+                        }
                     }
                 }
 

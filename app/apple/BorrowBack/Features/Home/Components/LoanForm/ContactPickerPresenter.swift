@@ -80,7 +80,7 @@ struct ContactPickerPresenter: UIViewControllerRepresentable {
 struct BorrowerContactSelection {
     struct PhoneNumber: Identifiable {
         let id = UUID()
-        let label: String
+        let label: String?
         let value: String
     }
 
@@ -105,10 +105,14 @@ struct BorrowerContactSelection {
         identifier = contact.identifier
         self.name = name
         phoneNumbers = contact.phoneNumbers.map { phoneNumber in
-            PhoneNumber(
-                label: CNLabeledValue<NSString>.localizedString(
-                    forLabel: phoneNumber.label ?? CNLabelPhoneNumberMain
-                ),
+            let label = phoneNumber.label.flatMap { rawLabel -> String? in
+                let trimmedLabel = rawLabel.trimmingCharacters(in: .whitespacesAndNewlines)
+                guard !trimmedLabel.isEmpty else { return nil }
+                return CNLabeledValue<NSString>.localizedString(forLabel: trimmedLabel)
+            }
+
+            return PhoneNumber(
+                label: label,
                 value: phoneNumber.value.stringValue
             )
         }
