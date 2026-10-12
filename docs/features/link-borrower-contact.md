@@ -29,6 +29,8 @@ I can record who borrowed an item in the way that suits the situation.
   links the contact to the loan.
 - A selected contact's only phone number is stored automatically; if several
   numbers are available, the user chooses one.
+- Phone-number choices retain the contact's localized labels. Numbers without
+  a label show only the number, without an added label or colon.
 - In both the new-loan and edit-loan forms, the phone-number choice opens after
   the contact picker closes, with every number available to select.
 - Phone-number choices use black text in light mode and white text in dark mode.
