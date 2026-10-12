@@ -29,6 +29,9 @@ I can record who borrowed an item in the way that suits the situation.
   links the contact to the loan.
 - A selected contact's only phone number is stored automatically; if several
   numbers are available, the user chooses one.
+- In both the new-loan and edit-loan forms, the phone-number choice opens after
+  the contact picker closes, with every number available to select.
+- Phone-number choices use black text in light mode and white text in dark mode.
 - A contact without a phone number can still be linked, but cannot receive a
   reminder message.
 - A contact without a personal name is linked under its organization name.
