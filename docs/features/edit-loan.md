@@ -24,6 +24,7 @@ postponed return date does not force me to delete and recreate the record.
 - The form opens filled with the loan's current item description, borrower,
   loan date, and due date.
 - A loan with a linked contact opens with that contact still linked.
+- Optional [loan notes](loan-notes.md) can be edited or cleared at the bottom of the form.
 - The same borrower options are available as when creating a loan: a typed name
   or a linked contact.
 - The due date of an overdue loan can be kept as it is.

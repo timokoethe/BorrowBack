@@ -1,6 +1,36 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Notes (optional)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notizen (optional)"
+          }
+        }
+      }
+    },
+    "Add a note…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notiz hinzufügen…"
+          }
+        }
+      }
+    },
+    "%lld / %lld characters" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld / %lld Zeichen"
+          }
+        }
+      }
+    },
     "Add loan" : {
       "localizations" : {
         "de" : {
