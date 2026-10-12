@@ -71,20 +71,26 @@ struct BorrowerField: View {
             }
         case .contact(_, let name, let phoneNumber):
             HStack(spacing: 12) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Label(name, systemImage: "person.crop.circle.fill")
-                        .foregroundStyle(Color("DeepInk"))
-                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
-                        .fixedSize(horizontal: false, vertical: true)
+                HStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "person.crop.circle.fill")
+                        .font(.system(size: contactIconSize))
+                        .accessibilityHidden(true)
 
-                    if let phoneNumber {
-                        Text(phoneNumber)
-                            .font(.caption)
-                            .foregroundStyle(Color("DeepInk").opacity(0.7))
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(verbatim: name)
                             .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
                             .fixedSize(horizontal: false, vertical: true)
+
+                        if let phoneNumber {
+                            Text(verbatim: phoneNumber)
+                                .font(.caption)
+                                .foregroundStyle(Color("DeepInk").opacity(0.7))
+                                .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                 }
+                .foregroundStyle(Color("DeepInk"))
 
                 Spacer()
 
@@ -92,6 +98,9 @@ struct BorrowerField: View {
                     borrower = .empty
                 } label: {
                     Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: contactIconSize))
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(.borderless)
                 .tint(Color("DeepInk").opacity(0.7))
