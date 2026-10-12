@@ -28,6 +28,7 @@ As a user, I want to record a new loan so that I do not forget who borrowed an i
 - The loan date is preselected with the current date so recording a loan right away needs no date entry.
 - The loan date can be moved into the past to record a loan after the fact, and cannot be set to a future date.
 - The due date cannot be earlier than the loan date.
+- Saving a loan with a due date earlier than its loan date is rejected without creating a record. Equal dates are allowed.
 - The new-loan page offers quick choices for seven days, fourteen days, or a custom due date. A quick choice is counted from the loan date.
 - Saving is disabled while the item description or the borrower name is empty or contains only whitespace.
 - A save checkmark is displayed in the top-right corner of the new-loan page.

@@ -23,7 +23,8 @@ struct LoanService {
     }
 
     func create(from draft: LoanDraft) throws {
-        guard draft.isValid else { throw LoanServiceError.invalidDraft }
+        guard draft.isValid, draft.dueDate >= draft.loanedAt
+        else { throw LoanServiceError.invalidDraft }
 
         modelContext.insert(draft.makeLoan())
         try saveChanges()
