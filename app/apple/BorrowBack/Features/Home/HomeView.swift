@@ -145,6 +145,7 @@ struct HomeView: View {
                 }
             }
         }
+        .animation(loanListAnimation, value: sort)
         .listStyle(.plain)
         .scrollDisabled(loans.isEmpty)
         .scrollContentBackground(.hidden)
@@ -191,7 +192,7 @@ struct HomeView: View {
     }
 
     private func markAsReturned(_ loan: Loan) {
-        withAnimation(loanRemovalAnimation) {
+        withAnimation(loanListAnimation) {
             do {
                 try LoanService(modelContext: modelContext).markAsReturned(loan)
             } catch {
@@ -201,7 +202,7 @@ struct HomeView: View {
     }
 
     private func delete(_ loan: Loan) {
-        withAnimation(loanRemovalAnimation) {
+        withAnimation(loanListAnimation) {
             do {
                 try LoanService(modelContext: modelContext).delete(loan)
             } catch {
@@ -227,7 +228,7 @@ struct HomeView: View {
         onWriteReminder(message)
     }
 
-    private var loanRemovalAnimation: Animation? {
+    private var loanListAnimation: Animation? {
         accessibilityReduceMotion
             ? nil
             : .snappy(duration: 0.22, extraBounce: 0)
