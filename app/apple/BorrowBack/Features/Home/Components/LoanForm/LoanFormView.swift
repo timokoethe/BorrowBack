@@ -52,6 +52,7 @@ struct LoanFormView: View {
 
             Section("Person") {
                 BorrowerField(borrower: $draft.borrower)
+                    .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 10))
             }
 
             Section("Return") {
