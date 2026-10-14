@@ -9,7 +9,7 @@ export const metadata = createPageMetadata({
   path: "/privacy",
 });
 
-const lastUpdated = "7 October 2026";
+const lastUpdated = "14 October 2026";
 
 export default function PrivacyPage() {
   return (
@@ -48,7 +48,7 @@ export default function PrivacyPage() {
           <ul>
             <li>
               <strong>Loan records</strong> — item titles, borrower names, loan
-              and due dates, return dates, and the information needed to keep
+              and due dates, return dates, optional notes, and the information needed to keep
               active and archived loans available between app launches. These
               records are stored locally and may also be stored in a private
               iCloud database for synchronization. We never receive or have
@@ -88,13 +88,22 @@ export default function PrivacyPage() {
           <h2 id="use-title">How we use information</h2>
           <p>
             For a loan linked to a contact with a stored phone number, you can
-            prepare an SMS or iMessage reminder. BorrowBack passes that number
-            and a suggested message containing the item title and due date to
-            the system message composer. You can edit or cancel the message;
-            it is sent only when you confirm sending. If you send it, the
+            open a reminder sheet with a suggested message containing the item
+            title and due date. You can edit the text, copy it, or choose Send.
+            Send passes the stored phone number and edited message to the system
+            SMS/iMessage composer. You can edit or cancel the message there;
+            it is sent only when you confirm sending in that composer. If you send it, the
             message is shared with the recipient through Apple&apos;s iMessage
             service or your mobile carrier, depending on the message type.
             We do not receive the phone number or message content.
+          </p>
+          <p>
+            Choosing Copy places only the edited message text on the system
+            clipboard so you can paste it into another app. It does not copy
+            the stored phone number or send a message. The text becomes
+            available for pasting outside BorrowBack. Reminder drafts are not
+            saved with your loan records or synchronized through BorrowBack&apos;s
+            iCloud database. We do not receive the draft or clipboard content.
           </p>
           <p>
             iCloud data is used only to keep your loan records available and up

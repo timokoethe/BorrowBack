@@ -90,8 +90,9 @@ export function homeStructuredData() {
         author: { "@type": "Person", "@id": SITE_AUTHOR_ID, ...SITE_AUTHOR },
         featureList: [
           "Track lent items, borrowers, and due dates",
+          "Keep optional notes about accessories, condition, or return arrangements",
           "Link a borrower with the system contact picker",
-          "Prepare editable reminders for linked contacts",
+          "Edit reminders for linked contacts, then send by SMS/iMessage or copy the text",
           "Archive returned loans and restore them",
           "Sync loan records through private iCloud",
         ],
