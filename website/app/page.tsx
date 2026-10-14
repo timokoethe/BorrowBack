@@ -37,7 +37,7 @@ const steps = [
   },
   {
     title: "Follow up when it matters",
-    text: "See what is due soon or overdue, then prepare a reminder for a linked contact without retyping the details.",
+    text: "See what is due soon or overdue, then edit, send or copy a reminder for a linked contact without retyping the details.",
   },
   {
     title: "Archive — or undo",
@@ -54,12 +54,12 @@ const followUpFeatures = [
   {
     icon: MessageCircle,
     title: "Write a reminder",
-    text: "For a linked contact with a phone number, BorrowBack prepares an editable SMS or iMessage with the item and due date.",
+    text: "For a linked contact with a phone number, open a ready-to-edit message with the item and due date. Send it by SMS or iMessage, or copy it to use elsewhere.",
   },
   {
     icon: BellRing,
     title: "Stay in control",
-    text: "Nothing is sent automatically. You review and confirm every reminder in the system message composer.",
+    text: "Nothing is sent automatically. Send opens the system message composer for your final confirmation. Copy works even when your device cannot send messages.",
   },
 ];
 
@@ -72,7 +72,7 @@ const promises = [
   {
     icon: ShieldCheck,
     title: "No account, no tracking",
-    text: "No sign-up, no email, no analytics, no profile. Open the app and start.",
+    text: "No sign-up, no email, no analytics in the app, no profile. Open the app and start.",
   },
   {
     icon: InfinityIcon,
@@ -108,7 +108,11 @@ const faq = [
   },
   {
     q: "Does BorrowBack send reminders automatically?",
-    a: "No. For an active loan linked to a contact with a phone number, touch and hold the loan, then choose Write reminder to prepare an SMS or iMessage. BorrowBack fills in the item and due date, and you can edit or cancel the message. It is sent only when you confirm sending in the system message composer.",
+    a: "No. For an active loan linked to a contact with a phone number, touch and hold the loan, then choose Write reminder. A sheet opens with an editable message containing the item and due date, plus Send and Copy buttons. Send opens the system SMS/iMessage composer, where you confirm sending. Copy puts the edited text on your clipboard so you can paste it elsewhere. Closing the sheet does not change the loan.",
+  },
+  {
+    q: "Can I copy a reminder if my device cannot send messages?",
+    a: "Yes. For an active loan linked to a contact with a phone number, you can open Write reminder, edit the message and copy it even if SMS/iMessage is unavailable on your device. BorrowBack copies only the message text; you choose where to paste it and whom to send it to.",
   },
   {
     q: "What happens to returned items?",
@@ -214,6 +218,10 @@ export default function Home() {
                 <li>
                   <BellRing size={17} strokeWidth={2.2} aria-hidden="true" />
                   Pick seven days, fourteen days, or a custom due date
+                </li>
+                <li>
+                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
+                  Add optional notes about accessories, condition or return arrangements
                 </li>
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
