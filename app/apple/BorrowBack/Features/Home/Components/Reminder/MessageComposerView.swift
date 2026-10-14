@@ -13,7 +13,8 @@ import SwiftUI
 struct MessageComposerView: UIViewControllerRepresentable {
     @Environment(\.dismiss) private var dismiss
 
-    let message: LoanReminderMessage
+    let recipient: String
+    let messageBody: String
     let onFailure: () -> Void
 
     static var canSendText: Bool {
@@ -23,8 +24,8 @@ struct MessageComposerView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> MFMessageComposeViewController {
         let composer = MFMessageComposeViewController()
         composer.messageComposeDelegate = context.coordinator
-        composer.recipients = [message.recipient]
-        composer.body = message.body
+        composer.recipients = [recipient]
+        composer.body = messageBody
         return composer
     }
 

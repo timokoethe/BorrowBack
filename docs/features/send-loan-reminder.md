@@ -26,12 +26,28 @@ an upcoming or missed return date with little effort.
   reminder action.
 - An active loan with a stored phone number offers a reminder action in its
   context menu.
-- The system SMS/iMessage composer opens with the phone number and a
-  localized, editable reminder containing the item and due date.
+- The reminder action opens a sheet with a localized Reminder message label
+  above an editable message containing the item and due date, followed by
+  full-width Send and Copy buttons with leading paper-plane and copy symbols.
+- The message field has a compact height that scales with the text size;
+  longer messages can be scrolled inside the field.
+- The sheet has an inline Reminder message navigation title and a leading
+  close (X) button, matching the edit-loan sheet's navigation layout.
+- Send opens the system SMS/iMessage composer with the stored phone number
+  and the edited message.
+- Copy copies the edited message to the clipboard and confirms it with a
+  Copied label and checkmark on the button. Editing the message restores the
+  Copy label and symbol. Copy remains available when messaging is unavailable.
+- Both buttons are disabled when the message is empty or only whitespace.
+- Closing the sheet with the X button or a dismissal gesture discards edits
+  without changing the loan.
 - An overdue loan receives wording that acknowledges the missed due date.
 - The app never sends a reminder without the user confirming it in the system
   message composer.
-- If messaging is unavailable on the device, the app explains why it cannot
-  open the composer.
+- If messaging is unavailable on the device, tapping Send explains why it
+  cannot open the composer and keeps the edited message available.
 - If sending fails in the system composer, the app displays an error after the
   composer closes.
+- Closing the system composer returns to the reminder sheet with its draft
+  intact, including after cancellation or a send failure. Further edits made
+  inside the system composer are not copied back to the sheet.
