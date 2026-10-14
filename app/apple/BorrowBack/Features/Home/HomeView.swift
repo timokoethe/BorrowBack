@@ -18,7 +18,6 @@ struct HomeView: View {
         sort: \Loan.dueDate
     ) private var loans: [Loan]
     @State private var sort = HomeSort.dueDate
-    @State private var isShowingMessagingUnavailable = false
     @State private var isShowingPersistenceError = false
 
     let onAddLoan: () -> Void
@@ -174,11 +173,6 @@ struct HomeView: View {
         } message: {
             Text("The change could not be saved.")
         }
-        .alert("Messages unavailable", isPresented: $isShowingMessagingUnavailable) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("This device is not configured to send messages.")
-        }
     }
 
     private var sortedLoans: [Loan] {
@@ -219,11 +213,6 @@ struct HomeView: View {
     }
 
     private func writeReminder(for loan: Loan) {
-        guard MessageComposerView.canSendText else {
-            isShowingMessagingUnavailable = true
-            return
-        }
-
         guard let message = LoanReminderMessage(
             loan: loan,
             today: today,
