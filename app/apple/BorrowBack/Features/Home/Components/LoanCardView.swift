@@ -10,7 +10,6 @@ import SwiftData
 
 struct LoanCardView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @Environment(\.currentDay) private var today
 
     let loan: Loan
 
@@ -100,19 +99,20 @@ struct LoanCardView: View {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     title.fixedSize()
                     Spacer(minLength: 4)
-                    statusBadge.fixedSize()
+                    LoanStatusBadge(dueDate: loan.dueDate, isReturned: loan.returnedAt != nil)
+                        .fixedSize()
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
                     title
-                    statusBadge
+                    LoanStatusBadge(dueDate: loan.dueDate, isReturned: loan.returnedAt != nil)
                 }
             }
         } else {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 title
                 Spacer(minLength: 4)
-                statusBadge
+                LoanStatusBadge(dueDate: loan.dueDate, isReturned: loan.returnedAt != nil)
             }
         }
     }
@@ -131,61 +131,9 @@ struct LoanCardView: View {
             : AnyLayout(HStackLayout(spacing: 4))
     }
 
-    private var statusBadge: some View {
-        Text(statusTitle)
-            .font(.caption.weight(.semibold))
-            .foregroundStyle(Color("DeepInk").opacity(0.8))
-            .padding(.horizontal, 9)
-            .padding(.vertical, 5)
-            .background(statusColor.opacity(0.22), in: Capsule())
-    }
-
     /// A linked contact is marked on the card, a free-text name is not.
     private var borrowerSymbol: String {
         loan.contactIdentifier == nil ? "person" : "person.crop.circle.fill"
-    }
-
-    private var statusTitle: LocalizedStringKey {
-        if loan.returnedAt != nil {
-            return "Returned"
-        }
-
-        if dueDay < today {
-            return "Overdue"
-        }
-
-        if dueDay < dueSoonThreshold {
-            return "Due soon"
-        }
-
-        return "OK"
-    }
-
-    private var statusColor: Color {
-        if loan.returnedAt != nil {
-            Color("BBTeal")
-        } else if dueDay < today {
-            Color("Coral")
-        } else if dueDay < dueSoonThreshold {
-            Color("Amber")
-        } else {
-            Color("BBTeal")
-        }
-    }
-
-    private var dueDay: Date {
-        Calendar.current.startOfDay(for: loan.dueDate)
-    }
-
-    /// A loan counts as due soon within this many days of its due date.
-    private static let dueSoonWindowInDays = 5
-
-    private var dueSoonThreshold: Date {
-        Calendar.current.date(
-            byAdding: .day,
-            value: Self.dueSoonWindowInDays,
-            to: today
-        ) ?? today
     }
 }
 
