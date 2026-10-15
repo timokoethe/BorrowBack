@@ -35,7 +35,7 @@ struct AppInfoView: View {
             .navigationTitle("About BorrowBack")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button {
                         dismiss()
                     } label: {
