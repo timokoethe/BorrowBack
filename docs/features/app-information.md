@@ -23,4 +23,4 @@ the privacy policy and check which version is installed.
 - Tapping the button opens an information sheet.
 - The sheet links to the BorrowBack website and privacy policy.
 - The sheet shows the installed app version.
-- The sheet has an X button to dismiss it without changing loan data.
+- The sheet has an X button on the leading side to dismiss it without changing loan data.
