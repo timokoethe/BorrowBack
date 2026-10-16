@@ -15,6 +15,17 @@ The frame is `docs/assets/iphone-frame.png`. It includes a fixed light status ba
 showing `9:41`. A different frame requires updating the display geometry in
 `scripts/export-images.swift`.
 
+## Sample data
+
+Debug builds refresh the seven known sample loans on each launch using dates
+relative to the current day. The overview includes an overdue loan, one due
+today, one due in three days, and one due in fourteen days. Three recently
+returned loans populate the archive.
+
+These sample records use English item titles. Their titles and loan, due, creation,
+and return dates are reset; other fields and unrelated loans are preserved. To capture a changed return state,
+take the screenshot before relaunching. Release builds do not seed sample data.
+
 ## Capture the current simulator screen
 
 Run from the repository root, navigating to the appropriate screen before each
@@ -23,8 +34,15 @@ capture:
 ```sh
 ./scripts/export-images.sh --simulator HomeView
 ./scripts/export-images.sh --simulator AddView
+./scripts/export-images.sh --simulator ReminderView
 ./scripts/export-images.sh --simulator ArchiveView
 ```
+
+For `ReminderView`, use an active loan linked to a contact with a phone number.
+Touch and hold the loan, choose **Write reminder**, and leave the editable message
+and its Send and Copy buttons visible before capturing. The seeded loans do not
+include contact links or phone numbers; link a sample contact in the loan's edit
+form first.
 
 Use these exact names to replace the images referenced by the website and README.
 Each command writes one framed image to each output directory, for example

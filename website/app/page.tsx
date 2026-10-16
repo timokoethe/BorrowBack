@@ -247,7 +247,7 @@ export default function Home() {
             <div className="reminder-visual">
               <DeviceFrame
                 screenshot="ReminderView"
-                alt="An editable reminder for an overdue bike pump, with Send and Copy buttons"
+                alt="An editable reminder for a camera due today, with Send and Copy buttons"
               />
             </div>
           </div>
