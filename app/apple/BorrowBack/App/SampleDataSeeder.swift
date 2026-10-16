@@ -9,17 +9,23 @@ import Foundation
 import SwiftData
 
 extension BBModelContainer {
-    /// Adds stable sample loans for product screenshots without duplicating them
-    /// on subsequent launches. Debug builds only, so no installed app writes
-    /// sample loans into a user's store or iCloud account.
+    /// Refreshes the dates and return state of known screenshot fixtures on each
+    /// debug launch, keeping every status represented without creating duplicates.
+    /// Release builds never seed or refresh records.
     static func seedSampleData(_ modelContext: ModelContext) throws {
         #if DEBUG
-        let existingIDs = Set(
-            try modelContext.fetch(FetchDescriptor<Loan>()).map(\.id)
-        )
+        let existingLoans = try modelContext.fetch(FetchDescriptor<Loan>())
 
-        for loan in sampleLoans where !existingIDs.contains(loan.id) {
-            modelContext.insert(loan)
+        for sample in sampleLoans {
+            if let existing = existingLoans.first(where: { $0.id == sample.id }) {
+                existing.title = sample.title
+                existing.loanedAt = sample.loanedAt
+                existing.dueDate = sample.dueDate
+                existing.returnedAt = sample.returnedAt
+                existing.createdAt = sample.createdAt
+            } else {
+                modelContext.insert(sample)
+            }
         }
 
         do {
@@ -32,82 +38,79 @@ extension BBModelContainer {
     }
 
     #if DEBUG
-    private static let sampleLoans: [Loan] = [
-        Loan(
-            id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA801")!,
-            title: "Picnic blanket",
-            borrowerName: "Sophie Marlow",
-            loanedAt: date(2026, 9, 1),
-            dueDate: date(2026, 9, 14),
-            createdAt: date(2026, 9, 1)
-        ),
-        Loan(
-            id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA802")!,
-            title: "Camera",
-            borrowerName: "Lilly Reid",
-            loanedAt: date(2026, 9, 5),
-            dueDate: date(2026, 9, 14),
-            createdAt: date(2026, 9, 5)
-        ),
-        Loan(
-            id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA803")!,
-            title: "Bike pump",
-            borrowerName: "Isabel McCracken",
-            loanedAt: date(2026, 9, 9),
-            dueDate: date(2026, 9, 23),
-            createdAt: date(2026, 9, 9)
-        ),
-        Loan(
-            id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA804")!,
-            title: "Camping stove",
-            borrowerName: "Lena Hoffmann",
-            loanedAt: date(2026, 9, 12),
-            dueDate: date(2026, 10, 31),
-            createdAt: date(2026, 9, 12)
-        ),
-        Loan(
-            id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA805")!,
-            title: "Projector",
-            borrowerName: "Noah Becker",
-            loanedAt: date(2026, 7, 3),
-            dueDate: date(2026, 7, 17),
-            returnedAt: date(2026, 7, 16),
-            createdAt: date(2026, 7, 3)
-        ),
-        Loan(
-            id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA806")!,
-            title: "Board game",
-            borrowerName: "Mia Sommer",
-            loanedAt: date(2026, 7, 21),
-            dueDate: date(2026, 8, 4),
-            returnedAt: date(2026, 8, 2),
-            createdAt: date(2026, 7, 21)
-        ),
-        Loan(
-            id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA807")!,
-            title: "Power drill",
-            borrowerName: "Jonas Weber",
-            loanedAt: date(2026, 8, 9),
-            dueDate: date(2026, 8, 23),
-            returnedAt: date(2026, 8, 20),
-            createdAt: date(2026, 8, 9)
-        )
-    ]
+    private static var sampleLoans: [Loan] {
+        let today = Calendar.current.startOfDay(for: .now)
 
-    private static func date(_ year: Int, _ month: Int, _ day: Int) -> Date {
-        var components = DateComponents()
-        components.calendar = .current
-        components.timeZone = .current
-        components.year = year
-        components.month = month
-        components.day = day
-        components.hour = 12
-
-        guard let date = components.date else {
-            preconditionFailure("Invalid sample data date: \(year)-\(month)-\(day)")
+        func date(_ offset: Int) -> Date {
+            guard let day = Calendar.current.date(byAdding: .day, value: offset, to: today),
+                  let noon = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: day)
+            else {
+                preconditionFailure("Invalid sample data day offset: \(offset)")
+            }
+            return noon
         }
 
-        return date
+        return [
+            Loan(
+                id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA801")!,
+                title: "Picnic blanket",
+                borrowerName: "Sophie Marlow",
+                loanedAt: date(-17),
+                dueDate: date(-3),
+                createdAt: date(-17)
+            ),
+            Loan(
+                id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA802")!,
+                title: "Camera",
+                borrowerName: "Lilly Reid",
+                loanedAt: date(-14),
+                dueDate: date(0),
+                createdAt: date(-14)
+            ),
+            Loan(
+                id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA803")!,
+                title: "Bike pump",
+                borrowerName: "Isabel McCracken",
+                loanedAt: date(-7),
+                dueDate: date(3),
+                createdAt: date(-7)
+            ),
+            Loan(
+                id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA804")!,
+                title: "Camping stove",
+                borrowerName: "Lena Hoffmann",
+                loanedAt: date(-2),
+                dueDate: date(14),
+                createdAt: date(-2)
+            ),
+            Loan(
+                id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA805")!,
+                title: "Projector",
+                borrowerName: "Noah Becker",
+                loanedAt: date(-26),
+                dueDate: date(-12),
+                returnedAt: date(-13),
+                createdAt: date(-26)
+            ),
+            Loan(
+                id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA806")!,
+                title: "Board game",
+                borrowerName: "Mia Sommer",
+                loanedAt: date(-20),
+                dueDate: date(-6),
+                returnedAt: date(-7),
+                createdAt: date(-20)
+            ),
+            Loan(
+                id: UUID(uuidString: "211CB936-261D-4A32-BECD-A103078DA807")!,
+                title: "Power drill",
+                borrowerName: "Jonas Weber",
+                loanedAt: date(-12),
+                dueDate: date(-1),
+                returnedAt: date(-2),
+                createdAt: date(-12)
+            )
+        ]
     }
     #endif
 }

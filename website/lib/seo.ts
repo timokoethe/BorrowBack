@@ -41,7 +41,7 @@ export function createPageMetadata({
       images: [{
         url: "/og.png",
         width: 1200,
-        height: 640,
+        height: 630,
         alt: "BorrowBack – Track lent items on your iPhone",
       }],
     },
