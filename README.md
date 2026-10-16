@@ -64,13 +64,22 @@ The behavior of every implemented feature is documented in
 
 BorrowBack does not request general Contacts access. Contact selection happens
 in Apple's out-of-process picker, and the app retains only the selected contact
-identifier, display name, and optional reminder phone number. Loan data
-synchronizes through the user's private CloudKit database.
+identifier, display name, and optional reminder phone number. Loan records stay
+on the device and, when iCloud is enabled for BorrowBack in device settings,
+synchronize through the user's private CloudKit database. The developer does
+not receive or have access to these records. The app has no analytics,
+advertising, or developer-operated backend.
 
 The current [privacy manifest](app/apple/BorrowBack/PrivacyInfo.xcprivacy)
-declares the stored names and phone numbers as data linked to the user for app
-functionality. It declares no tracking and lists UserDefaults API use with
-required reason `CA92.1` for the saved onboarding status.
+declares no collected data and no tracking. Local storage and private iCloud
+synchronization do not give the developer access to loan records. The manifest
+lists UserDefaults API use with required reason `CA92.1` for the saved onboarding
+status. App Store Connect privacy labels are maintained separately and must
+reflect the same data handling.
+
+The [privacy policy](https://borrowback.itstimo.me/privacy) also explains contact
+selection, user-confirmed reminder messages, and copying text to the clipboard.
+Website logs and analytics are separate from the native app's data handling.
 
 ## Getting Started
 
