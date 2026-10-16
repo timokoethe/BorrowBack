@@ -166,7 +166,7 @@ struct LoanFormView: View {
 
     private func scrollToNotes(using proxy: ScrollViewProxy) {
         guard isNotesFocused else { return }
-        withAnimation(.easeInOut(duration: 0.2)) {
+        withAnimation(accessibilityReduceMotion ? nil : .easeInOut(duration: 0.2)) {
             proxy.scrollTo(notesFieldID, anchor: .bottom)
         }
     }
