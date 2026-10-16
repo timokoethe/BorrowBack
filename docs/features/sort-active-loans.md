@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Allow students to organize outstanding loans by urgency or item name.
+Allow users to organize outstanding loans by urgency or item name.
 
 ## User Story
 

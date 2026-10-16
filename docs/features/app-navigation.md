@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Give students direct access to active loans and returned loans from one consistent navigation structure.
+Give users direct access to active loans and returned loans from one consistent navigation structure.
 
 ## User Story
 

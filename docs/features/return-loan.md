@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Let students complete an active loan while retaining its history.
+Let users complete an active loan while retaining its history.
 
 ## User Story
 

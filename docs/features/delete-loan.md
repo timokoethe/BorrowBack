@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Allow students to permanently remove a loan that is no longer needed or was entered incorrectly.
+Allow users to permanently remove a loan that is no longer needed or was entered incorrectly.
 
 ## User Story
 

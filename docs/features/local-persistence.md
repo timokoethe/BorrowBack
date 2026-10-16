@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Keep students' loan records available across app launches and during temporary loss of network connectivity.
+Keep users' loan records available across app launches and during temporary loss of network connectivity.
 
 ## User Story
 
