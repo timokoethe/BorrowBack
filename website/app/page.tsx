@@ -33,15 +33,15 @@ export const metadata = createPageMetadata({
 const steps = [
   {
     title: "Add the loan",
-    text: "Record the item, who has it, and when it should come back. Type a name or link a contact.",
+    text: "Save what you lent, who has it, and when it is due back.",
   },
   {
     title: "Follow up when it matters",
-    text: "See which loans are due soon or overdue. Sort by due date to see what needs attention first.",
+    text: "Spot loans that are due soon or overdue.",
   },
   {
     title: "Record the return",
-    text: "Mark a returned item with a swipe. It moves to the archive and can be restored if the return was recorded by mistake.",
+    text: "Swipe to mark an item as returned and keep it in your archive.",
   },
 ];
 
@@ -49,7 +49,7 @@ const followUpFeatures = [
   {
     icon: ContactRound,
     title: "Link the right person",
-    text: "Choose a borrower from your contacts or type a name. BorrowBack only receives details from the contact you select.",
+    text: "For an active loan, link a contact with a phone number. If several numbers are available, choose one for reminders. BorrowBack only receives details from the contact you select.",
   },
   {
     icon: MessageCircle,
@@ -87,12 +87,8 @@ const faq = [
     a: "BorrowBack is designed for iPhone and requires iOS 26 or later. The app is available in English and German and follows your app or system language settings.",
   },
   {
-    q: "Where is my data stored?",
-    a: "Locally on your iPhone, in the app's own database. When iCloud is enabled for BorrowBack, your loans also sync through your private iCloud account so they stay up to date across your devices. We cannot access your loan records.",
-  },
-  {
-    q: "Do I need iCloud?",
-    a: "No. BorrowBack works locally without iCloud. When iCloud is enabled for BorrowBack in your device settings, your loans sync automatically across devices signed in to the same Apple Account. There is no separate sync switch in the app.",
+    q: "Where is my data stored, and do I need iCloud?",
+    a: "Your loans are stored on your iPhone and work without iCloud. If iCloud is enabled for BorrowBack in your device settings, they also sync through your private iCloud account across devices signed in to the same Apple Account. We cannot access your loan records.",
   },
   {
     q: "Does BorrowBack support accessibility features?",
@@ -107,16 +103,8 @@ const faq = [
     a: "Yes. You can view and change your loans without a network connection. If iCloud is enabled for BorrowBack, offline changes sync after you reconnect.",
   },
   {
-    q: "Does BorrowBack send reminders automatically?",
-    a: "No. You choose when to write a reminder. For an active loan linked to a contact with a phone number, BorrowBack prepares an editable message with the item and due date. You review the message and confirm sending it by SMS or iMessage, or copy the text to use elsewhere.",
-  },
-  {
-    q: "Can I copy a reminder if my device cannot send messages?",
-    a: "Yes. Copy remains available even when your device cannot send SMS or iMessage. It copies just the message text, ready to paste into another app. Reminders require an active loan linked to a contact with a phone number.",
-  },
-  {
-    q: "What happens to returned items?",
-    a: "A swipe marks a loan as returned and moves it to the archive, where you can look up when the item was lent and returned.",
+    q: "How do reminders work?",
+    a: "You choose when to write a reminder. For an active loan linked to a contact with a phone number, BorrowBack prepares an editable message with the item and due date. You confirm sending it by SMS or iMessage, or copy the text to use elsewhere. Copy also works when your device cannot send messages. Nothing is sent automatically.",
   },
 ];
 
@@ -186,7 +174,7 @@ export default function Home() {
             <br />
             Get it back.
           </h2>
-          <div className="steps" style={{ marginTop: "3rem" }}>
+          <div className="steps">
             {steps.map((step, index) => (
               <article className="step" key={step.title}>
                 <span className="step-index">{String(index + 1).padStart(2, "0")}</span>
@@ -207,25 +195,17 @@ export default function Home() {
                 that help it come back.
               </h2>
               <p className="prose lead">
-                Record what you lent, who has it, when it went out, and when you want it back.
-                Type a name or choose a borrower from your contacts.
+                Type a borrower&rsquo;s name or choose a contact, then set a due date.
+                Add notes for the details you want to remember.
               </p>
               <ul className="checklist">
                 <li>
-                  <Plus size={17} strokeWidth={2.2} aria-hidden="true" />
-                  Record a loan today or add one you made earlier
-                </li>
-                <li>
-                  <BellRing size={17} strokeWidth={2.2} aria-hidden="true" />
-                  Choose a return date one or two weeks after the loan date, or pick your own
+                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
+                  Record today&rsquo;s loan or one you made earlier
                 </li>
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  Add optional notes about accessories, condition or return arrangements
-                </li>
-                <li>
-                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  Open an active loan later to correct its details or extend the due date
+                  Update the details or extend the due date later
                 </li>
               </ul>
             </div>
@@ -239,26 +219,37 @@ export default function Home() {
         </section>
 
         <section className="section shell">
-          <div className="centered">
-            <span className="eyebrow">Following up</span>
-            <h2 className="display">
-              A thoughtful reminder,
-              <br />
-              <span className="accent">ready when you need it.</span>
-            </h2>
-            <p className="lead">
-              Choose when to follow up with a message you can edit before sending.
-              Reminders are available for active loans linked to a contact with a phone number.
-            </p>
-          </div>
-          <div className="card-grid">
-            {followUpFeatures.map(({ icon: Icon, title, text }) => (
-              <article className="card" key={title}>
-                <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
+          <div className="reminder-panel">
+            <div className="reminder-heading">
+              <span className="eyebrow">Following up</span>
+              <h2 className="display">
+                A thoughtful reminder,
+                <br />
+                <span className="accent">ready when you need it.</span>
+              </h2>
+              <p className="lead">
+                Choose when to follow up with a message you can edit before sending.
+              </p>
+            </div>
+            <div className="reminder-details">
+              <ol className="reminder-steps">
+                {followUpFeatures.map(({ icon: Icon, title, text }) => (
+                  <li key={title}>
+                    <Icon size={21} strokeWidth={1.8} aria-hidden="true" />
+                    <div>
+                      <h3>{title}</h3>
+                      <p>{text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="reminder-visual">
+              <DeviceFrame
+                screenshot="ReminderView"
+                alt="An editable reminder for an overdue bike pump, with Send and Copy buttons"
+              />
+            </div>
           </div>
         </section>
 
@@ -272,23 +263,9 @@ export default function Home() {
                 <span className="accent">what came back.</span>
               </h2>
               <p className="prose lead">
-                Marking something as returned clears it from your overview but keeps it in the
-                archive, with the date it went out and the date it came back.
+                Returned loans stay in your archive with their loan and return dates,
+                newest returns first. Restore a loan if you marked it as returned by mistake.
               </p>
-              <ul className="checklist">
-                <li>
-                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  Mark a loan as returned with a swipe
-                </li>
-                <li>
-                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  Find the most recently returned items at the top of the archive
-                </li>
-                <li>
-                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  Restore an archived loan if you marked it as returned by mistake
-                </li>
-              </ul>
             </div>
             <div className="split-visual">
               <DeviceFrame
