@@ -9,12 +9,10 @@ export function DeviceFrame({
   screenshot,
   alt,
   placement = "feature",
-  preload = false,
 }: {
   screenshot: string;
   alt: string;
   placement?: keyof typeof responsiveSizes;
-  preload?: boolean;
 }) {
   return (
     <Image
@@ -24,7 +22,8 @@ export function DeviceFrame({
       width={1319}
       height={2748}
       sizes={responsiveSizes[placement]}
-      preload={preload}
+      loading={placement === "hero" ? "eager" : "lazy"}
+      fetchPriority={placement === "hero" ? "high" : undefined}
     />
   );
 }

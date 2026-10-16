@@ -162,7 +162,6 @@ export default function Home() {
               screenshot="HomeView"
               alt="The BorrowBack overview, listing four active loans with their due dates"
               placement="hero"
-              preload
             />
           </div>
         </section>
