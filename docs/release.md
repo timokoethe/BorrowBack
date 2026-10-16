@@ -130,8 +130,9 @@ Beta tags deploy to a preview URL and never touch the production domain.
 ## Xcode Cloud Build
 
 Xcode Cloud is expected to start independently from the same pushed tag. The
-[pre-build script](../ci_scripts/ci_pre_xcodebuild.sh) derives the app version as
-follows:
+[pre-build script](../app/apple/ci_scripts/ci_pre_xcodebuild.sh) lives next to
+the Xcode project in `app/apple/ci_scripts/` so Xcode Cloud discovers it
+automatically. It derives the app version as follows:
 
 - `MARKETING_VERSION` is the semantic version without the leading `v` or beta suffix. Both `v1.1.0` and `v1.1.0-beta1` therefore use marketing version `1.1.0`.
 - `CURRENT_PROJECT_VERSION` is the positive Xcode Cloud `CI_BUILD_NUMBER`.
