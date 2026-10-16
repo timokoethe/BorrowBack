@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Let students correct an active loan whose item description, borrower, loan
+Let users correct an active loan whose item description, borrower, loan
 date, or due date was entered wrongly or has since changed.
 
 ## User Story

@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Show all items that are currently on loan so students can see what needs to be returned and by whom.
+Show all items that are currently on loan so users can see what needs to be returned and by whom.
 
 ## User Story
 

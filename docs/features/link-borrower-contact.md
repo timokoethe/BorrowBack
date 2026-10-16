@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Let students pick the borrower from their existing contacts instead of typing a
+Let users pick the borrower from their existing contacts instead of typing a
 name, so a loan can later be traced back to a specific person.
 
 ## User Story

@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Help students preserve a history of completed loans and when their items were returned.
+Help users preserve a history of completed loans and when their items were returned.
 
 ## User Story
 

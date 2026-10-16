@@ -69,7 +69,8 @@ synchronizes through the user's private CloudKit database.
 
 The current [privacy manifest](app/apple/BorrowBack/PrivacyInfo.xcprivacy)
 declares the stored names and phone numbers as data linked to the user for app
-functionality. It declares no tracking or required-reason API use.
+functionality. It declares no tracking and lists UserDefaults API use with
+required reason `CA92.1` for the saved onboarding status.
 
 ## Getting Started
 

@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Make BorrowBack understandable to English- and German-speaking students while keeping English as the primary language.
+Make BorrowBack understandable to English- and German-speaking users while keeping English as the primary language.
 
 ## User Story
 

@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Let students undo a return so that a loan archived by mistake does not have to be recreated by hand.
+Let users undo a return so that a loan archived by mistake does not have to be recreated by hand.
 
 ## User Story
 

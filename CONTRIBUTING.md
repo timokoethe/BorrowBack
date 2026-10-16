@@ -23,11 +23,11 @@ For native iOS feature changes, update the matching document in
 
 For UI changes:
 
-- keep the interface simple and student-friendly
+- keep the interface simple and approachable
 - make controls easy to understand
 - preserve accessibility labels for icon-only controls
 - keep English and German user-facing strings in sync
-- consider different iPhone and iPad screen sizes
+- consider different iPhone screen sizes
 
 For data or persistence changes:
 

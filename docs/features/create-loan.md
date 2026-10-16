@@ -9,7 +9,7 @@ platforms:
 
 ## Purpose
 
-Let students record an item they have lent, the borrower's name, the date it was lent, and the expected return date.
+Let users record an item they have lent, the borrower's name, the date it was lent, and the expected return date.
 
 ## User Story
 
