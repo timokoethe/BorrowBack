@@ -92,7 +92,7 @@ export function homeStructuredData() {
           "Track lent items, borrowers, and due dates",
           "Keep optional notes about accessories, condition, or return arrangements",
           "Link a borrower with the system contact picker",
-          "Edit reminders for linked contacts, then send by SMS/iMessage or copy the text",
+          "Edit reminders for linked contacts with a phone number, then send by SMS/iMessage or copy the text",
           "Archive returned loans and restore them",
           "Sync loan records through private iCloud",
         ],

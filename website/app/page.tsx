@@ -37,10 +37,10 @@ const steps = [
   },
   {
     title: "Follow up when it matters",
-    text: "See what is due soon or overdue, then edit, send or copy a reminder for a linked contact without retyping the details.",
+    text: "See which loans are due soon or overdue. Sort by due date to see what needs attention first.",
   },
   {
-    title: "Archive — or undo",
+    title: "Record the return",
     text: "Mark a returned item with a swipe. It moves to the archive and can be restored if the return was recorded by mistake.",
   },
 ];
@@ -49,17 +49,17 @@ const followUpFeatures = [
   {
     icon: ContactRound,
     title: "Link the right person",
-    text: "Choose someone with the system contact picker or simply type a name. BorrowBack cannot browse your contacts.",
+    text: "Choose a borrower from your contacts or type a name. BorrowBack only receives details from the contact you select.",
   },
   {
     icon: MessageCircle,
     title: "Write a reminder",
-    text: "For a linked contact with a phone number, open a ready-to-edit message with the item and due date. Send it by SMS or iMessage, or copy it to use elsewhere.",
+    text: "Open a suggested message with the item and due date already filled in. Edit it to make it your own.",
   },
   {
     icon: BellRing,
     title: "Stay in control",
-    text: "Nothing is sent automatically. Send opens the system message composer for your final confirmation. Copy works even when your device cannot send messages.",
+    text: "Review the message before sending it by SMS or iMessage, or copy the text to use in another app. Nothing is sent automatically.",
   },
 ];
 
@@ -67,17 +67,17 @@ const promises = [
   {
     icon: WifiOff,
     title: "Private by design",
-    text: "Your loans stay available on your iPhone and can sync through your private iCloud account. BorrowBack cannot access your records.",
+    text: "Your loans are stored on your iPhone and can sync through your private iCloud account. We cannot access your loan records.",
   },
   {
     icon: ShieldCheck,
-    title: "No account, no tracking",
-    text: "No sign-up, no email, no analytics in the app, no profile. Open the app and start.",
+    title: "No BorrowBack account needed",
+    text: "Start with your first loan. The app has no analytics and does not track your activity.",
   },
   {
     icon: InfinityIcon,
-    title: "Free, without the catch",
-    text: "No subscription, no paywalled features, no ads. The whole app is the free version.",
+    title: "Every feature is free",
+    text: "The full app is free, with no subscriptions, in-app purchases, or ads.",
   },
 ];
 
@@ -88,7 +88,7 @@ const faq = [
   },
   {
     q: "Where is my data stored?",
-    a: "Locally on your iPhone, in the app's own database. When iCloud is available, your loans also sync through your private iCloud account so they stay up to date across your devices. BorrowBack cannot access your records.",
+    a: "Locally on your iPhone, in the app's own database. When iCloud is enabled for BorrowBack, your loans also sync through your private iCloud account so they stay up to date across your devices. We cannot access your loan records.",
   },
   {
     q: "Do I need iCloud?",
@@ -100,23 +100,23 @@ const faq = [
   },
   {
     q: "What does BorrowBack cost?",
-    a: "Nothing. There is no subscription, no in-app purchase and no advertising. Every feature is available from the moment you install it.",
+    a: "BorrowBack is free to download and use. All features are included, with no subscriptions, in-app purchases, or ads.",
   },
   {
     q: "Does it work offline?",
-    a: "Yes. You can view and change your loans without a network connection. Changes made offline sync through iCloud after you reconnect.",
+    a: "Yes. You can view and change your loans without a network connection. If iCloud is enabled for BorrowBack, offline changes sync after you reconnect.",
   },
   {
     q: "Does BorrowBack send reminders automatically?",
-    a: "No. For an active loan linked to a contact with a phone number, touch and hold the loan, then choose Write reminder. A sheet opens with an editable message containing the item and due date, plus Send and Copy buttons. Send opens the system SMS/iMessage composer, where you confirm sending. Copy puts the edited text on your clipboard so you can paste it elsewhere. Closing the sheet does not change the loan.",
+    a: "No. You choose when to write a reminder. For an active loan linked to a contact with a phone number, BorrowBack prepares an editable message with the item and due date. You review the message and confirm sending it by SMS or iMessage, or copy the text to use elsewhere.",
   },
   {
     q: "Can I copy a reminder if my device cannot send messages?",
-    a: "Yes. For an active loan linked to a contact with a phone number, you can open Write reminder, edit the message and copy it even if SMS/iMessage is unavailable on your device. BorrowBack copies only the message text; you choose where to paste it and whom to send it to.",
+    a: "Yes. Copy remains available even when your device cannot send SMS or iMessage. It copies just the message text, ready to paste into another app. Reminders require an active loan linked to a contact with a phone number.",
   },
   {
     q: "What happens to returned items?",
-    a: "A swipe marks a loan as returned and moves it to the archive, where it stays with its loan and return date in case you need to look it up later.",
+    a: "A swipe marks a loan as returned and moves it to the archive, where you can look up when the item was lent and returned.",
   },
 ];
 
@@ -143,8 +143,8 @@ export default function Home() {
               Never forget what you <span className="accent">lent.</span>
             </h1>
             <p className="lead">
-              BorrowBack keeps a quiet list of the things you have lent out and when they are
-              due back — so the drill, the book and the camping stove all find their way home.
+              Keep track of what you&rsquo;ve lent, who has it, and when it&rsquo;s due back.
+              From books to camping gear, your loans stay in one place.
             </p>
             <div className="hero-actions">
               <StoreButton />
@@ -208,16 +208,16 @@ export default function Home() {
               </h2>
               <p className="prose lead">
                 Record what you lent, who has it, when it went out, and when you want it back.
-                Type a name or link the borrower from the system contact picker.
+                Type a name or choose a borrower from your contacts.
               </p>
               <ul className="checklist">
                 <li>
                   <Plus size={17} strokeWidth={2.2} aria-hidden="true" />
-                  The loan date defaults to today but can be moved into the past
+                  Record a loan today or add one you made earlier
                 </li>
                 <li>
                   <BellRing size={17} strokeWidth={2.2} aria-hidden="true" />
-                  Pick seven days, fourteen days, or a custom due date
+                  Choose a return date one or two weeks after the loan date, or pick your own
                 </li>
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
@@ -247,8 +247,8 @@ export default function Home() {
               <span className="accent">ready when you need it.</span>
             </h2>
             <p className="lead">
-              Link a borrower once and BorrowBack can prepare the message when a return date is
-              getting close — or has already passed.
+              Choose when to follow up with a message you can edit before sending.
+              Reminders are available for active loans linked to a contact with a phone number.
             </p>
           </div>
           <div className="card-grid">
@@ -267,9 +267,9 @@ export default function Home() {
             <div>
               <span className="eyebrow">After the return</span>
               <h2 className="display">
-                Returned, not
+                A history of
                 <br />
-                <span className="accent">deleted.</span>
+                <span className="accent">what came back.</span>
               </h2>
               <p className="prose lead">
                 Marking something as returned clears it from your overview but keeps it in the
@@ -278,11 +278,11 @@ export default function Home() {
               <ul className="checklist">
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  Swipe right to return; swipe left, then tap Delete to remove a loan permanently
+                  Mark a loan as returned with a swipe
                 </li>
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
-                  The archive stays sorted by most recently returned
+                  Find the most recently returned items at the top of the archive
                 </li>
                 <li>
                   <Check size={17} strokeWidth={2.4} aria-hidden="true" />
@@ -308,8 +308,8 @@ export default function Home() {
               <span className="accent">Nothing you don&rsquo;t.</span>
             </h2>
             <p className="lead">
-              BorrowBack is deliberately small. There is no BorrowBack account to create, no
-              advertising profile and no upsell waiting a few screens in.
+              BorrowBack keeps the focus on your loans. Your records stay on your devices
+              and in your private iCloud account when sync is enabled.
             </p>
           </div>
           <div className="card-grid">
