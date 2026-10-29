@@ -1,20 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next"
 import { SITE_AUTHOR, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/seo";
-import { Inter, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 /* Text face for the interface, serif for display headings — the serif echoes
    the app, whose own title is set in SwiftUI's serif design. */
-const sans = Inter({
-  subsets: ["latin"],
+const sans = localFont({
+  src: "./fonts/Inter.ttf",
+  weight: "100 900",
   variable: "--font-sans",
   display: "swap",
 });
 
-const serif = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["600", "700"],
+const serif = localFont({
+  src: "./fonts/SourceSerif4.ttf",
+  weight: "200 900",
   variable: "--font-serif",
   display: "swap",
 });
