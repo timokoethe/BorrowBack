@@ -1,0 +1,19 @@
+# BorrowBack
+
+> BorrowBack is a free iPhone app for tracking items you lend, who has them, and when they are due back.
+
+BorrowBack requires iOS 26 or later and supports English and German. It works offline and requires no BorrowBack account. All features are free, with no subscriptions, in-app purchases, or ads.
+
+Users can record items, borrowers, loan dates, due dates, and optional notes; edit active loans; and archive returned items. Borrowers can be entered by name or selected with the system contact picker. For linked contacts with a phone number, users can edit a suggested reminder and send it through the system SMS/iMessage composer or copy the text. Nothing is sent automatically.
+
+Loan records are stored on the device and synchronize through the user's private iCloud account when iCloud is enabled for BorrowBack. The developer cannot access loan records. The app has no analytics or tracking; the website uses Vercel Web Analytics.
+
+## Official pages
+
+- [BorrowBack](https://borrowback.itstimo.me/): Product overview, features, availability, and frequently asked questions.
+- [Privacy policy](https://borrowback.itstimo.me/privacy): Data handling for the app and website, iCloud synchronization, contacts, and reminders.
+
+## Support
+
+- [GitHub repository](https://github.com/timokoethe/BorrowBack): Source code and project documentation.
+- [Issue tracker](https://github.com/timokoethe/BorrowBack/issues): Questions, feedback, and feature requests.
