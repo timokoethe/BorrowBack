@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import appIcon from "../icon.png";
 import { StoreButton } from "./StoreButton";
+import { MobileNavigation } from "./MobileNavigation";
 
 export function SiteHeader({ home = false }: { home?: boolean }) {
   return (
@@ -17,6 +18,7 @@ export function SiteHeader({ home = false }: { home?: boolean }) {
             <Link href="/privacy" aria-current={home ? undefined : "page"}>Privacy</Link>
           </nav>
           <StoreButton variant="sm" />
+          <MobileNavigation home={home} />
         </div>
       </header>
   );

@@ -29,14 +29,14 @@ export default function NotFound() {
           <h1 className="display">
             This page didn&rsquo;t
             <br />
-            <span className="accent">make it back.</span>
+            <span className="accent">make it back</span>
           </h1>
           <p className="lead">
             The address may have changed, or the page never existed. Either way,
             we know the way home.
           </p>
           <Link className="btn btn--primary" href="/">
-            <ArrowLeft size={17} strokeWidth={2.2} aria-hidden="true" />
+            <ArrowLeft size={18} strokeWidth={1.5} aria-hidden="true" />
             Back to BorrowBack
           </Link>
         </div>
@@ -53,11 +53,11 @@ export default function NotFound() {
                 <span>Overdue</span>
               </div>
               <p>
-                <UserRound size={16} strokeWidth={1.9} />
+                <UserRound size={18} strokeWidth={1.5} />
                 Somewhere on the internet
               </p>
               <p>
-                <CalendarDays size={16} strokeWidth={1.9} />
+                <CalendarDays size={18} strokeWidth={1.5} />
                 Due back a while ago
               </p>
             </div>

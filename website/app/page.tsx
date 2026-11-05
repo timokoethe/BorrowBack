@@ -11,8 +11,7 @@ import {
   MessageCircle,
   Plus,
   ShieldCheck,
-  Sparkles,
-  WifiOff,
+  UserRound,
 } from "lucide-react";
 import appIcon from "./icon.png";
 import { DeviceFrame } from "./components/DeviceFrame";
@@ -65,12 +64,12 @@ const followUpFeatures = [
 
 const promises = [
   {
-    icon: WifiOff,
+    icon: ShieldCheck,
     title: "Private by design",
     text: "Your loans are stored on your iPhone and can sync through your private iCloud account. We cannot access your loan records.",
   },
   {
-    icon: ShieldCheck,
+    icon: UserRound,
     title: "No BorrowBack account needed",
     text: "Start with your first loan. The app has no analytics and does not track your activity.",
   },
@@ -118,17 +117,17 @@ export default function Home() {
           __html: JSON.stringify(homeStructuredData()).replace(/</g, "\\u003c"),
         }}
       />
+      <a className="skip-link" href="#top">Skip to content</a>
       <SiteHeader home />
 
       <main id="top">
         <section className="shell hero">
           <div>
             <p className="hero-meta">
-              <Sparkles size={14} strokeWidth={2} aria-hidden="true" />
               Free · No account · iPhone
             </p>
             <h1 className="display">
-              Never forget what you <span className="accent">lent.</span>
+              Never forget what you <span className="accent">lent</span>
             </h1>
             <p className="lead">
               Keep track of what you&rsquo;ve lent, who has it, and when it&rsquo;s due back.
@@ -138,23 +137,9 @@ export default function Home() {
               <StoreButton />
               <a className="btn btn--quiet" href="#how">
                 How it works
-                <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
+                <ArrowRight size={18} strokeWidth={1.5} aria-hidden="true" />
               </a>
             </div>
-            <ul className="facts">
-              <li>
-                <Check size={15} strokeWidth={2.4} aria-hidden="true" />
-                Works offline
-              </li>
-              <li>
-                <Check size={15} strokeWidth={2.4} aria-hidden="true" />
-                No sign-up
-              </li>
-              <li>
-                <Check size={15} strokeWidth={2.4} aria-hidden="true" />
-                Private iCloud sync
-              </li>
-            </ul>
           </div>
 
           <div className="hero-stage">
@@ -171,12 +156,12 @@ export default function Home() {
           <h2 className="display">
             Add it. Follow up.
             <br />
-            Get it back.
+            Get it back
           </h2>
           <div className="steps">
             {steps.map((step, index) => (
               <article className="step" key={step.title}>
-                <span className="step-index">{String(index + 1).padStart(2, "0")}</span>
+                <span className="step-index">{index + 1}</span>
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
               </article>
@@ -191,7 +176,7 @@ export default function Home() {
               <h2 className="display">
                 Only the details
                 <br />
-                that help it come back.
+                that help it come back
               </h2>
               <p className="prose lead">
                 Type a borrower&rsquo;s name or choose a contact, then set a due date.
@@ -199,11 +184,11 @@ export default function Home() {
               </p>
               <ul className="checklist">
                 <li>
-                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
+                  <Check size={18} strokeWidth={1.5} aria-hidden="true" />
                   Record today&rsquo;s loan or one you made earlier
                 </li>
                 <li>
-                  <Check size={17} strokeWidth={2.4} aria-hidden="true" />
+                  <Check size={18} strokeWidth={1.5} aria-hidden="true" />
                   Update the details or extend the due date later
                 </li>
               </ul>
@@ -224,7 +209,7 @@ export default function Home() {
               <h2 className="display">
                 A thoughtful reminder,
                 <br />
-                <span className="accent">ready when you need it.</span>
+                <span className="accent">ready when you need it</span>
               </h2>
               <p className="lead">
                 Choose when to follow up with a message you can edit before sending.
@@ -234,7 +219,7 @@ export default function Home() {
               <ol className="reminder-steps">
                 {followUpFeatures.map(({ icon: Icon, title, text }) => (
                   <li key={title}>
-                    <Icon size={21} strokeWidth={1.8} aria-hidden="true" />
+                    <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
                     <div>
                       <h3>{title}</h3>
                       <p>{text}</p>
@@ -259,7 +244,7 @@ export default function Home() {
               <h2 className="display">
                 A history of
                 <br />
-                <span className="accent">what came back.</span>
+                <span className="accent">what came back</span>
               </h2>
               <p className="prose lead">
                 Returned loans stay in your archive with their loan and return dates,
@@ -279,9 +264,9 @@ export default function Home() {
           <div className="centered">
             <span className="eyebrow">Privacy</span>
             <h2 className="display">
-              Everything you need.
+              Your loans, kept private
               <br />
-              <span className="accent">Nothing you don&rsquo;t.</span>
+              <span className="accent">Every feature, free</span>
             </h2>
             <p className="lead">
               BorrowBack keeps the focus on your loans. Your records stay on your devices
@@ -291,7 +276,7 @@ export default function Home() {
           <div className="card-grid">
             {promises.map(({ icon: Icon, title, text }) => (
               <article className="card" key={title}>
-                <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
+                <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
                 <h3>{title}</h3>
                 <p>{text}</p>
               </article>
@@ -301,13 +286,13 @@ export default function Home() {
 
         <section className="section shell" id="faq">
           <span className="eyebrow">FAQ</span>
-          <h2 className="display">Questions, answered.</h2>
+          <h2 className="display">Questions, answered</h2>
           <div className="faq-list">
             {faq.map((item) => (
               <details className="faq-item" key={item.q}>
                 <summary>
                   {item.q}
-                  <Plus size={18} strokeWidth={2} aria-hidden="true" />
+                  <Plus size={18} strokeWidth={1.5} aria-hidden="true" />
                 </summary>
                 <p>{item.a}</p>
               </details>
@@ -319,8 +304,8 @@ export default function Home() {
           <div className="cta">
             <Image src={appIcon} alt="The BorrowBack app icon" width={84} height={84} />
             <div>
-              <span className="eyebrow">Free. Private. Yours.</span>
-              <h2 className="display">Lend it. Track it. Get it back.</h2>
+              <span className="eyebrow">BorrowBack for iPhone</span>
+              <h2 className="display">Lend it. Track it. Get it back</h2>
               <p>
                 {APP_STORE_URL
                   ? "BorrowBack is a free download for iPhone."
