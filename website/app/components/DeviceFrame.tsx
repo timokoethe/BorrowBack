@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 const responsiveSizes = {
-  hero: "(max-width: 380px) 224px, (max-width: 560px) 257px, (max-width: 900px) 307px, (max-width: 1080px) 274px, 315px",
-  feature: "(max-width: 380px) 224px, (max-width: 560px) 257px, (max-width: 900px) 307px, (max-width: 1080px) 249px, 266px",
+  hero: "(max-width: 380px) 224px, (max-width: 560px) 256px, (max-width: 900px) 308px, (max-width: 1080px) 276px, 316px",
+  feature: "(max-width: 380px) 224px, (max-width: 560px) 256px, (max-width: 900px) 308px, (max-width: 1080px) 248px, 268px",
 } as const;
 
 export function DeviceFrame({
