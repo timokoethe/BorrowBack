@@ -31,4 +31,12 @@ advertise App Store availability until a public App Store URL exists.
 npm run dev
 npm run build
 npm run lint
+npm run typecheck
 ```
+
+`typecheck` uses TypeScript 7 through the `@typescript/native` npm alias.
+The `typescript` alias provides Microsoft's TypeScript 6 compatibility API for
+ESLint and Next.js tooling. This follows Microsoft's
+[side-by-side setup](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-6.0)
+while typescript-eslint requires the TypeScript 6 API.
+Next.js currently uses that compatibility package for its build-time type check.
