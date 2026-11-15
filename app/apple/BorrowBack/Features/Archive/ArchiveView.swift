@@ -109,11 +109,10 @@ struct ArchiveView: View {
         .sheet(isPresented: $isShowingAppInfo) {
             AppInfoView()
         }
-        .alert("Save failed", isPresented: $isShowingPersistenceError) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("The change could not be saved.")
-        }
+        .persistenceErrorAlert(
+            isPresented: $isShowingPersistenceError,
+            message: "The change could not be saved."
+        )
     }
 
     private var sortedLoans: [Loan] {
