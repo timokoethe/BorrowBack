@@ -21,6 +21,8 @@ changelog:
       labels:
         - dependencies
         - maintenance
+        - refactor
+        - chore
     - title: Other Changes
       labels:
         - "*"
