@@ -37,11 +37,10 @@ struct EditLoanView: View {
         }
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
-        .alert("Save failed", isPresented: $isShowingSaveError) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("The change could not be saved.")
-        }
+        .persistenceErrorAlert(
+            isPresented: $isShowingSaveError,
+            message: "The change could not be saved."
+        )
     }
 
     private func save() {

@@ -30,11 +30,10 @@ struct AddLoanView: View {
             )
         }
         .toolbar(.hidden, for: .tabBar)
-        .alert("Save failed", isPresented: $isShowingSaveError) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("The loan could not be saved.")
-        }
+        .persistenceErrorAlert(
+            isPresented: $isShowingSaveError,
+            message: "The loan could not be saved."
+        )
     }
 
     private func save() {
