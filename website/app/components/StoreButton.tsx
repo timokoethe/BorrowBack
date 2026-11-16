@@ -8,10 +8,6 @@ export function StoreButton({ variant = "primary" }: { variant?: "primary" | "on
         ? "btn btn--onDark"
         : "btn btn--primary";
 
-  if (!APP_STORE_URL) {
-    return <span className={`${className} btn--unavailable`}>Coming soon on the App Store</span>;
-  }
-
   return (
     <a className={className} href={APP_STORE_URL}>
       Download on the App Store

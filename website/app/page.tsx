@@ -16,7 +16,6 @@ import {
 import appIcon from "./icon.png";
 import { DeviceFrame } from "./components/DeviceFrame";
 import {
-  APP_STORE_URL,
   createPageMetadata,
   homeStructuredData,
   SITE_DESCRIPTION,
@@ -307,9 +306,7 @@ export default function Home() {
               <span className="eyebrow">BorrowBack for iPhone</span>
               <h2 className="display">Lend it. Track it. Get it back</h2>
               <p>
-                {APP_STORE_URL
-                  ? "BorrowBack is a free download for iPhone."
-                  : "BorrowBack is coming soon to the App Store as a free iPhone app."}
+                BorrowBack is now available as a free download on the App Store.
                 {" "}No account, no subscription. Requires iOS 26 or later.
               </p>
             </div>
