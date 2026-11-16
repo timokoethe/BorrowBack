@@ -11,6 +11,8 @@ import SwiftData
 struct LoanCardView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
+    @ScaledMetric(relativeTo: .subheadline) private var borrowerIconSize = 16.0
+
     let loan: Loan
 
     var body: some View {
@@ -35,7 +37,15 @@ struct LoanCardView: View {
             VStack(alignment: .leading, spacing: 10) {
                 titleAndStatus
 
-                Label(loan.borrowerName, systemImage: borrowerSymbol)
+                Label {
+                    Text(verbatim: loan.borrowerName)
+                } icon: {
+                    BorrowerAvatarView(
+                        photoData: loan.borrowerPhotoData,
+                        fallbackSymbol: borrowerSymbol,
+                        size: borrowerIconSize
+                    )
+                }
                     .font(.subheadline)
                     .foregroundStyle(Color("DeepInk").opacity(0.65))
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)

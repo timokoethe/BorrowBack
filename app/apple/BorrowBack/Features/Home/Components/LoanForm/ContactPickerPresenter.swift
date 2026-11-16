@@ -87,6 +87,7 @@ struct BorrowerContactSelection {
     let identifier: String
     let name: String
     let phoneNumbers: [PhoneNumber]
+    let photoData: Data?
 
     /// Links a picked contact, preferring its formatted name and falling back
     /// to the organization. Returns `nil` for a contact without any usable
@@ -104,6 +105,7 @@ struct BorrowerContactSelection {
 
         identifier = contact.identifier
         self.name = name
+        photoData = Self.photoSnapshot(from: contact)
         phoneNumbers = contact.phoneNumbers.map { phoneNumber in
             let label = phoneNumber.label.flatMap { rawLabel -> String? in
                 let trimmedLabel = rawLabel.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -118,11 +120,27 @@ struct BorrowerContactSelection {
         }
     }
 
+    /// Only read image keys supplied by the picker. Never refetch the contact,
+    /// which would require Contacts authorization. Store a small, metadata-free JPEG.
+    private static func photoSnapshot(from contact: CNContact) -> Data? {
+        let thumbnail = contact.isKeyAvailable(CNContactThumbnailImageDataKey)
+            ? contact.thumbnailImageData : nil
+        let data = thumbnail ?? (contact.isKeyAvailable(CNContactImageDataKey)
+            ? contact.imageData : nil)
+        guard let data,
+              let image = UIImage(data: data),
+              let thumbnail = image.preparingThumbnail(of: CGSize(width: 128, height: 128))
+        else { return nil }
+
+        return thumbnail.jpegData(compressionQuality: 0.8)
+    }
+
     func borrower(phoneNumber: String?) -> Borrower {
         .contact(
             identifier: identifier,
             name: name,
-            phoneNumber: phoneNumber
+            phoneNumber: phoneNumber,
+            photoData: photoData
         )
     }
 }

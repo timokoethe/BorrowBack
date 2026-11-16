@@ -21,6 +21,7 @@ As a user, I want my loans to sync through iCloud so that I can manage the same 
 - Synchronization is controlled through device settings; BorrowBack has no separate iCloud switch.
 - Created, edited, returned, and deleted loans are included in synchronization.
 - Loan data is stored in the user's private iCloud database and is not shared with other users.
-- Synchronized records include item details, notes, dates, and a linked contact's stored name, identifier, and phone number when present.
+- Synchronized records include item details, notes, dates, and a linked contact's stored name, identifier, phone number, and photo snapshot when present.
+- A synchronized contact photo is available without access to the receiving device's contacts database.
 - The developer does not receive or have access to the private loan records.
 - Changes made without a network connection remain available locally and sync after connectivity returns.

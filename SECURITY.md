@@ -1,6 +1,6 @@
 # Security Policy
 
-BorrowBack is a native SwiftUI app for iOS that stores loan records locally on the user's device. Records include item and borrower names, loan and return dates, optional notes, and a selected contact's identifier and phone number when linked to a loan.
+BorrowBack is a native SwiftUI app for iOS that stores loan records locally on the user's device. Records include item and borrower names, loan and return dates, optional notes, and a selected contact's identifier, phone number, and a reduced photo snapshot when linked to a loan.
 
 When iCloud is enabled for BorrowBack in the device settings, these records also synchronize through the user's private CloudKit database across devices signed in to the same Apple Account. The developer does not receive or have access to these records.
 
