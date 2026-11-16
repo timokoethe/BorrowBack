@@ -140,7 +140,8 @@ automatically. It derives the app version as follows:
 
 Build numbers are not derived from the semantic version or beta counter. For example, `v1.1.0-beta3` does not imply build number `3`.
 
-The first Xcode Cloud release build in this repository is expected to become build `1`.
+Use the actual Xcode Cloud build number when checking a release; do not assume
+that a release starts at build `1`.
 
 ## Verification After Tagging
 

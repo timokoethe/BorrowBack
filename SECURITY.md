@@ -14,7 +14,7 @@ Only the latest public release and the current `main` branch are supported for s
 
 Please do not open a public issue for security reports.
 
-If private vulnerability reporting is enabled for this repository, use GitHub's private vulnerability reporting flow to submit details securely. Otherwise, contact the repository maintainer privately before sharing details in public.
+If private vulnerability reporting is enabled for this repository, use GitHub's private vulnerability reporting flow to submit details securely. Otherwise, email [borrowback@itstimo.me](mailto:borrowback@itstimo.me) before sharing details in public.
 
 Please include:
 

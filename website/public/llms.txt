@@ -10,6 +10,7 @@ Loan records are stored on the device and synchronize through the user's private
 
 ## Official pages
 
+- [App Store](https://apps.apple.com/de/app/borrowback-verleih-tracker/id6803524362): Download BorrowBack for free on iPhone.
 - [BorrowBack](https://borrowback.itstimo.me/): Product overview, features, availability, and frequently asked questions.
 - [Privacy policy](https://borrowback.itstimo.me/privacy): Data handling for the app and website, iCloud synchronization, contacts, and reminders.
 
