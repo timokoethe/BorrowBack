@@ -17,7 +17,8 @@ As a user, I want to switch between the overview and the archive so that I can r
 
 ## Acceptance Criteria
 
-- The app presents Overview and Archive as persistent tabs.
+- Overview and Archive form the app's main tab navigation.
+- The tab bar is hidden on the new-loan page and reappears when returning to the overview.
 - Selecting a tab displays its corresponding screen.
 - Both tabs use the shared BorrowBack wordmark and a screen-specific section
   heading.

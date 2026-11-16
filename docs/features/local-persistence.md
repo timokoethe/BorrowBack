@@ -23,3 +23,11 @@ As a user, I want my loan records and their lifecycle changes to be saved locall
 - Local changes synchronize through iCloud when connectivity is available, as described in [iCloud Sync](icloud-sync.md).
 - If local storage cannot be opened, loan-management controls are unavailable and the app displays a recovery message.
 - The app does not silently switch to temporary storage when persistent storage is unavailable.
+
+## Debug Sample Data
+
+In debug builds, the seven screenshot sample loans are refreshed on each launch:
+their titles and dates, including return timestamps, are reset, and deleted
+sample loans are recreated. Other loans are preserved. Release builds do not
+seed or refresh sample loans. See [Screenshot exports](../screenshots.md#sample-data)
+for details.
