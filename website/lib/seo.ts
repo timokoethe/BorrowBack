@@ -14,9 +14,9 @@ export const SOFTWARE_ID = `${SITE_URL}/#software`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const WEBPAGE_ID = `${SITE_URL}/#webpage`;
 
-// Set the real App Store URL here when the listing is available.
 // Buttons and structured download data use this same value.
-export const APP_STORE_URL: string | null = null;
+export const APP_STORE_URL =
+  "https://apps.apple.com/de/app/borrowback-verleih-tracker/id6803524362";
 
 export function createPageMetadata({
   title,
@@ -96,12 +96,10 @@ export function homeStructuredData() {
           "Archive returned loans and restore them",
           "Sync loan records through private iCloud",
         ],
-        ...(APP_STORE_URL ? {
           downloadUrl: APP_STORE_URL,
           installUrl: APP_STORE_URL,
           sameAs: [APP_STORE_URL],
           offers: { "@type": "Offer", price: 0, priceCurrency: "USD", url: APP_STORE_URL },
-        } : {}),
       },
     ],
   };

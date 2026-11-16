@@ -4,7 +4,7 @@ This directory contains the separate Next.js website for BorrowBack.
 The native app itself is iOS-only and lives in [`../app/apple`](../app/apple).
 
 The website is BorrowBack's project landing page. It introduces the native app,
-shows its current features, and explains the project's development status.
+shows its current features, and links to its App Store listing.
 
 ## Getting Started
 
@@ -21,9 +21,9 @@ Edit the main page in [`app/page.tsx`](app/page.tsx).
 
 ## Relationship to the App
 
-Keep website messaging aligned with the current iOS app state. BorrowBack
-remains under active development and currently runs from source. Do not
-advertise App Store availability until a public App Store URL exists.
+Keep website messaging aligned with the current iOS app state. BorrowBack is
+available as a free iPhone app on the App Store. The shared App Store URL in
+`lib/seo.ts` powers the download buttons and structured download data.
 
 ## Scripts
 
