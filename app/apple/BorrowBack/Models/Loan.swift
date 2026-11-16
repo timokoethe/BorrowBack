@@ -16,6 +16,7 @@ final class Loan {
     var borrowerName: String = ""
     var contactIdentifier: String?
     var borrowerPhoneNumber: String?
+    @Attribute(.externalStorage) var borrowerPhotoData: Data?
     var loanedAt: Date = Date.now
     var dueDate: Date = Date.now
     var returnedAt: Date?
@@ -29,6 +30,7 @@ final class Loan {
         borrowerName: String,
         contactIdentifier: String? = nil,
         borrowerPhoneNumber: String? = nil,
+        borrowerPhotoData: Data? = nil,
         loanedAt: Date = .now,
         dueDate: Date,
         returnedAt: Date? = nil,
@@ -41,6 +43,7 @@ final class Loan {
         self.borrowerName = borrowerName
         self.contactIdentifier = contactIdentifier
         self.borrowerPhoneNumber = borrowerPhoneNumber
+        self.borrowerPhotoData = borrowerPhotoData
         self.loanedAt = loanedAt
         self.dueDate = dueDate
         self.returnedAt = returnedAt

@@ -35,7 +35,7 @@ postponed return date does not force me to delete and recreate the record.
   unchanged in the form.
 - If the same field was changed in the form and a synchronized change has
   already arrived on this device, the form's edit wins when saving.
-  The borrower's name, contact link, and phone number are saved together.
+  The borrower's name, contact link, phone number, and photo snapshot are saved together.
 - If merged dates would put the due date before the loan date, saving fails
   without changing the loan and the form stays open with an error.
 - Saving fails instead of recreating a loan if its deletion has already been

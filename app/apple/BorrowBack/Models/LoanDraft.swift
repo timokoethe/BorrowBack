@@ -41,7 +41,8 @@ struct LoanDraft: Equatable {
         borrower = Borrower(
             name: loan.borrowerName,
             contactIdentifier: loan.contactIdentifier,
-            phoneNumber: loan.borrowerPhoneNumber
+            phoneNumber: loan.borrowerPhoneNumber,
+            photoData: loan.borrowerPhotoData
         )
         loanedAt = loan.loanedAt
         dueDate = loan.dueDate
@@ -71,6 +72,7 @@ struct LoanDraft: Equatable {
             borrowerName: borrower.persistedName,
             contactIdentifier: borrower.contactIdentifier,
             borrowerPhoneNumber: borrower.phoneNumber,
+            borrowerPhotoData: borrower.photoData,
             loanedAt: loanedAt,
             dueDate: dueDate
         )
@@ -78,7 +80,7 @@ struct LoanDraft: Equatable {
 
     /// Merges only edits made since the form opened into the latest values.
     /// Borrower details form one unit so a name cannot be paired with another
-    /// contact's identifier or phone number. Local edits win for the same field.
+    /// contact's identifier, phone number, or photo. Local edits win for the same field.
     func mergingChanges(since original: LoanDraft, into current: LoanDraft) -> LoanDraft {
         var merged = current
         if persistedTitle != original.persistedTitle {
@@ -108,6 +110,7 @@ struct LoanDraft: Equatable {
         loan.borrowerName = borrower.persistedName
         loan.contactIdentifier = borrower.contactIdentifier
         loan.borrowerPhoneNumber = borrower.phoneNumber
+        loan.borrowerPhotoData = borrower.photoData
         loan.loanedAt = loanedAt
         loan.dueDate = dueDate
     }

@@ -74,12 +74,14 @@ struct BorrowerField: View {
                 .buttonStyle(.borderless)
                 .accessibilityLabel("Choose contact")
             }
-        case .contact(_, let name, let phoneNumber):
+        case .contact(_, let name, let phoneNumber, let photoData):
             HStack(spacing: 12) {
                 HStack(alignment: .center, spacing: 12) {
-                    Image(systemName: "person.crop.circle.fill")
-                        .font(.system(size: contactIconSize))
-                        .accessibilityHidden(true)
+                    BorrowerAvatarView(
+                        photoData: photoData,
+                        fallbackSymbol: "person.crop.circle.fill",
+                        size: contactIconSize
+                    )
 
                     VStack(alignment: .leading, spacing: 6) {
                         Text(verbatim: name)

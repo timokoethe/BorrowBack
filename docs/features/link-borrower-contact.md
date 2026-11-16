@@ -44,8 +44,8 @@ I can record who borrowed an item in the way that suits the situation.
 - Cancelling the contact picker leaves the person field unchanged.
 - Cancelling the phone-number choice for a contact with several numbers leaves
   the person field unchanged.
-- A loan with a linked contact is marked with a contact symbol next to the
-  borrower name.
+- A loan with a linked contact shows its saved photo or a contact symbol next
+  to the borrower name, as described in [Contact Photos](contact-photos.md).
 - Saving is disabled while no contact is linked and the typed name is empty or
   contains only whitespace.
 - The borrower name of a saved loan remains available without access to the

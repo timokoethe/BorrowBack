@@ -9,7 +9,7 @@ export const metadata = createPageMetadata({
   path: "/privacy",
 });
 
-const lastUpdated = "14 October 2026";
+const lastUpdated = "16 November 2026";
 
 export default function PrivacyPage() {
   return (
@@ -59,11 +59,15 @@ export default function PrivacyPage() {
               the system contact picker, the app stores that contact&apos;s display
               name and identifier with the loan, plus one phone number if the
               contact has one. If the contact has multiple phone numbers, you
-              choose which number to store. BorrowBack cannot browse your
+              choose which number to store. When the picker supplies a contact
+              photo, the app also stores a reduced copy with the loan. This photo
+              is a snapshot and is not automatically refreshed from Contacts.
+              BorrowBack cannot browse your
               contacts database and receives no details about contacts you do not
               select. If iCloud synchronization is used, the stored name,
-              identifier, and phone number may be synchronized as part of the
-              loan record.
+              identifier, phone number, and photo snapshot may be synchronized
+              through your private iCloud database as part of the loan record.
+              We do not receive or have access to this information.
             </li>
             <li>
               <strong>Website log data</strong> — opening a page on this site
@@ -86,6 +90,13 @@ export default function PrivacyPage() {
 
         <section aria-labelledby="use-title">
           <h2 id="use-title">How we use information</h2>
+          <p>
+            Saved contact photos help you recognize borrowers in loan forms and
+            on active and archived loan cards. They remain available without
+            looking up the contact again, including on your other devices when
+            iCloud synchronization is used. Removing or replacing a linked
+            contact and saving the loan removes or replaces its stored photo.
+          </p>
           <p>
             For a loan linked to a contact with a stored phone number, you can
             open a reminder sheet with a suggested message containing the item
@@ -146,7 +157,8 @@ export default function PrivacyPage() {
         <section aria-labelledby="retention-title">
           <h2 id="retention-title">Retention and deletion</h2>
           <p>
-            You can delete individual loan records in the app at any time.
+            You can delete individual loan records, including their stored
+            contact photo snapshots, in the app at any time.
             When iCloud synchronization is used, deletions may be synchronized
             across your devices. Deleting the app from one device removes its
             local data but may not delete records that remain in iCloud or on
