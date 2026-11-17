@@ -106,6 +106,22 @@ configuration](../.github/release.yml). Pull requests labeled
 
 The GitHub Release is changelog metadata. Its successful creation does not mean that the website deployment or the Xcode Cloud build also succeeded.
 
+## App Store Release Notes
+
+Use the same minimal format for “What's New in This Version” in every release:
+
+- Write one to three short bullet points, one observable user benefit per point.
+- Lead with the user benefit, then explain the new behavior. Put the main new
+  feature first, followed by specific improvements or fixes.
+- Use plain language without headings, version numbers, greetings, or technical details.
+- Use natural, everyday wording instead of formal terms such as “Entleiher”.
+- Include only native app changes since the previous stable release. Omit internal
+  refactoring, documentation, website changes, and generic claims about bug fixes.
+- Prepare English first, then German with the same meaning and bullet order.
+
+Keep version-specific text in App Store Connect and retrieve it through the
+App Store Connect MCP when needed; do not duplicate it in this document.
+
 ## Website Deployment
 
 After the GitHub Release was created, the same workflow deploys the website in
