@@ -18,9 +18,11 @@ As a user, I want to see whether a loan is on time, due soon, overdue, or return
 
 ## Acceptance Criteria
 
-- An active loan due five or more calendar days from today displays an OK status.
+- An active loan due five or more calendar days from today has no visible status indicator; VoiceOver still announces OK.
 - An active loan due today or within the next four calendar days displays a Due soon status.
 - An active loan with a due date before today displays an Overdue status.
 - An archived loan displays a Returned status.
-- Overdue loans use coral, loans due soon use amber, and OK or returned loans use teal.
+- Overdue loans use coral, loans due soon use amber, and returned loans use teal.
 - Loan status reflects the current calendar day without requiring a restart or a data change.
+- Status appears as a colored circle with a checkmark for returned, a clock for due soon, and an exclamation mark for overdue.
+- Indicators scale with text size and expose the full localized status to VoiceOver without a visible text badge.

@@ -102,28 +102,12 @@ struct LoanCardView: View {
         .accessibilityElement(children: .combine)
     }
 
-    @ViewBuilder
     private var titleAndStatus: some View {
-        if dynamicTypeSize.isAccessibilitySize {
-            ViewThatFits(in: .horizontal) {
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    title.fixedSize()
-                    Spacer(minLength: 4)
-                    LoanStatusBadge(dueDate: loan.dueDate, isReturned: loan.returnedAt != nil)
-                        .fixedSize()
-                }
-
-                VStack(alignment: .leading, spacing: 8) {
-                    title
-                    LoanStatusBadge(dueDate: loan.dueDate, isReturned: loan.returnedAt != nil)
-                }
-            }
-        } else {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                title
-                Spacer(minLength: 4)
-                LoanStatusBadge(dueDate: loan.dueDate, isReturned: loan.returnedAt != nil)
-            }
+        HStack(alignment: .top, spacing: 8) {
+            title
+                .frame(maxWidth: .infinity, alignment: .leading)
+            LoanStatusBadge(dueDate: loan.dueDate, isReturned: loan.returnedAt != nil)
+                .fixedSize()
         }
     }
 
