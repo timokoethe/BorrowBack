@@ -13,6 +13,8 @@ struct AddLoanView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
 
+    var presentationStyle: LoanFormView.PresentationStyle = .pushed
+
     @State private var draft = LoanDraft()
     @State private var isShowingSaveError = false
 
@@ -25,11 +27,12 @@ struct AddLoanView: View {
                 draft: $draft,
                 navigationTitle: "New Loan",
                 focusesTitle: true,
-                presentationStyle: .pushed,
+                presentationStyle: presentationStyle,
+                showsDueDatePresets: true,
                 onSave: save
             )
         }
-        .toolbar(.hidden, for: .tabBar)
+        .toolbar(presentationStyle == .pushed ? .hidden : .automatic, for: .tabBar)
         .persistenceErrorAlert(
             isPresented: $isShowingSaveError,
             message: "The loan could not be saved."

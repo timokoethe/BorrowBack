@@ -3,6 +3,7 @@ status: implemented
 area: loans
 platforms:
   - ios
+  - ipados
 ---
 
 # Loan Archive
@@ -24,3 +25,4 @@ As a user, I want to review returned loans so that I can reference past lending 
 - An empty state is displayed when there are no returned loans.
 - The empty state briefly fades in or out when the archive becomes empty or receives its first returned loan. With Reduce Motion enabled, it changes immediately.
 - At accessibility text sizes, archived cards let titles, names, and dates wrap and show the status beside the title when both fit in one line, otherwise below it.
+- In wide windows, the header and archived loans share the overview's centered, limited content width.

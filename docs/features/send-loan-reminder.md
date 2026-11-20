@@ -3,6 +3,7 @@ status: implemented
 area: loans
 platforms:
   - ios
+  - ipados
 ---
 
 # Send a Loan Reminder
@@ -51,3 +52,4 @@ an upcoming or missed return date with little effort.
 - Closing the system composer returns to the reminder sheet with its draft
   intact, including after cancellation or a send failure. Further edits made
   inside the system composer are not copied back to the sheet.
+- The sheet uses a preferred height suited to the message editor and actions in wide layouts; compact layouts retain medium and large sheet sizes.

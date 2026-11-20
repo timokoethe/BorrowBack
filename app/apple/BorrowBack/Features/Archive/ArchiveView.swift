@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct ArchiveView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @Environment(\.modelContext) private var modelContext
     @Query(
@@ -87,6 +88,7 @@ struct ArchiveView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .environment(\.defaultMinListRowHeight, 1)
+        .contentWidth(maximum: 840)
         .background(Color("WarmIvory"))
         .overlay {
             ZStack {
@@ -108,6 +110,7 @@ struct ArchiveView: View {
         }
         .sheet(isPresented: $isShowingAppInfo) {
             AppInfoView()
+                .formPresentation(isExpanded: horizontalSizeClass == .regular, preferredHeight: 340)
         }
         .persistenceErrorAlert(
             isPresented: $isShowingPersistenceError,

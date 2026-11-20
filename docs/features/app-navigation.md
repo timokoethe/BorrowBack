@@ -3,6 +3,7 @@ status: implemented
 area: navigation
 platforms:
   - ios
+  - ipados
 ---
 
 # App Navigation
@@ -18,7 +19,8 @@ As a user, I want to switch between the overview and the archive so that I can r
 ## Acceptance Criteria
 
 - Overview and Archive form the app's main tab navigation.
-- The tab bar is hidden on the new-loan page and reappears when returning to the overview.
+- In compact layouts, the tab bar is hidden on the new-loan page and reappears when returning to the overview.
+- In wide layouts, creating a loan opens a sheet; closing it leaves the overview and tab bar in place.
 - Selecting a tab displays its corresponding screen.
 - Both tabs use the shared BorrowBack wordmark and a screen-specific section
   heading.
@@ -27,3 +29,5 @@ As a user, I want to switch between the overview and the archive so that I can r
   sized circular accent backgrounds.
 - The archive header provides the information access described in
   [App Information](app-information.md).
+- The app supports iPhone and iPad; iPad supports all four interface orientations and resizable windows.
+- Layout changes preserve the current navigation and unsaved form input.

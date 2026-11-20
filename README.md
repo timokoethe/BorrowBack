@@ -74,7 +74,7 @@ The website uses Vercel Web Analytics separately from the app.
 
 ### Native iOS app
 
-You need Xcode 26 or later and an iPhone or simulator running iOS 26 or later.
+You need Xcode 26 or later and an iPhone, iPad, or simulator running iOS/iPadOS 26 or later.
 
 Open the project and run the `BorrowBack` scheme:
 

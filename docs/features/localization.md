@@ -3,6 +3,7 @@ status: implemented
 area: localization
 platforms:
   - ios
+  - ipados
 ---
 
 # English and German Localization

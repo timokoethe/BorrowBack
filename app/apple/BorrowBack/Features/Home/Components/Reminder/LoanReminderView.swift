@@ -76,8 +76,6 @@ struct LoanReminderView: View {
                 }
             }
         }
-        .presentationDetents([.medium, .large])
-        .presentationDragIndicator(.visible)
         .onChange(of: text) {
             hasCopied = false
         }

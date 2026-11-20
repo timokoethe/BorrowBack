@@ -3,6 +3,7 @@ status: implemented
 area: loans
 platforms:
   - ios
+  - ipados
 ---
 
 # Edit a Loan
@@ -46,3 +47,5 @@ postponed return date does not force me to delete and recreate the record.
 - Archived loans cannot be opened for editing from the archive.
 - If a return synchronizes while the edit form is open, the form can still be
   saved; the loan remains archived with its synchronized return timestamp.
+- In wide layouts, the sheet uses a preferred height that scales with text size and accommodates the standard-size form, including notes and the character counter. Smaller windows and larger text remain scrollable.
+- Compact layouts retain medium and large sheet sizes.
