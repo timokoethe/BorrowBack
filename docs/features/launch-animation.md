@@ -3,6 +3,7 @@ status: implemented
 area: app-shell
 platforms:
   - ios
+  - ipados
 ---
 
 # Launch Animation

@@ -1,6 +1,6 @@
 # Native development
 
-Requires Xcode 26 or later and iOS 26 or later. Open
+Requires Xcode 26 or later and iOS/iPadOS 26 or later. Open
 `app/apple/BorrowBack.xcodeproj` and select the `BorrowBack` scheme.
 
 ## Signing and iCloud
@@ -34,3 +34,12 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild \
 This verifies compilation but does not produce an app that can run with its
 iCloud-backed container.
 
+
+## Adaptive layout verification
+
+Keep the shared compact interface as the iPhone reference. On iPad, check
+onboarding, overview, archive, creating and editing a loan, reminders, and app
+information in portrait, landscape, and a narrow resizable window. Include large
+Dynamic Type, the software keyboard, and an external keyboard. Confirm that
+resizing preserves navigation and unsaved form input, focused notes remain
+reachable, and swipe actions and contact selection still work.

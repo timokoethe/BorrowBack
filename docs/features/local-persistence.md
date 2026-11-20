@@ -3,6 +3,7 @@ status: implemented
 area: data
 platforms:
   - ios
+  - ipados
 ---
 
 # Local Persistence

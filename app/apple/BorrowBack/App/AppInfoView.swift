@@ -45,8 +45,6 @@ struct AppInfoView: View {
                 }
             }
         }
-        .presentationDetents([.medium, .large])
-        .presentationDragIndicator(.visible)
     }
 
     private var version: String {

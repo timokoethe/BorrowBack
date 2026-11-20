@@ -2,7 +2,7 @@
 //  BorrowBackWordmark.swift
 //  BorrowBack
 //
-//  Created by Codex on 12.09.26.
+//  Created by Timo Köthe on 12.09.26.
 //
 
 import SwiftUI

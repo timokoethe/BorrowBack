@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @State private var isContentVisible = false
     @State private var isCompleting = false
@@ -28,7 +29,8 @@ struct OnboardingView: View {
                     Spacer(minLength: 44)
 
                     OnboardingLogoView()
-                        .padding(.horizontal, 48)
+                        .frame(maxWidth: horizontalSizeClass == .regular ? 280 : .infinity)
+                        .padding(.horizontal, horizontalSizeClass == .regular ? 0 : 48)
 
                     Spacer(minLength: 40)
 
@@ -53,6 +55,7 @@ struct OnboardingView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 28)
                 .padding(.top, 28)
+                .contentWidth(maximum: 520)
                 .frame(minHeight: geometry.size.height)
             }
             .scrollIndicators(.hidden)
@@ -83,6 +86,7 @@ struct OnboardingView: View {
             .disabled(isCompleting)
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 24)
+            .contentWidth(maximum: 520)
             .padding(.vertical, 12)
         }
         .scaleEffect(isCompleting ? 0.96 : 1)

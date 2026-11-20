@@ -8,11 +8,14 @@
 import Foundation
 
 enum HomeSheet: Identifiable {
+    case addLoan
     case editLoan(Loan)
     case reminder(LoanReminderMessage)
 
     var id: String {
         switch self {
+        case .addLoan:
+            "add-loan"
         case .editLoan(let loan):
             loan.id.uuidString
         case .reminder(let message):

@@ -28,6 +28,7 @@ struct LoanFormView: View {
     /// Whether the title field takes focus when the form appears.
     let focusesTitle: Bool
     let presentationStyle: PresentationStyle
+    var showsDueDatePresets = false
     let onSave: () -> Void
 
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -67,7 +68,7 @@ struct LoanFormView: View {
                         displayedComponents: .date
                     )
 
-                    if presentationStyle == .pushed {
+                    if showsDueDatePresets {
                         dueDatePresetLayout {
                             dueDatePresetButton("7 days", preset: .sevenDays)
                             dueDatePresetButton("14 days", preset: .fourteenDays)
@@ -99,6 +100,7 @@ struct LoanFormView: View {
         }
         .formStyle(.grouped)
         .scrollContentBackground(.hidden)
+        .contentWidth(maximum: 640)
         .background(Color("WarmIvory"))
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
@@ -140,7 +142,7 @@ struct LoanFormView: View {
             }
         }
         .onAppear {
-            if presentationStyle == .pushed {
+            if showsDueDatePresets {
                 dueDatePreset = matchingPreset(for: draft.dueDate)
             }
         }
@@ -150,12 +152,12 @@ struct LoanFormView: View {
             }
         }
         .onChange(of: draft.dueDate) { _, newDate in
-            if presentationStyle == .pushed {
+            if showsDueDatePresets {
                 dueDatePreset = matchingPreset(for: newDate)
             }
         }
         .onChange(of: draft.loanedAt) {
-            if presentationStyle == .pushed,
+            if showsDueDatePresets,
                let presetDate = date(for: dueDatePreset) {
                 draft.dueDate = presetDate
             } else if draft.dueDate < draft.loanedAt {

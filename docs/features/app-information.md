@@ -3,6 +3,7 @@ status: implemented
 area: app-shell
 platforms:
   - ios
+  - ipados
 ---
 
 # App Information
@@ -24,3 +25,4 @@ the privacy policy and check which version is installed.
 - The sheet links to the BorrowBack website and privacy policy.
 - The sheet shows the installed app version.
 - The sheet has an X button on the leading side to dismiss it without changing loan data.
+- The sheet uses a compact preferred height in wide layouts; compact layouts retain medium and large sheet sizes.

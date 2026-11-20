@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var presentedSheet: HomeSheet?
     @State private var homePath: [HomeRoute] = []
 
@@ -18,7 +19,11 @@ struct ContentView: View {
                 NavigationStack(path: $homePath) {
                     HomeView(
                         onAddLoan: {
-                            homePath.append(.addLoan)
+                            if horizontalSizeClass == .regular {
+                                presentedSheet = .addLoan
+                            } else {
+                                homePath.append(.addLoan)
+                            }
                         },
                         onEditLoan: { loan in
                             presentedSheet = .editLoan(loan)
@@ -47,11 +52,20 @@ struct ContentView: View {
         .tint(.accentColor)
         .trackingCurrentDay()
         .sheet(item: $presentedSheet) { sheet in
-            switch sheet {
-            case .editLoan(let loan):
-                EditLoanView(loan: loan)
-            case .reminder(let message):
-                LoanReminderView(message: message)
+            Group {
+                switch sheet {
+                case .addLoan:
+                    NavigationStack {
+                        AddLoanView(presentationStyle: .sheet)
+                    }
+                    .formPresentation(isExpanded: horizontalSizeClass == .regular)
+                case .editLoan(let loan):
+                    EditLoanView(loan: loan)
+                        .formPresentation(isExpanded: horizontalSizeClass == .regular)
+                case .reminder(let message):
+                    LoanReminderView(message: message)
+                        .formPresentation(isExpanded: horizontalSizeClass == .regular, preferredHeight: 500)
+                }
             }
         }
     }

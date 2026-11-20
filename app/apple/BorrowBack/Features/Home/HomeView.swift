@@ -149,6 +149,7 @@ struct HomeView: View {
         .scrollDisabled(loans.isEmpty)
         .scrollContentBackground(.hidden)
         .environment(\.defaultMinListRowHeight, 1)
+        .contentWidth(maximum: 840)
         .background(Color("WarmIvory"))
         .overlay {
             ZStack {

@@ -3,6 +3,7 @@ status: implemented
 area: loans
 platforms:
   - ios
+  - ipados
 ---
 
 # Loan Status

@@ -35,8 +35,6 @@ struct EditLoanView: View {
                 onSave: save
             )
         }
-        .presentationDetents([.medium, .large])
-        .presentationDragIndicator(.visible)
         .persistenceErrorAlert(
             isPresented: $isShowingSaveError,
             message: "The change could not be saved."
