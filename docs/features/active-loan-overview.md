@@ -27,5 +27,6 @@ As a user, I want to see my active loans in one place so that I can keep track o
 - Tapping a loan opens it for editing, as described in [Edit a Loan](edit-loan.md).
 - A loan with a linked phone number offers the reminder action described in
   [Send a Loan Reminder](send-loan-reminder.md).
-- At accessibility text sizes, loan cards let the title, borrower name, and due date wrap and show the status beside the title when both fit in one line, otherwise below it.
+- At accessibility text sizes, loan cards let the title, borrower name, and due date wrap while the status indicator stays at the top trailing corner.
 - In wide windows, the header, sorting control, and loan list share a centered, limited content width.
+- Loans due soon or overdue show a compact circular status indicator at the top trailing corner, including when the title wraps. Loans with OK status have no visible indicator.

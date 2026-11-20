@@ -30,3 +30,4 @@ As a new user, I want a brief introduction so that I understand what BorrowBack 
   stays visible outside the scrolling content.
 - After completing onboarding, later launches open the main interface directly.
 - In wide windows, the introduction and start button are centered with a limited width, and the logo stays compact. Narrow windows retain the compact layout.
+- The scrolling introduction keeps a visible gap above the pinned start button, including in short windows.

@@ -67,7 +67,7 @@ struct OnboardingView: View {
             }
             .scrollDisabled(!needsScrolling)
         }
-        .safeAreaInset(edge: .bottom) {
+        .safeAreaInset(edge: .bottom, spacing: 24) {
             Button(action: completeOnboarding) {
                 HStack {
                     Text("Get started")

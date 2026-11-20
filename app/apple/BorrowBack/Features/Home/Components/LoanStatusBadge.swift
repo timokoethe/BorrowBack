@@ -3,6 +3,8 @@ import SwiftUI
 struct LoanStatusBadge: View {
     @Environment(\.currentDay) private var today
 
+    @ScaledMetric(relativeTo: .caption) private var diameter = 26.0
+
     let dueDate: Date
     let isReturned: Bool
 
@@ -49,12 +51,25 @@ struct LoanStatusBadge: View {
         ) ?? today
     }
 
+    private var statusSymbol: String {
+        if isReturned { return "checkmark" }
+        if dueDay < today { return "exclamationmark" }
+        if dueDay < dueSoonThreshold { return "clock" }
+        return "checkmark"
+    }
+
+    private var showsIndicator: Bool {
+        isReturned || dueDay < dueSoonThreshold
+    }
+
     var body: some View {
-        Text(statusTitle)
-            .font(.caption.weight(.semibold))
-            .foregroundStyle(Color("DeepInk").opacity(0.8))
-            .padding(.horizontal, 9)
-            .padding(.vertical, 5)
-            .background(statusColor.opacity(0.22), in: Capsule())
+        Image(systemName: statusSymbol)
+            .font(.caption.weight(.bold))
+            .foregroundStyle(Color("DeepInk"))
+            .frame(width: showsIndicator ? diameter : 0, height: showsIndicator ? diameter : 0)
+            .background(statusColor.opacity(0.22), in: Circle())
+            .opacity(showsIndicator ? 1 : 0)
+            .accessibilityLabel(statusTitle)
+            .accessibilityHidden(false)
     }
 }
