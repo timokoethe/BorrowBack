@@ -87,6 +87,7 @@ export function homeStructuredData() {
         image: `${SITE_URL}/icon.png`,
         operatingSystem: "iOS 26 or later",
         applicationCategory: "UtilitiesApplication",
+        applicationSubCategory: "Productivity",
         author: { "@type": "Person", "@id": SITE_AUTHOR_ID, ...SITE_AUTHOR },
         featureList: [
           "Track lent items, borrowers, and due dates",
